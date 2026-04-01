@@ -9,34 +9,54 @@ public class mascota {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private Integer dueño;
+    
+    private Integer duenio;
     private String nombre;
     private Integer edad;
     private String raza;
     private String color_01;
     private String color_02;
+    private String color_03;
     private String descripcion;
     private String estado;
+    private String especie;
+    private Boolean tiene_chip;
+    private Boolean tiene_collar;
+    private String descripcion_collar;
+    private String ubicacion_residencia;
 
-    public mascota(
-            Integer id, 
-            Integer dueño, 
+//______________________________________________________________________________
+    
+    public mascota(Integer id, 
+            Integer duenio, 
             String nombre, 
             Integer edad, 
             String raza, 
             String color_01, 
             String color_02, 
+            String color_03,
             String descripcion, 
-            String estado) {
+            String estado, 
+            String especie,
+            Boolean tiene_chip, 
+            Boolean tiene_collar, 
+            String descripcion_collar,
+            String ubicacion_residencia) {
         this.id = id;
-        this.dueño = dueño;
+        this.duenio = duenio;
         this.nombre = nombre;
         this.edad = edad;
         this.raza = raza;
         this.color_01 = color_01;
         this.color_02 = color_02;
+        this.color_03 = color_03;
         this.descripcion = descripcion;
         this.estado = estado;
+        this.especie = especie;
+        this.tiene_chip = tiene_chip;
+        this.tiene_collar = tiene_collar;
+        this.descripcion_collar = descripcion_collar;
+        this.ubicacion_residencia = ubicacion_residencia;
     }
 
     public mascota() {
@@ -53,11 +73,11 @@ public class mascota {
     
 //______________________________________________________________________________
 
-    public Integer getDueño() {
-        return dueño;
+    public Integer getDuenio() {
+        return duenio;
     }
-    public void setDueño(Integer dueño) {
-        this.dueño = dueño;
+    public void setDuenio(Integer duenio) {
+        this.duenio = duenio;
     }
     
 //______________________________________________________________________________
@@ -107,6 +127,15 @@ public class mascota {
 
 //______________________________________________________________________________    
     
+    public String getColor_03() {
+        return color_03;
+    }
+    public void setColor_03(String color_03) {
+        this.color_03 = color_03;
+    }
+
+//______________________________________________________________________________    
+    
     public String getDescripcion() {
         return descripcion;
     }
@@ -122,4 +151,51 @@ public class mascota {
     public void setEstado(String estado) {
         this.estado = estado;
     }
+
+//______________________________________________________________________________    
+    
+    public String getEspecie() {
+        return especie;
+    }
+    public void setEspecie(String especie) {
+        this.especie = especie;
+    }
+
+//______________________________________________________________________________        
+    
+    public Boolean getTiene_chip() {
+        return tiene_chip;
+    }
+    public void setTiene_chip(Boolean tiene_chip) {
+        this.tiene_chip = tiene_chip;
+    }
+
+//______________________________________________________________________________        
+    
+    public Boolean getTiene_collar() {
+        return tiene_collar;
+    }
+    public void setTiene_collar(Boolean tiene_collar) {
+        this.tiene_collar = tiene_collar;
+    }
+
+//______________________________________________________________________________        
+    
+    public String getDescripcion_collar() {
+        return descripcion_collar;
+    }
+    public void setDescripcion_collar(String descripcion_collar) {
+        this.descripcion_collar = descripcion_collar;
+    }
+
+//______________________________________________________________________________  
+
+    public String getUbicacion_residencia() {
+        return ubicacion_residencia;
+    }
+    public void setUbicacion_residencia(String ubicacion_residencia) {
+        this.ubicacion_residencia = ubicacion_residencia;
+    }
+
+//______________________________________________________________________________
 }

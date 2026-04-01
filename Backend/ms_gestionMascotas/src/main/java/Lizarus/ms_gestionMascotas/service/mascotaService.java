@@ -30,17 +30,23 @@ public class mascotaService {
 
 //______________________________________________________________________________
     
-    public mascota modificarMascota(mascota mod_m){
-        mascota mod = rep.findById(mod_m.getId()).orElse(null);
+    public mascota modificarMascota(mascota m){
+        mascota mod = rep.findById(m.getId()).orElse(null);
         
-        mod.setNombre(mod_m.getNombre());
-        mod.setRaza(mod_m.getRaza());
-        mod.setEstado(mod_m.getEstado());
-        mod.setEdad(mod_m.getEdad());
-        mod.setDueño(mod_m.getDueño());
-        mod.setDescripcion(mod_m.getDescripcion());
-        mod.setColor_01(mod_m.getColor_01());
-        mod.setColor_02(mod_m.getColor_02());
+        mod.setNombre(m.getNombre());
+        mod.setRaza(m.getRaza());
+        mod.setEstado(m.getEstado());
+        mod.setEdad(m.getEdad());
+        mod.setDuenio(m.getDuenio());
+        mod.setDescripcion(m.getDescripcion());
+        mod.setColor_01(m.getColor_01());
+        mod.setColor_02(m.getColor_02());
+        mod.setColor_03(m.getColor_03());
+        mod.setEspecie(m.getEspecie());
+        mod.setTiene_chip(m.getTiene_chip());
+        mod.setTiene_collar(m.getTiene_collar());
+        mod.setDescripcion_collar(m.getDescripcion_collar());
+        mod.setUbicacion_residencia(m.getUbicacion_residencia());
         
         return rep.save(mod);
     }
@@ -51,4 +57,6 @@ public class mascotaService {
         rep.deleteById(id);
         return "Mascota retirada del sistema";
     }
+    
+//______________________________________________________________________________    
 }
