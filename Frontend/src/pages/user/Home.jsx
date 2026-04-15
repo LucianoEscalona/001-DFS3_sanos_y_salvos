@@ -1,4 +1,5 @@
 import '../../App.css'
+import { insert_ls, motor_demo } from '../../utils/test'
 
 function Home() {
     return(
@@ -32,7 +33,8 @@ function Home() {
                 <p>Contactanos</p>
                 <p>TEMPORAL DESCRIPTION</p>
                 <p>TEMPORAL DESCRIPTION</p>
-                <button className="btn-testing">Contactar</button>
+                <button className="btn-testing" onClick={insert_ls}>Contactar</button>
+                <button className="btn-testing" onClick={motor_demo}>PrintMET</button>
             </div>
         </div>
         </>
