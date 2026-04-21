@@ -1,47 +1,48 @@
-.cuadrao{
-  background-color: rebeccapurple;
-  height: 100px;
-  width: 100px;
-}
-
-.banner_pagina{
-  width: 100%;
-}
-
-.color-testing{
+.img-sim{
   background-color: blueviolet;
-  border: 1px solid white;
-}
-
-.btn-testing{
-  background-color: blueviolet;
-  color: white;
-  border-radius: 5px;
-  border: 1px solid white;
-}.btn-testing:focus{
-  background-color: rgb(118, 30, 169);
-}
-.home-titulo_slogan{
   width: 100%;
   height: 100px;
-}
-.home-mascotas{
-  width: 100%;
-  height: 500px;
-
   margin: 0;
+  padding: 0;
 }
-.home-contacto{
-  width: 100%;
-  height: 400px;
-
-  text-align: justify;
-  color: white;
-
-  padding: 2rem;
+.min-h{
+  height: 100px !important;
 }
-.home-card{
-  border: 1px solid white;
+*{
   box-sizing: border-box;
-  height: 100%;
 }
+body{
+  overflow-x: hidden;
+}
+body::-webkit-scrollbar {
+  display: none;
+}
+.b-gen{
+  border: 1px solid black;
+  border-radius: 10px;
+}
+.mw-fra{
+  max-width: 1000px;
+  width: 100%;
+  justify-self: center;
+}
+p{margin-bottom: 0;}
+.b-sep-t{border-top: 1px solid rgb(251, 134, 255);}
+
+.w-e{
+  width: 100%;
+}
+.map-gg{
+  width: 100%;
+  height: auto;
+}
+/*
+
+                        <iframe 
+                            src="https://www.google.com/maps/embed?pb=..." 
+                            className="map-gg"
+                            style={{border:0}}
+                            allowfullscreen="" 
+                            loading="lazy">
+                        </iframe>
+*/
