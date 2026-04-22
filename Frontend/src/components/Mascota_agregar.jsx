@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 /* demasiadas razas y tipos de gatos =_=, asi que pondre algunas nomas, ya que es un proyecto ficticio */
 
-function Mascota_agregar() {
+function Mascota_agregar({cerrar}) {
 
     const [nombre, setNombre] = useState("")
     const [especie, setEspecie] = useState("perro")
@@ -304,7 +304,7 @@ function Mascota_agregar() {
                             <select name="ojo_i" id="ojo_i"
                                 value={da_coi}
                                 onChange={(e)=>setDa_coi(e.target.value)}>
-                                <option value="NONE" disabled defaultValue={"NONE"} hidden>Izquierdo</option>
+                                <option value="" disabled defaultValue={""} hidden>Izquierdo</option>
                                 <option value="verde">Verde</option>
                                 <option value="amarillo">Amarillo</option>
                                 <option value="azul">Azul</option>
@@ -315,7 +315,7 @@ function Mascota_agregar() {
                             <select name="ojo_d" id="ojo_d"
                                 value={da_cod}
                                 onChange={(e)=>setDa_cod(e.target.value)}>
-                                <option value="NONE" disabled defaultValue={"NONE"} hidden>Derecho</option>
+                                <option value="" disabled defaultValue={""} hidden>Derecho</option>
                                 <option value="verde">Verde</option>
                                 <option value="amarillo">Amarillo</option>
                                 <option value="azul">Azul</option>
@@ -383,6 +383,7 @@ function Mascota_agregar() {
                             </>
                         }
                         <button onClick={print_info}>print</button>
+                        <button onClick={cerrar}>Cerrar</button>
                     </div>
                 </div>
             </div>

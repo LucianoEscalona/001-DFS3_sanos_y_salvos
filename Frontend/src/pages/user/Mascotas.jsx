@@ -9,6 +9,7 @@ function Mascotas() {
     const [mascotas, setMascotas] = useState([])
     const [reportes, setReportes] = useState([])
     const [usuarios, setUsuarios] = useState([])
+    const [mostrar_agregar, setMostrar_agregar] = useState(false)
 
     const gls = ()=>{
         localStorage.setItem("mascotas_BDD", JSON.stringify(mascotas))
@@ -51,8 +52,12 @@ function Mascotas() {
             <div className="color-testing mascota-opciones">
                 <p>Check for coincidences</p>
             </div>
+            <button onClick={()=>setMostrar_agregar(true)}>Registrar mascota</button>
             <p className="cuadrao">Mascotas</p>
-            <Mascota_agregar/>
+            {mostrar_agregar &&
+                <Mascota_agregar cerrar={()=>setMostrar_agregar(false)}/>
+            }
+            
         </div>
         </>
     )
