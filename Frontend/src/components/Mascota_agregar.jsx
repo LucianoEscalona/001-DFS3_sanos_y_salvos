@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { postSMT } from "../utils/apiHelper"
 /* demasiadas razas y tipos de gatos =_=, asi que pondre algunas nomas, ya que es un proyecto ficticio */
 
 function Mascota_agregar({cerrar}) {
@@ -25,8 +26,8 @@ function Mascota_agregar({cerrar}) {
     const [ubi_chip, setUbi_chip] = useState("")
 
     const [des_animal, setDes_animal] = useState("")
-        const [da_coi, setDa_coi] = useState("verde")
-        const [da_cod, setDa_cod] = useState("verde")
+        const [da_coi, setDa_coi] = useState("")
+        const [da_cod, setDa_cod] = useState("")
         const [da_lpj, setDa_lpj] = useState("corto")
         const [da_dsa, setDa_dsa] = useState("")
     const [con_animal, setCon_animal] = useState("")
@@ -38,48 +39,84 @@ function Mascota_agregar({cerrar}) {
     const [estado, setEstado] = useState("con_duenio")
 
     const print_info = ()=>{
-        setDes_collar(`${cll_c1}-${cll_c2}-${cll_mt}-${cll_ds}`)
-        setDes_animal(`${da_coi}-${da_cod}-${da_lpj}-${da_dsa}`)
-        if(!mezcla){setRaza_s("NONE")}
-        if(!con_collar){setDes_collar("NONE")}
-        if(!con_chip){setUbi_chip("NONE")}
+        let pDes_collar = `${cll_c1}-${cll_c2}-${cll_mt}-${cll_ds}`
+        let pDes_animal = `${da_coi}-${da_cod}-${da_lpj}-${da_dsa}`
+
+        let pRaza_s = raza_s
+        let pUbi_chip = ubi_chip
+        let pMos_residencia = mos_residencia
+        let pEstado = estado
+        if(!mezcla){pRaza_s = "NONE"}
+        if(!con_collar){pDes_collar = "NONE"}
+        if(!con_chip){pUbi_chip = "NONE"}
+        if(tipo=="lo_vi"){pMos_residencia = true; pEstado = "perdido"}
         const animal_g = {
-            a_nombre: nombre,
-            a_especie: especie,
-            a_raza_01: raza_p,
-            a_raza_02: raza_s,
-            a_mezcla: mezcla,
-            a_genero: genero,
-            a_genero_s: genero_seguro,
-            a_edad: edad,
-            a_edad_s: edad_segura,
-            a_collar: con_collar,
-            a_collar_d: des_collar,
-            a_chip: con_chip,
-            a_chip_u: ubi_chip,
-            a_desc: des_animal,
-            a_cond: con_animal,
-            a_res_u: ubi_residencia,
-            a_res_m: mos_residencia,
-            a_tipo: tipo,
-            a_estado: estado
+            nombre: nombre,
+            animal: especie,
+            raza_1: raza_p,
+            raza_2: pRaza_s,
+            raza_sg: mezcla,
+            genero: genero,
+            genero_seg: genero_seguro,
+            edad: edad,
+            edad_seg: edad_segura,
+            collar: con_collar,
+            collar_des: pDes_collar,
+            chip: con_chip,
+            chip_ubi: pUbi_chip,
+            apariencia: pDes_animal,
+            condicion: con_animal,
+            ubicacion_res: ubi_residencia,
+            ubicacion_mos: pMos_residencia,
+            tipo: tipo,
+            estado: pEstado
         }
-        console.log(animal_g)
+        postSMT("8081","mascota","guardar",animal_g)
+        
+    }
+
+    const manejo_boton = ()=>{
+        print_info()
+        cerrar()
     }
 
     return (
         <>
-            <div>
+            <div className="fondo_opaco_tarjetas">
             <div className="p-4 b-gen mw-fra">
                 <div className="row m-0">
                     <div className="col-md-6 col-sm-12">
                         <div className="img-sim"></div>
                         <p className="mt-4 mb-3 pt-3 fw-bold">Descripcion General:</p>
+
+                        <div className="d-flex gap-3 mt-4">    
+                            <p>Tipo de animal:</p>
+                            <select name="tipo" id="tipo" 
+                                value={tipo} 
+                                onChange={(e)=>setTipo(e.target.value)}>
+                                <option value="mascota">Mascota</option>
+                                <option value="lo_vi">Lo vi por ahi</option>
+                            </select>
+                        </div>
+
+                        {tipo == "mascota" &&
+                            <>
+                                <div className="d-flex gap-3 mt-3">
+                                    <p>Estado:</p>
+                                    <select name="estado" id="estado"
+                                        value={estado} 
+                                        onChange={(e)=>setEstado(e.target.value)}>
+                                        <option value="con_duenio">Con su dueño</option>
+                                        <option value="perdido">Perdido</option>
+                                    </select>
+                                </div>
+                            </>
+                        }
+                        
                         <p className="mt-3">Nombre animal:</p>
                         <input type="text" id="nombre" name="nombre"
                             value={nombre}
                             onChange={(e)=>setNombre(e.target.value)}/>
-
 
                         <div className="d-flex gap-3 mt-4">
                             <p>Especie:</p>
@@ -246,15 +283,18 @@ function Mascota_agregar({cerrar}) {
                                     <option value="negro">Negro</option>
                                     <option value="UNKNOWN">No sabria decir</option>
                                 </select>
-                                <select name="c_collar_2" id="c_collar_2" className="w-e mt-2"
-                                    value={cll_c2}
-                                    onChange={(e)=>setCll_c2(e.target.value)}>
-                                    <option value="" disabled defaultValue={""} hidden>Color secundario</option>
-                                    <option value="rojo">Rojo</option>
-                                    <option value="amarillo">Amarillo</option>
-                                    <option value="negro">Negro</option>
-                                    <option value="UNKNOWN">No sabria decir</option>
-                                </select>
+                                {!cll_c1 == "" &&
+                                    <select name="c_collar_2" id="c_collar_2" className="w-e mt-2"
+                                        value={cll_c2}
+                                        onChange={(e)=>setCll_c2(e.target.value)}>
+                                        <option value="" disabled defaultValue={""} hidden>Color secundario</option>
+                                        <option value="rojo">Rojo</option>
+                                        <option value="amarillo">Amarillo</option>
+                                        <option value="negro">Negro</option>
+                                        <option value="NONE">Sin color secundario</option>
+                                        <option value="UNKNOWN">No sabria decir</option>
+                                    </select>
+                                }
                                 <select name="m_collar" id="m_collar" className="w-e mt-2"
                                     value={cll_mt}
                                     onChange={(e)=>setCll_mt(e.target.value)}>
@@ -346,44 +386,27 @@ function Mascota_agregar({cerrar}) {
                         <textarea id="co_esp" name="co_esp" className="w-e"
                             value={con_animal}
                             onChange={(e)=>setCon_animal(e.target.value)}/>
-                        <p className="mt-2">Lugar de residencia del animal:</p>
+                        {tipo == "mascota" &&
+                            <p className="mt-2">Donde vive el animal:</p>
+                        }
+                        {tipo == "lo_vi" &&
+                            <p className="mt-2">Donde vio al animal?:</p>
+                        }
                         <input type="text" id="residencia" name="residencia" className="w-e"
                             value={ubi_residencia}
                             onChange={(e)=>setUbi_residencia(e.target.value)}/>
                         
-
-                        <div className="d-flex gap-3 mt-2">
-                            <p>Mostrar ubicacion?</p>    
-                            <label>
-                                <input type="checkbox" checked={mos_residencia} onChange={(e) => setMos_residencia(e.target.checked)} />
-                            </label>
-                        </div>
-                        <div className="d-flex gap-3 mt-4 pt-3 b-sep-t">    
-                            <p>Tipo de animal:</p>
-                            <select name="tipo" id="tipo" 
-                                value={tipo} 
-                                onChange={(e)=>setTipo(e.target.value)}>
-                                <option value="mascota">Mascota</option>
-                                <option value="lo_vi">Lo vi por ahi</option>
-                                <option value="adopcion">Adopcion</option>
-                            </select>
-                        </div>
-
                         {tipo == "mascota" &&
-                            <>
-                                <div className="d-flex gap-3 mt-3">
-                                    <p>Estado:</p>
-                                    <select name="estado" id="estado"
-                                        value={estado} 
-                                        onChange={(e)=>setEstado(e.target.value)}>
-                                        <option value="con_duenio">Con su dueño</option>
-                                        <option value="perdido">Perdido</option>
-                                    </select>
-                                </div>
-                            </>
+                            <div className="d-flex gap-3 mt-2">
+                                <p>Mostrar ubicacion?</p>    
+                                <label>
+                                    <input type="checkbox" checked={mos_residencia} onChange={(e) => setMos_residencia(e.target.checked)} />
+                                </label>
+                            </div>
                         }
-                        <button onClick={print_info}>print</button>
-                        <button onClick={cerrar}>Cerrar</button>
+                        <p className="mt-4"></p>
+                        <button onClick={manejo_boton}>print</button>
+                        <button onClick={cerrar}>Cerrasr</button>
                     </div>
                 </div>
             </div>

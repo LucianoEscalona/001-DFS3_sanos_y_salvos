@@ -21,10 +21,26 @@ body::-webkit-scrollbar {
   border: 1px solid black;
   border-radius: 10px;
 }
+.fondo_opaco_tarjetas{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .mw-fra{
   max-width: 1000px;
-  width: 100%;
-  justify-self: center;
+  max-height: 95vh;
+  width: 95vw;
+  overflow-y: auto;
+  background-color: rgb(255, 255, 255);
+}.mw-fra::-webkit-scrollbar {
+  display: none;
 }
 p{margin-bottom: 0;}
 .b-sep-t{border-top: 1px solid rgb(251, 134, 255);}
@@ -36,13 +52,3 @@ p{margin-bottom: 0;}
   width: 100%;
   height: auto;
 }
-/*
-
-                        <iframe 
-                            src="https://www.google.com/maps/embed?pb=..." 
-                            className="map-gg"
-                            style={{border:0}}
-                            allowfullscreen="" 
-                            loading="lazy">
-                        </iframe>
-*/
