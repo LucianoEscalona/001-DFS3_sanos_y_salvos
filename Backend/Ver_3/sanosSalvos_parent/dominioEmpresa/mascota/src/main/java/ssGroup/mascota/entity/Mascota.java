@@ -20,25 +20,27 @@ public class Mascota {
     private String animal;
     private String raza_1;
     private String raza_2;
-    private String raza_sg;
+    private Boolean raza_sg;
     
     private String genero;
-    private String genero_seg;
+    private Boolean genero_seg;
     
     private String edad;
-    private String edad_seg;
+    private Boolean edad_seg;
     
     private String apariencia;
     private String condicion;
     
-    private String collar;
+    private Boolean collar;
     private String collar_des;
-    private String chip;
+    private Boolean chip;
     private String chip_ubi;
     
     private String ubicacion_res;
-    private String ubicacion_mos;
+    private Boolean ubicacion_mos;
     
     private String tipo;
     private String estado;
+    
+    private Integer rut_usuario;
 }

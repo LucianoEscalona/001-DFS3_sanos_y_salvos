@@ -53,9 +53,10 @@ export const postSMT = async(puerto, api, ruta, cuerpo) => {
     }
 }
 
-export const putSMT = async(puerto, api, ruta, cuerpo) => {
+export const putSMT = async(puerto, api, ruta, cuerpo, id) => {
     try {
-        const res  = await fetch(`${API}:${puerto}/${api}/v1/${ruta}`, {
+        console.log(cuerpo)
+        const res  = await fetch(`${API}:${puerto}/${api}/v1/${ruta}/${id}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json"

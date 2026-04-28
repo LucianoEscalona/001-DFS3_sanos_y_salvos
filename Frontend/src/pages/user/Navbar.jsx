@@ -1,6 +1,29 @@
+import { useEffect, useState } from 'react'
 import { Link, useNavigate, useLocation } from 'react-router-dom'
 
 function Navbar() {
+
+    const [sesionActiva, setSesionActiva] = useState(false)
+    const navegar = useNavigate()
+
+    const cerrar_sesion = ()=>{
+        localStorage.removeItem("sesion")
+        setSesionActiva(false)
+        navegar("/")
+        window.location.reload()
+    }
+
+    useEffect(()=>{
+        try {
+            if(JSON.parse(localStorage.getItem("sesion"))){
+                setSesionActiva(true)
+            }else{
+                setSesionActiva(false)
+            }
+        } catch (error) {
+            setSesionActiva(false)
+        }
+    },[])
     return(
         <>
         <nav className="navbar navbar-expand-lg bg-body-tertiary">
@@ -17,33 +40,27 @@ function Navbar() {
                 <li className="nav-item">
                     <Link className="nav-link active" aria-current="page" to="/">Contacto</Link>
                 </li>
-                <li className="nav-item dropdown">
-                    <a className="nav-link dropdown-toggle" to="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Mascotas
-                    </a>
-                    <ul className="dropdown-menu">
-                        <li><Link className="dropdown-item" to="/mascotas">Mascotas</Link></li>
-                        <li><Link className="dropdown-item" to="/ingresar_mascota">Registrar mascota</Link></li>
-                    </ul>
-                </li>
-                <li className="nav-item dropdown">
-                    <a className="nav-link dropdown-toggle" to="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Reportes de mascotas
-                    </a>
-                    <ul className="dropdown-menu">
-                        <li><Link className="dropdown-item" to="/reportes">Reportes de mascotas</Link></li>
-                        <li><Link className="dropdown-item" to="/ingresar_reporte">Realizar un reporte</Link></li>
-                    </ul>
-                </li>
-                <li className="nav-item dropdown">
-                    <a className="nav-link dropdown-toggle" to="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Sesion
-                    </a>
-                    <ul className="dropdown-menu">
-                        <li><Link className="dropdown-item" to="/info_cuenta">Mi cuenta</Link></li>
-                        <li><Link className="dropdown-item" to="#">Cerrar sesion</Link></li>
-                    </ul>
-                </li>
+                {sesionActiva &&
+                    <li className="nav-item">
+                        <Link className="nav-link active" aria-current="page" to="/mascotas">Mascotas</Link>
+                    </li>
+                }
+                {sesionActiva &&
+                    <li className="nav-item dropdown">
+                        <a className="nav-link dropdown-toggle" to="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Sesion
+                        </a>
+                            <ul className="dropdown-menu">
+                                <li><Link className="dropdown-item" to="/">Ver sesion</Link></li>
+                                <li><Link className="dropdown-item" to="/" onClick={()=>cerrar_sesion()}>Cerrar sesion</Link></li>
+                            </ul>
+                    </li>
+                }
+                {!sesionActiva &&
+                    <li className="nav-item">
+                        <Link className="nav-link active" aria-current="page" to="/login">Iniciar sesion</Link>
+                    </li>
+                }
             </ul>
             </div>
         </div>

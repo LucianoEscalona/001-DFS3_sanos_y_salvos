@@ -24,8 +24,9 @@ import ssGroup.mascota.entity.Mascota;
 import ssGroup.mascota.repository.MascotaRepositorio;
 
 @RestController
+@CrossOrigin("http://localhost:5173")
 @RequestMapping("/mascota/v1")
-public class mascotaControlador {
+public class MascotaControlador {
     
     @Autowired
     MascotaRepositorio rep;
@@ -59,7 +60,7 @@ public class mascotaControlador {
 //______________________________________________________________________________
     
     @PutMapping("/mod_info/{id}")
-    public ResponseEntity<?> put(@PathVariable Integer id, @RequestBody Mascota m){
+    public ResponseEntity<?> put(@PathVariable("id") Integer id, @RequestBody Mascota m){
         Optional<Mascota> optM = rep.findById(id);
         
         if(optM.isPresent()){
@@ -87,6 +88,10 @@ public class mascotaControlador {
             modM.setUbicacion_res(m.getUbicacion_res());
             modM.setUbicacion_mos(m.getUbicacion_mos());
             
+            modM.setEstado(m.getEstado());
+            modM.setTipo(m.getTipo());
+            
+            modM.setRut_usuario(m.getRut_usuario());
             Mascota rM = rep.save(modM);
             return new ResponseEntity<>(rM, HttpStatus.OK);
         } else {
@@ -96,7 +101,7 @@ public class mascotaControlador {
 //______________________________________________________________________________
     
     @PutMapping("/mod_tipo/{id}")
-    public ResponseEntity<?> put_tipo(@PathVariable Integer id, @RequestBody Mascota m){
+    public ResponseEntity<?> put_tipo(@PathVariable("id") Integer id, @RequestBody Mascota m){
         Optional<Mascota> optM = rep.findById(id);
         
         if(optM.isPresent()){
@@ -111,7 +116,7 @@ public class mascotaControlador {
 //______________________________________________________________________________
     
     @PutMapping("/mod_estado/{id}")
-    public ResponseEntity<?> put_estado(@PathVariable Integer id, @RequestBody Mascota m){
+    public ResponseEntity<?> put_estado(@PathVariable("id") Integer id, @RequestBody Mascota m){
         Optional<Mascota> optM = rep.findById(id);
         
         if(optM.isPresent()){
@@ -133,7 +138,7 @@ public class mascotaControlador {
 //______________________________________________________________________________
 
     @DeleteMapping("/retirar_sis/{id}")
-    public ResponseEntity<?> delete(@PathVariable Integer id){
+    public ResponseEntity<?> delete(@PathVariable("id") Integer id){
         rep.deleteById(id);
         return ResponseEntity.ok(HttpStatus.OK);
     }

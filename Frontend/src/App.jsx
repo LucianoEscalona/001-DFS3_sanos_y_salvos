@@ -11,6 +11,7 @@ import Ingresar_mascota from './pages/user/Ingresar_mascota'
 import Navbar from './pages/user/Navbar'
 
 import './App.css'
+import Mascota_detalle from './pages/user/Mascota_detalle'
 
 function App() {
 
@@ -25,7 +26,7 @@ function App() {
           <Route path="/reportes" element={<Reportes />} />
           <Route path="/ingresar_reporte" element={<Ingresar_reporte />} />
           <Route path="/mascotas" element={<Mascotas />} />
-          <Route path="/ingresar_mascota" element={<Ingresar_mascota />} />
+          <Route path="/mascota_detalle" element={<Mascota_detalle />} />
         </Routes>
     </>
   )

@@ -39,31 +39,44 @@ function Mascotas() {
         <>
         <div>
             <div className="color-testing mascota-banner">
-                <img src="x" alt="TEMP MESSAGE" />
+                <div className="img-sim"></div>
             </div>
-            <div className="color-testing mascota-titulo">
-                <p>Welcome to your pets!</p>
+            <div className="row m-0 p-3">
+                <div className="col-xl-9 col-lg-8 col-md-6 col-sm-12">
+                    <div className="p-4">
+                        <h1>Bienvenido a la seccion de mascotas!</h1>
+                        <p>Aqui puedes las mascotas que has registrado en el sistema, y si no tienen ninguna mascota registrada, puedes registrar una de tus mascotas!</p>
+                        <p>Tambien puedes ingresar animales que hayas visto en algun lado (por ejemplo: animales que parezcan perdidos)</p>
+                    </div>
+                </div>
+                <div className="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+                    <div className="p-4">
+                        <div className="img-sim"></div>
+                    </div>
+                </div>
             </div>
 
-            <div className="color-testing mascota-opciones">
+            <div className="color-testing mascota-opciones p-4">
                 <p>Check for coincidences</p>
             </div>
             <button onClick={()=>setMostrar_agregar(true)}>Registrar mascota</button>
             <p className="cuadrao">Mascotas</p>
-            {mostrar_agregar &&
-                <Mascota_agregar cerrar={()=>setMostrar_agregar(false)}/>
-            }
-            <h1 className="p-4">MASCOTAS</h1>
-            <div className="row m-0">
-                {mascotas_r.map((m, i)=>(
-                    <Mascota_miniatura Key={i} id={m.id}/>
-                ))}
-            </div>
-            <h1 className="p-4">VISTOS</h1>
-            <div className="row m-0">
-                {animales_v.map((a, i)=>(
-                    <Mascota_miniatura Key={i} id={a.id}/>
-                ))}
+            <div className="">
+                {mostrar_agregar &&
+                    <Mascota_agregar cerrar={()=>setMostrar_agregar(false)} naturaleza={"add"}/>
+                }                
+                <h2 className="p-4 m-0 m_t_style">Mascotas registradas</h2>
+                <div className="row m-0 w-bg pt-3 pb-3">
+                    {mascotas_r.map((m, i)=>(
+                        <Mascota_miniatura key={i} id={m.id}/>
+                    ))}
+                </div>
+                <h2 className="p-4 m-0 m_t_style">Animales vistos</h2>
+                <div className="row m-0 w-bg pt-3 pb-3">
+                    {animales_v.map((a, i)=>(
+                        <Mascota_miniatura key={i} id={a.id}/>
+                    ))}
+                </div>
             </div>
             
         </div>

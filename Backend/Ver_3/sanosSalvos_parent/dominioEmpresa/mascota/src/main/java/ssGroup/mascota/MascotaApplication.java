@@ -15,8 +15,7 @@ public class MascotaApplication {
         
         @Bean
         @LoadBalanced
-        public WebClient.Builder loadBalancedWebClientBuilder()
-        { return WebClient.builder();
+        public WebClient.Builder loadBalancedWebClientBuilder(){ 
+            return WebClient.builder();
         }
-
 }
