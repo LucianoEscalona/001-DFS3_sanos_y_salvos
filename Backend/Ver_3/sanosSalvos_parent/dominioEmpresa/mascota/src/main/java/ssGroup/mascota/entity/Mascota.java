@@ -42,5 +42,5 @@ public class Mascota {
     private String tipo;
     private String estado;
     
-    private Integer rut_usuario;
+    private String rut_usuario;
 }

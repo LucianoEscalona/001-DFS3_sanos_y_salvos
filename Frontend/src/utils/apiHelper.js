@@ -37,6 +37,7 @@ export const getSMT_ID = async(puerto, api, ruta, id) => {
 
 export const postSMT = async(puerto, api, ruta, cuerpo) => {
     try {
+        console.log("ENVIANDO:", cuerpo)
         const res  = await fetch(`${API}:${puerto}/${api}/v1/${ruta}`, {
             method: "POST",
             headers: {

@@ -41,9 +41,14 @@ function Navbar() {
                     <Link className="nav-link active" aria-current="page" to="/">Contacto</Link>
                 </li>
                 {sesionActiva &&
+                    <>
                     <li className="nav-item">
                         <Link className="nav-link active" aria-current="page" to="/mascotas">Mascotas</Link>
                     </li>
+                    <li className="nav-item">
+                        <Link className="nav-link active" aria-current="page" to="/reportes">Reportes</Link>
+                    </li>
+                    </>
                 }
                 {sesionActiva &&
                     <li className="nav-item dropdown">

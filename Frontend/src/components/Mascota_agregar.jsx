@@ -489,10 +489,10 @@ function Mascota_agregar({cerrar,naturaleza,id_mod}) {
                         }
                         <p className="mt-4"></p>
                         {naturaleza == "add" &&
-                            <button className="me-4" onClick={manejo_boton}>Registrar mascota</button>
+                            <button className="me-4" onClick={()=>manejo_boton()}>Registrar mascota</button>
                         }
                         {naturaleza == "mod" &&
-                            <button className="me-4" onClick={manejo_boton}>Guardar cambios</button>
+                            <button className="me-4" onClick={()=>manejo_boton()}>Guardar cambios</button>
                         }
                         <button onClick={cerrar}>Cerrar</button>
                     </div>

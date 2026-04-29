@@ -14,6 +14,8 @@ function Mascotas() {
     const [usuarios, setUsuarios] = useState([])
     const [mostrar_agregar, setMostrar_agregar] = useState(false)
 
+    const sesion = JSON.parse(localStorage.getItem("sesion"))
+
     useEffect(()=>{
         const obtenerData = async() => {
             const res = await getSMT(8081,"mascota","listar")
@@ -25,9 +27,9 @@ function Mascotas() {
         const mr = []
         const av = []
         mascotas.forEach(m => {
-            if(m.tipo == "mascota"){
+            if(m.tipo == "mascota" && m.rut_usuario == sesion.rut){
                 mr.push(m)
-            }else{
+            }else if(m.tipo == "lo_vi" && m.rut_usuario == sesion.rut){
                 av.push(m)
             }
         })
