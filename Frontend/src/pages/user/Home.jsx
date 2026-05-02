@@ -1,8 +1,21 @@
+import { useEffect, useState } from 'react'
 import '../../App.css'
-import Reporte_p from '../../components/Reporte_p'
+import Reporte_miniatura from '../../components/Reporte_miniatura'
 import { insert_ls, motor_demo } from '../../utils/test'
+import { getSMT } from '../../utils/apiHelper'
 
 function Home() {
+
+    const [reportes, setReportes] = useState([])
+    
+    useEffect(()=>{
+        const obtenerData = async() => {
+            const res = await getSMT(8083,"reporte","listar")
+            setReportes(res)
+        }
+        obtenerData()
+    },[])
+
     return(
         <div className='container-fluid p-0'>
 
@@ -30,9 +43,10 @@ function Home() {
                 <h4>Reportes de mascotas recientes:</h4>
             </div>
             <div className='row m-0'>
-                <div className='col-lg-3 col-md-4 col-sm-6'><Reporte_p/></div>
-                <div className='col-lg-3 col-md-4 col-sm-6'><Reporte_p/></div>
-                <div className='col-lg-3 col-md-4 col-sm-6'><Reporte_p/></div>
+                {reportes.map((r,i)=>(
+                    <Reporte_miniatura id={r.id} key={i} naturaleza={"home"}/>
+                ))
+                }
             </div>
         </div>
         

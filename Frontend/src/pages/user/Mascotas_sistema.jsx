@@ -5,14 +5,12 @@ import '../../styles/mascota.css'
 import Mascota_agregar from "../../components/Mascota_agregar"
 import Mascota_miniatura from "../../components/Mascota_miniatura"
 
-function Mascotas() {
+function Mascotas_sistema(){
 
     const [mascotas, setMascotas] = useState([])
         const [mascotas_r, setMascotas_r] = useState([])
         const [animales_v, setAnimales_v] = useState([])
     const [mostrar_agregar, setMostrar_agregar] = useState(false)
-
-    const sesion = JSON.parse(localStorage.getItem("sesion"))
 
     useEffect(()=>{
         const obtenerData = async() => {
@@ -25,9 +23,9 @@ function Mascotas() {
         const mr = []
         const av = []
         mascotas.forEach(m => {
-            if(m.tipo == "mascota" && m.rut_usuario == sesion.rut){
+            if(m.tipo == "mascota"){
                 mr.push(m)
-            }else if(m.tipo == "lo_vi" && m.rut_usuario == sesion.rut){
+            }else if(m.tipo == "lo_vi"){
                 av.push(m)
             }
         })
@@ -68,13 +66,13 @@ function Mascotas() {
                 <h2 className="p-4 m-0 m_t_style">Mascotas registradas</h2>
                 <div className="row m-0 w-bg pt-3 pb-3">
                     {mascotas_r.map((m, i)=>(
-                        <Mascota_miniatura key={i} id={m.id} naturaleza={"ver_detalle"} origen={"/mascotas"}/>
+                        <Mascota_miniatura key={i} id={m.id} naturaleza={"ver_detalle"} origen={"/mascotas_sistema"}/>
                     ))}
                 </div>
                 <h2 className="p-4 m-0 m_t_style">Animales vistos</h2>
                 <div className="row m-0 w-bg pt-3 pb-3">
                     {animales_v.map((a, i)=>(
-                        <Mascota_miniatura key={i} id={a.id} naturaleza={"ver_detalle"} origen={"/mascotas"}/>
+                        <Mascota_miniatura key={i} id={a.id} naturaleza={"ver_detalle"} origen={"/mascotas_sistema"}/>
                     ))}
                 </div>
             </div>
@@ -83,4 +81,4 @@ function Mascotas() {
         </>
     )
 }
-export default Mascotas
+export default Mascotas_sistema

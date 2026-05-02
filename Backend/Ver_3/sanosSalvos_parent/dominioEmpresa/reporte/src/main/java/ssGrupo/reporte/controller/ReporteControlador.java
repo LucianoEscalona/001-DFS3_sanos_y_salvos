@@ -44,6 +44,21 @@ public class ReporteControlador {
             return ResponseEntity.ok(allR);
         }
     }
+   
+//______________________________________________________________________________
+    
+    @GetMapping("/obtener/{id}")
+    public ResponseEntity<?> get(@PathVariable("id") Integer id) {
+        Optional<Reporte> optR = rep.findById(id);
+        
+        if(optR.isPresent()){
+            Reporte rR = optR.get();
+            return new ResponseEntity<>(rR, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+    
 //______________________________________________________________________________
     
     @PutMapping("/mod_rep/{id}")
@@ -54,10 +69,11 @@ public class ReporteControlador {
             Reporte modR = optR.get();
             modR.setId_mascota(r.getId_mascota());
             modR.setId_usuario(r.getId_usuario());
+            modR.setTitulo(r.getTitulo());
             modR.setDescripcion(r.getDescripcion());
             modR.setConsideracion_e(r.getConsideracion_e());
             modR.setTiempo_uvv(r.getTiempo_uvv());
-            modR.setUbicacion_uvv(r.getTiempo_uvv());
+            modR.setUbicacion_uvv(r.getUbicacion_uvv());
             Reporte rR = rep.save(modR);
             return new ResponseEntity<>(rR, HttpStatus.OK);
         } else {

@@ -28,12 +28,16 @@ function Mascota_detalle(){
 
     const id = localStorage.getItem("id_m")
 
+    const origen_red = localStorage.getItem("operdmd")
+    var sesion = JSON.parse(localStorage.getItem("sesion")) || null
+
     useEffect(()=>{
         const obtenerData = async() => {
             const res = await getSMT_ID(8081,"mascota","obtener",id)
             setData(res)
         }
         obtenerData()
+        console.log(sesion)
     },[])
     useEffect(()=>{
 
@@ -77,6 +81,9 @@ function Mascota_detalle(){
 
         if(data.condicion != "" && data.condicion != undefined){
             setCondicion(capTxt(data.condicion))
+            if(animal.condicion == "NONE"){
+                setCondicion("No posee ninguna condicion especial")
+            }
         }else{
             setCondicion("No posee ninguna condicion especial")
         }
@@ -107,7 +114,7 @@ function Mascota_detalle(){
     },[data])
 
     const mascota = ()=>{
-        navegar("/mascotas")
+        navegar(origen_red)
     }
     const retirar = ()=>{
         if(confirm("Estas seguro de retirar la mascota del sistema?")){
@@ -138,6 +145,7 @@ function Mascota_detalle(){
                         <p className="mt-2">
                             <strong>Edad: </strong>{edad}
                         </p>
+                        
                     </div>
                     <div className="col-md-6 p-3">
                         <h5><strong>Descripcion especifica:</strong></h5>
@@ -158,15 +166,22 @@ function Mascota_detalle(){
                         </p>
                         <p className="mt-2"><em>{estado}</em></p>
                         <p className="mt-2"><em>RUT: {rut_temp}</em></p>
+                        
                         <div className="row m-0">
                             <div className="col-12 p-0">
                                 <button onClick={()=>mascota()}>Regresar</button>
-                                <button onClick={()=>setMostrar_agregar(true)} className="ms-3 m-3">Modificar</button>
-                                <button onClick={()=>retirar()} className="btn-red">Retirar del sistema</button>
+                                {sesion != null && rut_temp == sesion.rut &&
+                                    <>
+                                        <button onClick={()=>setMostrar_agregar(true)} className="ms-3 m-3">Modificar</button>
+                                        <button onClick={()=>retirar()} className="btn-red">Retirar del sistema</button>
+                                    </>
+                                }
                             </div>
                         </div>
                     </div>
-                    <button className="btn-red">Reportar como desaparecido</button>
+                    {sesion != null && rut_temp == sesion.rut &&
+                        <button className="btn-red">Reportar como desaparecido</button>
+                    }
                 </div>
             </div>
             </div>

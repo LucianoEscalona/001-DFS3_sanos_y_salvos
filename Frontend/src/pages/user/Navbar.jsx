@@ -42,11 +42,34 @@ function Navbar() {
                 </li>
                 {sesionActiva &&
                     <>
+                    <li className="nav-item dropdown">
+                        <a className="nav-link dropdown-toggle" to="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Mascotas
+                        </a>
+                            <ul className="dropdown-menu">
+                                <li><Link className="dropdown-item" to="/mascotas">Mis mascotas</Link></li>
+                                <li><Link className="dropdown-item" to="/mascotas_sistema">Mascotas en el sistema</Link></li>
+                            </ul>
+                    </li>
+                    <li className="nav-item dropdown">
+                        <a className="nav-link dropdown-toggle" to="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Reportes
+                        </a>
+                            <ul className="dropdown-menu">
+                                <li><Link className="dropdown-item" to="/reportes">Mis reportes</Link></li>
+                                <li><Link className="dropdown-item" to="/reportes_sistema">Reportes en el sistema</Link></li>
+                            </ul>
+                    </li>
+
+                    </>
+                }
+                {!sesionActiva &&
+                    <>
                     <li className="nav-item">
-                        <Link className="nav-link active" aria-current="page" to="/mascotas">Mascotas</Link>
+                        <Link className="nav-link active" aria-current="page" to="/reportes_sistema">Reportes del sistema</Link>
                     </li>
                     <li className="nav-item">
-                        <Link className="nav-link active" aria-current="page" to="/reportes">Reportes</Link>
+                        <Link className="nav-link active" aria-current="page" to="/mascotas_sistema">Mascotas del sistema</Link>
                     </li>
                     </>
                 }

@@ -3,7 +3,7 @@ import { getSMT_ID } from "../utils/apiHelper"
 import { capTxt, formato_collar, formato_raza } from "../utils/FunFuns"
 import { useNavigate } from "react-router-dom"
 
-function Mascota_miniatura({id}){
+function Mascota_miniatura({id, naturaleza, cerrar, id_ani, origen}){
 
     const navegar = useNavigate()
 
@@ -16,10 +16,16 @@ function Mascota_miniatura({id}){
     const [collar_des_f, setCollar_des_f] = useState("")
     const [chip, setChip] = useState("")
     const [res, setRes] = useState("")
+    const [tipo_a, setTipo_a] = useState("")
 
     const detalle = (id)=>{
         navegar("/mascota_detalle")
         localStorage.setItem("id_m", id)
+    }
+
+    const guardar_cerrar = ()=>{
+        id_ani(data.id)
+        cerrar(false)
     }
 
     useEffect(()=>{
@@ -32,6 +38,8 @@ function Mascota_miniatura({id}){
 
     useEffect(()=>{
         
+        localStorage.setItem("operdmd", origen)
+
         if(data.nombre == ""){
             setNombre("Sin nombre")
         }else{
@@ -69,6 +77,12 @@ function Mascota_miniatura({id}){
 
         var ls_apariencia = data.apariencia?.split("-") || []
 
+        var tipo = data.tipo
+        if(tipo == "lo_vi"){
+            tipo = "Visto por mi"
+        }
+        setTipo_a(tipo)
+
     },[data])
 
     return(
@@ -79,14 +93,24 @@ function Mascota_miniatura({id}){
                     <img className="cc-st mb-2" src="../../public/img/Red-Pin.png" alt="NOT FOUND" />
                 </div>
                 <div className="img-sim shadow"></div>
-                <h4 className="mt-4">{nombre}</h4>
+                {naturaleza=="ver_detalle" &&
+                    <h4 className="mt-4">{nombre}</h4>
+                }
+                {naturaleza=="sel_reporte" &&
+                    <h4 className="mt-4">{nombre} ({tipo_a})</h4>
+                }
                 <p className="mt-2">{`${animal}${razas}`}</p>
                 <p className="mt-2">{genero}</p>
                 <p className="mt-2">{edad}</p>
                 <p className="mt-2">{collar_des_f}</p>
                 <p className="mt-2">{chip}</p>
                 <p className="mt-2">{res}</p>
-                <button onClick={()=>detalle(id)} className="mt-3">Ver detalles</button>
+                {naturaleza=="ver_detalle"&&
+                    <button onClick={()=>detalle(id)} className="mt-3">Ver detalles</button>
+                }
+                {naturaleza=="sel_reporte" &&
+                    <button onClick={()=>guardar_cerrar()} className="mt-3">Seleccionar</button>
+                }
             </div>
         </div>
         </>

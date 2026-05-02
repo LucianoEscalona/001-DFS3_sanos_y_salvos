@@ -9,7 +9,7 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "usuario")
+@Table(name = "reporte")
 public class Reporte {
     
     @Id
@@ -19,6 +19,7 @@ public class Reporte {
     private Integer id_mascota;
     private Integer id_usuario;
     
+    private String titulo;
     private String descripcion;
     private String consideracion_e;
     private String tiempo_uvv;

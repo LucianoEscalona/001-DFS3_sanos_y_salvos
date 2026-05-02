@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { getSMT_ID, postSMT, putSMT } from "../utils/apiHelper"
 /* demasiadas razas y tipos de gatos =_=, asi que pondre algunas nomas, ya que es un proyecto ficticio */
 
-function Mascota_agregar({cerrar,naturaleza,id_mod}) {
+function Mascota_agregar({cerrar,naturaleza,id_mod, id_ani}) {
 
     const [data, setData] = useState({})
 
@@ -82,8 +82,14 @@ function Mascota_agregar({cerrar,naturaleza,id_mod}) {
             postSMT(8081,"mascota","guardar",animal_g)
         }
         if(nat=="mod"){
-            console.log(animal_g)
             putSMT(8081,"mascota","mod_info",animal_g,id_mod)
+        }
+        if(nat=="ag_reporte"){
+            const postData_res = async() => {
+                const res = await postSMT(8081,"mascota","guardar",animal_g)
+                id_ani(res.id)
+            }
+            postData_res()
         }
     }
 
@@ -100,6 +106,9 @@ function Mascota_agregar({cerrar,naturaleza,id_mod}) {
             }
             obtenerData()
             console.log(id_mod)
+        }
+        if(naturaleza == "ag_reporte"){
+            setEstado("perdido")
         }
     },[])
     useEffect(()=>{
@@ -169,7 +178,7 @@ function Mascota_agregar({cerrar,naturaleza,id_mod}) {
                         <div className="img-sim shadow"></div>
                         <p className="mt-4 mb-3 pt-3 fw-bold">Descripcion General:</p>
 
-                        {naturaleza == "add" &&
+                        {naturaleza == "add" || naturaleza == "ag_reporte" &&
                             <div className="d-flex gap-3 mt-4">    
                                 <p>Tipo de animal:</p>
                                 <select name="tipo" id="tipo" 
@@ -181,7 +190,7 @@ function Mascota_agregar({cerrar,naturaleza,id_mod}) {
                             </div>
                         }
 
-                        {tipo == "mascota" &&
+                        {tipo == "mascota" && naturaleza != "ag_reporte" &&
                             <>
                                 <div className="d-flex gap-3 mt-3">
                                     <p>Estado:</p>
@@ -490,6 +499,9 @@ function Mascota_agregar({cerrar,naturaleza,id_mod}) {
                         <p className="mt-4"></p>
                         {naturaleza == "add" &&
                             <button className="me-4" onClick={()=>manejo_boton()}>Registrar mascota</button>
+                        }
+                        {naturaleza == "ag_reporte" &&
+                            <button className="me-4" onClick={()=>manejo_boton()}>Registrar y asociar a reporte</button>
                         }
                         {naturaleza == "mod" &&
                             <button className="me-4" onClick={()=>manejo_boton()}>Guardar cambios</button>
