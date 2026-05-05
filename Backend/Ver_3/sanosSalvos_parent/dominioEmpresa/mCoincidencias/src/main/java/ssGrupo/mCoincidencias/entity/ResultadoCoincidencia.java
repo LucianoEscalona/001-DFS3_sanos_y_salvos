@@ -14,7 +14,7 @@ public class ResultadoCoincidencia {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id_resultado;
+    private Integer id;
     
     private Integer ptje_res_coincidencia;
     
@@ -37,6 +37,9 @@ public class ResultadoCoincidencia {
     private Boolean tiene_chip;
     private Boolean ubicacion_chip_coincide;
     private Boolean ubicacion_estadia_coincide;
+    
+    private Integer idMascota;
+    private Integer idReporte;
 
     public ResultadoCoincidencia( 
             Integer ptje_res_coincidencia, 
@@ -58,7 +61,9 @@ public class ResultadoCoincidencia {
             Boolean material_collar_coincide, 
             Boolean tiene_chip, 
             Boolean ubicacion_chip_coincide, 
-            Boolean ubicacion_estadia_coincide) {
+            Boolean ubicacion_estadia_coincide,
+            Integer idMascota,
+            Integer idReporte) {
         this.ptje_res_coincidencia = ptje_res_coincidencia;
         this.nombre_coincide = nombre_coincide;
         this.animal_coincide = animal_coincide;
@@ -79,6 +84,11 @@ public class ResultadoCoincidencia {
         this.tiene_chip = tiene_chip;
         this.ubicacion_chip_coincide = ubicacion_chip_coincide;
         this.ubicacion_estadia_coincide = ubicacion_estadia_coincide;
+        this.idMascota = idMascota;
+        this.idReporte = idReporte;
+    }
+
+    public ResultadoCoincidencia() {
     }
     
     

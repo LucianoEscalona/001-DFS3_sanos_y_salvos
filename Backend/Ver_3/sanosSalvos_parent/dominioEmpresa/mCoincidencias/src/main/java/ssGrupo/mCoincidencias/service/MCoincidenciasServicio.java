@@ -24,6 +24,19 @@ public class MCoincidenciasServicio {
     @Autowired
     ResultadoCoincidenciaRepositorio rep;
     
+    public List<ResultadoCoincidencia> recuperarRes(Integer id_reporte){
+        
+        List<ResultadoCoincidencia> ls_res = rep.findAll();
+        List<ResultadoCoincidencia> ls_res_relacionados = new ArrayList<>();
+        for(ResultadoCoincidencia res : ls_res){
+            if(Objects.equals(res.getIdReporte(), id_reporte)){
+                ls_res_relacionados.add(res);
+            }
+        }
+        
+        return ls_res_relacionados;
+    }
+    
     public void procesar(Integer id_m, Integer id_r){
         
         List<MascotaDTO> ls_m = mc.obtenerMascotas();
@@ -217,7 +230,9 @@ public class MCoincidenciasServicio {
                             c_collar_material,
                             c_chip,
                             c_chip_ubi,
-                            c_ubicacion
+                            c_ubicacion,
+                            m_u.getId(),
+                            r_u.getId()
                     );
                     rep.save(rc_motor);
                 }

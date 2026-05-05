@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { deleteSMT, getSMT_ID } from "../../utils/apiHelper"
+import { deleteSMT, getSMT_ID, resultMotor, searchMotor } from "../../utils/apiHelper"
 import { capTxt, formato_apariencia, formato_collar, formato_raza } from "../../utils/FunFuns"
 import { useNavigate } from "react-router-dom"
 import Reporte_agregar from "../../components/Reporte_agregar"
@@ -29,12 +29,22 @@ function Reporte_detalle({id}) {
 
     const [modificando, setModificando] = useState(false)
 
+    const [resReportes, setResReportes] = useState([])
+
     const navegar = useNavigate()
 
     const retirar = ()=>{
         if(confirm("Estas seguro de quitar el reporte del sistema?")){
             deleteSMT(8083,"reporte","retirar_sis",reporte.id)
         }
+    }
+    const buscar_coincidencias = async(id_m, id_r)=>{
+        const res = await searchMotor(id_m, id_r)
+        const res_2 = await resultMotor(id_r)
+        setResReportes(res_2)
+    }
+    const printResultados = ()=>{
+        console.log(resReportes)
     }
 
     useEffect(()=>{
@@ -198,7 +208,9 @@ function Reporte_detalle({id}) {
                         <button onClick={()=>retirar()}>Quitar reporte</button>
                     </>
                 }
-
+                <p>-Probando el motor-</p>
+                <button onClick={()=>buscar_coincidencias(reporte.id_mascota, reporte.id)}>Buscar coincidencias</button>
+                <button onClick={()=>printResultados()}>PRINT</button>
             </div>
         </div>
         {modificando &&

@@ -87,5 +87,28 @@ export const deleteSMT = async(puerto, api, ruta, id) => {
     }
 }
 
+export const searchMotor = async(id_m, id_r) => {
+    try {
+        const res = await fetch(`${API}:8084/motor/v1/procesar/${id_m}/${id_r}`)
+        if(!res.ok) throw new Error("ERROR al ejecutar: SearchMotor")
+        const data =  await res
+        return data
+    } catch(e) {
+        console.error("Error al ejectar: SearchMotor, Mensaje de error: ", e)
+        return "No se pudo ejecutar el proceco correctamente"
+    }
+}
+export const resultMotor = async(id_r) => {
+    try {
+        const res = await fetch(`${API}:8084/motor/v1/resultado/${id_r}`)
+        if(!res.ok) throw new Error("ERROR al ejecutar: resultMotor")
+        const data =  await res.json()
+        return data
+    } catch(e) {
+        console.error("Error al ejectar: resultMotor, Mensaje de error: ", e)
+        return []
+    }
+}
+
 //_PRIVADOS_______________________________________________________________________________________________________________
 

@@ -179,7 +179,8 @@ export const motor_v1_test = (m_o, m_c) => {
         color_collar_s_coincide: c_collar_c2,
         material_collar_coincide: c_collar_material,
         chip_coincide: c_chip_ubi,
-        ubicacion_estadia_coincide: c_ubicacion
+        ubicacion_estadia_coincide: c_ubicacion,
+        
 
     }
     return res_coincidencias

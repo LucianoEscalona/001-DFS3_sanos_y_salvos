@@ -1,14 +1,18 @@
 package ssGrupo.mCoincidencias.controller;
 
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import ssGrupo.mCoincidencias.entity.ResultadoCoincidencia;
 import ssGrupo.mCoincidencias.service.MCoincidenciasServicio;
 
 
 @RestController
+@CrossOrigin("http://localhost:5173")
 @RequestMapping("/motor/v1")
 public class MCoincidenciasControlador {
     
@@ -23,4 +27,9 @@ public class MCoincidenciasControlador {
         ser.procesar(id_m, id_r);
         return "Proceso ejecutado correctamente";
     }
+    @GetMapping("/resultado/{id_r}")
+    public List<ResultadoCoincidencia> recuperar_resultado( 
+            @PathVariable("id_r") Integer id_r) {
+        return ser.recuperarRes(id_r);
+    };
 }
