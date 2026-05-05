@@ -110,6 +110,7 @@ function Mascota_agregar({cerrar,naturaleza,id_mod, id_ani}) {
         if(naturaleza == "ag_reporte"){
             setEstado("perdido")
         }
+        alert("-"+naturaleza+"-")
     },[])
     useEffect(()=>{
         if(naturaleza=="mod"){
@@ -178,17 +179,29 @@ function Mascota_agregar({cerrar,naturaleza,id_mod, id_ani}) {
                         <div className="img-sim shadow"></div>
                         <p className="mt-4 mb-3 pt-3 fw-bold">Descripcion General:</p>
 
-                        {naturaleza == "add" || naturaleza == "ag_reporte" &&
+                        {naturaleza == "add" &&
                             <div className="d-flex gap-3 mt-4">    
                                 <p>Tipo de animal:</p>
                                 <select name="tipo" id="tipo" 
                                     value={tipo} 
                                     onChange={(e)=>setTipo(e.target.value)}>
                                     <option value="mascota">Mascota</option>
-                                    <option value="lo_vi">Lo vi por ahi</option>
+                                    <option value="lo_vi">Callejero</option>
                                 </select>
                             </div>
                         }
+                        {naturaleza == "ag_reporte" &&
+                            <div className="d-flex gap-3 mt-4">    
+                                <p>Es su mascota o lo vio por ahi?:</p>
+                                <select name="tipo" id="tipo" 
+                                    value={tipo} 
+                                    onChange={(e)=>setTipo(e.target.value)}>
+                                    <option value="mascota">Mascota</option>
+                                    <option value="lo_vi">Callejero</option>
+                                </select>
+                            </div>
+                        }
+
 
                         {tipo == "mascota" && naturaleza != "ag_reporte" &&
                             <>

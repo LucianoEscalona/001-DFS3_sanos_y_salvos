@@ -5,6 +5,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import java.time.LocalDateTime;
 import lombok.Data;
 
 @Data
@@ -22,6 +23,6 @@ public class Reporte {
     private String titulo;
     private String descripcion;
     private String consideracion_e;
-    private String tiempo_uvv;
+    private LocalDateTime tiempo_uvv;
     private String ubicacion_uvv;
 }

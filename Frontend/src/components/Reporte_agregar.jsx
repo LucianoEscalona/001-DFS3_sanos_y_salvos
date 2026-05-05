@@ -118,7 +118,7 @@ function Reporte_agregar({cerrar, naturaleza, id_mod}) {
                     <p>Consideracion especial:</p>
                     <textarea value={consideracion} onChange={(e)=>setConsideracion(e.target.value)} className="w-e mb-2" name="" id=""></textarea>
                     <p>Cuando vio al animal?</p>
-                    <input value={tiempo_visto} onChange={(e)=>setTiempo_visto(e.target.value)} className="w-e mb-2" type="text" />
+                    <input value={tiempo_visto} onChange={(e)=>setTiempo_visto(e.target.value)} className="w-e mb-2" type="datetime-local" />
                     <p>Donde vio al animal?</p>
                     <input value={ubicacion_visto} onChange={(e)=>setUbicacion_visto(e.target.value)} className="w-e mb-2" type="text" />
                     {naturaleza == "add" &&
