@@ -6,7 +6,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 import ssGrupo.mCoincidencias.client.MascotaClient;
 import ssGrupo.mCoincidencias.client.ReporteClient;
 import ssGrupo.mCoincidencias.dto.MascotaDTO;
@@ -23,6 +25,8 @@ public class MCoincidenciasServicio {
     private ReporteClient rc;
     @Autowired
     ResultadoCoincidenciaRepositorio rep;
+    @Autowired
+    private RestTemplate rt;
     
     public List<ResultadoCoincidencia> recuperarRes(Integer id_reporte){
         
@@ -39,6 +43,10 @@ public class MCoincidenciasServicio {
     
     public void procesar(Integer id_m, Integer id_r){
         
+        System.out.println("-----------------------------");
+        System.out.println("LOGRO LLAMAR AL METODO");
+        System.out.println("-----------------------------");
+        
         List<MascotaDTO> ls_m = mc.obtenerMascotas();
         MascotaDTO m_u = mc.obtenerMascotaID(id_m);
         
@@ -47,6 +55,10 @@ public class MCoincidenciasServicio {
         
         for(MascotaDTO m : ls_m){
             if(m_u != null){
+                
+                System.out.println("-----------------------------");
+                System.out.println("ENTRO A EL PRIMER IF");
+                System.out.println("-----------------------------");
                 
                 Integer ptje_coincidencia = 0;
                 Boolean posible_coincidencia = false;
@@ -83,17 +95,33 @@ public class MCoincidenciasServicio {
                 List<String> comparado_collar = new ArrayList<>(Arrays.asList(m.getCollar_des().split("-")));
                 List<String> comparado_apariencia = new ArrayList<>(Arrays.asList(m.getApariencia().split("-")));
                 
-                posible_coincidencia = m_u.getAnimal().equalsIgnoreCase(m.getAnimal());
+                System.out.println("-----------------------------");
+                System.out.println("ANTES DE POSIBLE COINCIDENCIA 1");
+                System.out.println("-----------------------------");
+                
+                if(m_u.getAnimal().equalsIgnoreCase(m.getAnimal())){
+                    posible_coincidencia = true;
+                    c_animal = true;
+                    ptje_coincidencia += 3;
+                }
+                
+                
+                System.out.println("-----------------------------");
+                System.out.println("ANTES DE POSIBLE COINCIDENCIA 2");
+                System.out.println("-----------------------------");
                 
                 for(Reporte_mDTO r : ls_r){
                     if(r_u != null){
                         LocalDateTime f_reporte_u = r_u.getTiempo_uvv();
                         LocalDateTime f_reporte_s = r.getTiempo_uvv();
                         posible_coincidencia = f_reporte_u.isBefore(f_reporte_s);
+                        
+                        
                     }
                 }
-                
-                
+                System.out.println("-----------------------------");
+                System.out.println("ANTES DE LOS IF");
+                System.out.println("-----------------------------");
                 
                 if(posible_coincidencia){
                     //----------------------------------------COMPARACION-NOMBRE
@@ -203,13 +231,21 @@ public class MCoincidenciasServicio {
                                 c_chip_ubi = true;
                             }
                         }
+                    }else if(m_u.getChip() == false){
+                        if(Objects.equals(m_u.getChip(), m.getChip())){
+                            ptje_coincidencia += 4;
+                            c_chip = true;
+                            c_chip_ubi = true;
+                        }
                     }
                     //----------------------------------------------------------
                     if(m_u.getUbicacion_res().equalsIgnoreCase(m.getUbicacion_res())){
                         ptje_coincidencia += 3;
                         c_ubicacion = true;
                     }
-                    
+                    System.out.println("-----------------------------");
+                    System.out.println("ANTES DE CREAR EL RESULTADO  ");
+                    System.out.println("-----------------------------");
                     ResultadoCoincidencia rc_motor = new ResultadoCoincidencia(
                             ptje_coincidencia,
                             c_nombre,
@@ -232,14 +268,29 @@ public class MCoincidenciasServicio {
                             c_chip_ubi,
                             c_ubicacion,
                             m_u.getId(),
-                            r_u.getId()
+                            r_u.getId(),
+                            m.getId()
                     );
-                    rep.save(rc_motor);
+                    
+                    List<ResultadoCoincidencia> ls_resultados = recuperarRes(r_u.getId());
+                    
+                    System.out.println("-----------------------------");
+                    System.out.println(ls_resultados);
+                    System.out.println("-----------------------------");
+                    
+                    if(ls_resultados.isEmpty()){
+                        rep.save(rc_motor);
+                    }else{
+                        if(!ls_resultados.contains(rc_motor)){
+                            rep.save(rc_motor);
+                        }
+                    }
+                    
                 }
-                
             }
-            System.out.println("Animal numero " + m.getId() + ": " + m.getAnimal());
+            //System.out.println("Animal numero " + m.getId() + ": " + m.getAnimal());
         }
+        /*
         if(m_u != null){
             System.out.println("Animal recuperado:" + m_u.getAnimal());
         }
@@ -249,6 +300,6 @@ public class MCoincidenciasServicio {
         }
         if(r_u != null){
             System.out.println("Reporte recuperado:" + r_u.getTitulo());
-        }
+        }*/
     }
 }

@@ -146,3 +146,9 @@ p,h1,h2,h3,h4, strong{
 }.mw-fra::-webkit-scrollbar {
   display: none;
 }
+.positive{
+  color: rgb(0, 116, 39);
+}
+.maybe{
+  color: rgb(160, 0, 209);
+}

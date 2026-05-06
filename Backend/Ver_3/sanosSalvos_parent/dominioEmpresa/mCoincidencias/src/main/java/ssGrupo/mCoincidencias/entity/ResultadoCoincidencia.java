@@ -6,10 +6,39 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
 @Entity
 @Table(name = "res_coincidencias")
+@Getter
+@Setter
+@EqualsAndHashCode(of = {
+    "ptje_res_coincidencia", 
+    "nombre_coincide",
+    "animal_coincide",
+    "raza_primaria_coincide",
+    "raza_secundaria_coincide",
+    "raza_es_segura",
+    "genero_coincide",
+    "genero_es_seguro",
+    "edad_coincide",
+    "edad_es_segura",
+    "color_ojo_i_coincide",
+    "color_ojo_d_coincide",
+    "largo_pelaje_coincide",
+    "tiene_collar",
+    "color_collar_p_coincide",
+    "color_collar_s_coincide",
+    "material_collar_coincide",
+    "tiene_chip",
+    "ubicacion_chip_coincide",
+    "ubicacion_estadia_coincide",
+    "idMascota",
+    "idReporte",
+    "idMascota_revisada"
+})
 public class ResultadoCoincidencia {
     
     @Id
@@ -41,7 +70,9 @@ public class ResultadoCoincidencia {
     private Integer idMascota;
     private Integer idReporte;
 
-    public ResultadoCoincidencia( 
+    private Integer idMascota_revisada;
+
+    public ResultadoCoincidencia(
             Integer ptje_res_coincidencia, 
             Boolean nombre_coincide, 
             Boolean animal_coincide, 
@@ -54,16 +85,17 @@ public class ResultadoCoincidencia {
             Boolean edad_es_segura, 
             Boolean color_ojo_i_coincide, 
             Boolean color_ojo_d_coincide, 
-            Boolean largo_pelaje_coincide,
-            Boolean tiene_collar,
+            Boolean largo_pelaje_coincide, 
+            Boolean tiene_collar, 
             Boolean color_collar_p_coincide, 
             Boolean color_collar_s_coincide, 
             Boolean material_collar_coincide, 
             Boolean tiene_chip, 
             Boolean ubicacion_chip_coincide, 
-            Boolean ubicacion_estadia_coincide,
-            Integer idMascota,
-            Integer idReporte) {
+            Boolean ubicacion_estadia_coincide, 
+            Integer idMascota, 
+            Integer idReporte, 
+            Integer idMascota_revisada) {
         this.ptje_res_coincidencia = ptje_res_coincidencia;
         this.nombre_coincide = nombre_coincide;
         this.animal_coincide = animal_coincide;
@@ -86,7 +118,9 @@ public class ResultadoCoincidencia {
         this.ubicacion_estadia_coincide = ubicacion_estadia_coincide;
         this.idMascota = idMascota;
         this.idReporte = idReporte;
+        this.idMascota_revisada = idMascota_revisada;
     }
+    
 
     public ResultadoCoincidencia() {
     }
