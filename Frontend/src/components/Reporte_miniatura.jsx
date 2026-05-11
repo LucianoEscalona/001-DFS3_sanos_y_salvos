@@ -17,7 +17,7 @@ function Reporte_miniatura({id, naturaleza}) {
 
     useEffect(()=>{
         const obtenerReporte = async() => {
-            const res = await getSMT_ID(8083,"reporte","obtener",id)
+            const res = await getSMT_ID("reporte","obtener",id)
             setReporte(res)
         }
         obtenerReporte()
@@ -27,7 +27,7 @@ function Reporte_miniatura({id, naturaleza}) {
         if(reporte.id_mascota != undefined){
             try {
                 const obtener_animal = async() => {
-                    const res = await getSMT_ID(8081,"mascota","obtener",reporte.id_mascota)
+                    const res = await getSMT_ID("mascota","obtener",reporte.id_mascota)
                     setAnimal(res)
                 }
                 obtener_animal()
@@ -39,7 +39,7 @@ function Reporte_miniatura({id, naturaleza}) {
         if(reporte.id_usuario != undefined){
             try {
                 const obtener_usuario = async() => {
-                    const res = await getSMT_ID(8082,"usuario","obtener",reporte.id_usuario)
+                    const res = await getSMT_ID("usuario","obtener",reporte.id_usuario)
                     setUsuario(res)
                 }
                 obtener_usuario()

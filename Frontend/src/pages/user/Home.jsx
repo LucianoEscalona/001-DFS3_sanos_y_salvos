@@ -10,7 +10,7 @@ function Home() {
     
     useEffect(()=>{
         const obtenerData = async() => {
-            const res = await getSMT(8083,"reporte","listar")
+            const res = await getSMT("reporte","listar")
             setReportes(res)
         }
         obtenerData()

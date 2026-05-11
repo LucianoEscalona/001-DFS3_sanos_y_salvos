@@ -17,7 +17,7 @@ function Login() {
     }
 
     const iniciar_sesion = async(correo,passwd)=>{
-        const u = await getSMT_ID(8082,"usuario","login",correo) || {}
+        const u = await getSMT_ID("usuario","login",correo) || {}
         if(u.contrasenia == passwd){
             localStorage.setItem("sesion",JSON.stringify(u))
             alert("Inicio de sesion exitosa")

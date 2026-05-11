@@ -12,7 +12,7 @@ function Reportes() {
 
     useEffect(()=>{
         const obtenerData = async() => {
-            const res = await getSMT(8083,"reporte","listar")
+            const res = await getSMT("reporte","listar")
 
             const sesion_u = JSON.parse(localStorage.getItem("sesion"))
             let ls_reportes_u = []

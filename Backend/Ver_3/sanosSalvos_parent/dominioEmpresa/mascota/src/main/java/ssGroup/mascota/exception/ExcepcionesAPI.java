@@ -1,17 +1,19 @@
 package ssGroup.mascota.exception;
-
+/*
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.client.HttpServerErrorException;
 import ssGroup.mascota.common.RespuestaExcepciones;
 
 @RestControllerAdvice
+*/
 public class ExcepcionesAPI {
-    
-    @ExceptionHandler(Exception.class)
+    /*
+    @ExceptionHandler(HttpServerErrorException.class)
     public ResponseEntity<?> manejarHostDesconocido(String instancia, Exception e){
         
         LocalDateTime f_hoy = LocalDateTime.now();
@@ -115,4 +117,5 @@ public class ExcepcionesAPI {
                 .status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body(res);    
     }
+*/
 }

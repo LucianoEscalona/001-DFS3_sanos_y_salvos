@@ -1,5 +1,5 @@
 package ssGroup.mascota.exception;
-
+/*
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import org.springframework.http.HttpStatus;
@@ -9,8 +9,9 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import ssGroup.mascota.common.RespuestaExcepciones;
 
 @RestControllerAdvice
+*/
 public class ExcepcionesRDN {
-    
+    /*
     @ExceptionHandler(Exception.class)
     public ResponseEntity<?> usuarioExistente(String instancia, Exception e){
         
@@ -114,5 +115,5 @@ public class ExcepcionesRDN {
                 .status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body(res);
     }
-    
+    */
 }

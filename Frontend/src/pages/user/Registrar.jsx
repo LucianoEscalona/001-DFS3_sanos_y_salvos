@@ -31,7 +31,7 @@ function Registrar() {
         }
         console.log(usuario_g)
         try {
-            postSMT(8082,"usuario","guardar",usuario_g)
+            postSMT("usuario","guardar",usuario_g)
             alert("Cuenta creada correctamente!")
             navegar("/login")
         } catch (error) {

@@ -79,14 +79,14 @@ function Mascota_agregar({cerrar,naturaleza,id_mod, id_ani}) {
             rut_usuario: rut
         }
         if(nat=="add"){
-            postSMT(8081,"mascota","guardar",animal_g)
+            postSMT("mascota","guardar",animal_g)
         }
         if(nat=="mod"){
-            putSMT(8081,"mascota","mod_info",animal_g,id_mod)
+            putSMT("mascota","mod_info",animal_g,id_mod)
         }
         if(nat=="ag_reporte"){
             const postData_res = async() => {
-                const res = await postSMT(8081,"mascota","guardar",animal_g)
+                const res = await postSMT("mascota","guardar",animal_g)
                 id_ani(res.id)
             }
             postData_res()
@@ -101,7 +101,7 @@ function Mascota_agregar({cerrar,naturaleza,id_mod, id_ani}) {
     useEffect(()=>{
         if(naturaleza == "mod"){
             const obtenerData = async() => {
-                const res = await getSMT_ID(8081,"mascota","obtener",id_mod)
+                const res = await getSMT_ID("mascota","obtener",id_mod)
                 setData(res)
             }
             obtenerData()

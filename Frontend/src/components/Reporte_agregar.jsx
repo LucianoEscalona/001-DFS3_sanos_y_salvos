@@ -50,11 +50,11 @@ function Reporte_agregar({cerrar, naturaleza, id_mod}) {
             ubicacion_uvv: ubicacion_visto
         }
         if(naturaleza == "add"){
-            postSMT(8083,"reporte","guardar",reporte_g)
+            postSMT("reporte","guardar",reporte_g)
             cerrar_agregar()
         }
         if(naturaleza == "mod"){
-            putSMT(8083,"reporte","mod_rep",reporte_g,id_mod)
+            putSMT("reporte","mod_rep",reporte_g,id_mod)
             cerrar_agregar()
         }
         
@@ -63,13 +63,13 @@ function Reporte_agregar({cerrar, naturaleza, id_mod}) {
     useEffect(()=>{
         setSesion(JSON.parse(localStorage.getItem("sesion")))
         const obtenerData = async() => {
-            const res = await getSMT(8081,"mascota","listar")
+            const res = await getSMT("mascota","listar")
             setAnimales(res)
         }
         obtenerData()
         if(naturaleza == "mod"){
             const obtenerData = async() => {
-                const res = await getSMT_ID(8083,"reporte","obtener",id_mod)
+                const res = await getSMT_ID("reporte","obtener",id_mod)
                 setDataMod(res)
             }
             obtenerData()

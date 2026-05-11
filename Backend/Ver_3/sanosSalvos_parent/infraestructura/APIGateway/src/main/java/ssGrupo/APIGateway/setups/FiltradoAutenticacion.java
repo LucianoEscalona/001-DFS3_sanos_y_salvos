@@ -1,5 +1,5 @@
 package ssGrupo.APIGateway.setups;
-
+/*
 import com.fasterxml.jackson.databind.JsonNode;
 import com.google.common.net.HttpHeaders;
 import io.micrometer.common.util.StringUtils;
@@ -17,8 +17,9 @@ import org.springframework.web.server.ResponseStatusException;
 
 @Slf4j
 @Component
-public class FiltradoAutenticacion extends AbstractGatewayFilterFactory<FiltradoAutenticacion.Config>{
-    
+*/
+public class FiltradoAutenticacion /*extends AbstractGatewayFilterFactory<FiltradoAutenticacion.Config>*/{
+    /*
     private final WebClient.Builder wcb;
     
     private static final Logger log = LoggerFactory.getLogger(FiltradoAutenticacion.class);
@@ -66,4 +67,5 @@ public class FiltradoAutenticacion extends AbstractGatewayFilterFactory<Filtrado
     }
     
     public static class Config{} 
+    */
 }

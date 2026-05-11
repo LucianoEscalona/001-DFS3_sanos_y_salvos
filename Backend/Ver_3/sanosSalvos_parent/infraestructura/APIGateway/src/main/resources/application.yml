@@ -1,4 +1,3 @@
-# Fala revisar esto, pq resulta que antes tengo que hacer el KeyCloak ese
 server:
   port: 8080
 eureka:
@@ -13,9 +12,22 @@ spring:
   cloud:
     gateway:
       routes:
-        - id: customer_service
-          uri: lb://businessdomain-customer
+        - id: mascota_gateway
+          uri: lb://mascota
           predicates:
-            - Path=/**
-          filters:
-            - AuthenticationFilterinig
+            - Path=/mascota/**
+            
+        - id: usuario_gateway
+          uri: lb://usuario
+          predicates:
+            - Path=/usuario/**
+            
+        - id: reporte_gateway
+          uri: lb://reporte
+          predicates:
+            - Path=/reporte/**
+            
+        - id: mCoincidencias_gateway
+          uri: lb://mCoincidencias
+          predicates:
+            - Path=/motor/**

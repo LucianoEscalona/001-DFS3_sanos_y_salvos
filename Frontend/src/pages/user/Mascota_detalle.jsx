@@ -33,7 +33,7 @@ function Mascota_detalle(){
 
     useEffect(()=>{
         const obtenerData = async() => {
-            const res = await getSMT_ID(8081,"mascota","obtener",id)
+            const res = await getSMT_ID("mascota","obtener",id)
             setData(res)
         }
         obtenerData()
@@ -118,7 +118,7 @@ function Mascota_detalle(){
     }
     const retirar = ()=>{
         if(confirm("Estas seguro de retirar la mascota del sistema?")){
-            deleteSMT(8081,"mascota","retirar_sis",data.id)
+            deleteSMT("mascota","retirar_sis",data.id)
         }
     }
 

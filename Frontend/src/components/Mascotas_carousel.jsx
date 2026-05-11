@@ -8,7 +8,7 @@ function Mascotas_carousel({cerrar, id_ani}){
 
     useEffect(()=>{
         const obtenerData = async() => {
-            const res = await getSMT(8081,"mascota","listar")
+            const res = await getSMT("mascota","listar")
             setAnimales(res)
         }
         obtenerData()

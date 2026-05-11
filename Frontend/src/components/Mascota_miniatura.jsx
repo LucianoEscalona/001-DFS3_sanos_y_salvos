@@ -30,7 +30,7 @@ function Mascota_miniatura({id, naturaleza, cerrar, id_ani, origen}){
 
     useEffect(()=>{
         const obtenerData = async() => {
-            const res = await getSMT_ID(8081,"mascota","obtener",id)
+            const res = await getSMT_ID("mascota","obtener",id)
             setData(res)
         }
         obtenerData()

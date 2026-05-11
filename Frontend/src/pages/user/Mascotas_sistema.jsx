@@ -14,7 +14,7 @@ function Mascotas_sistema(){
 
     useEffect(()=>{
         const obtenerData = async() => {
-            const res = await getSMT(8081,"mascota","listar")
+            const res = await getSMT("mascota","listar")
             setMascotas(res)
         }
         obtenerData()

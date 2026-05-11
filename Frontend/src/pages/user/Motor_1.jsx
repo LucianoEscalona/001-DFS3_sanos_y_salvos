@@ -18,9 +18,9 @@ function Motor_1(){
 
     const searchTEST_01 = async()=>{
         try {
-            const res_1 = await getSMT_ID(8081,"mascota","obtener",num_m)
+            const res_1 = await getSMT_ID("mascota","obtener",num_m)
             setMas_1(res_1)
-            const res_2 = await getSMT_ID(8081,"mascota","obtener",num_b)
+            const res_2 = await getSMT_ID("mascota","obtener",num_b)
             setMas_2(res_2)
             const res_3 = await searchMotor(num_m, num_r)
             const res_4 = await resultMotor(num_r)
