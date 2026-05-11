@@ -152,3 +152,9 @@ p,h1,h2,h3,h4, strong{
 .maybe{
   color: rgb(160, 0, 209);
 }
+
+.card-mSize{
+  justify-self: center;
+  max-width: 1000px;
+  width: 100%;
+}
