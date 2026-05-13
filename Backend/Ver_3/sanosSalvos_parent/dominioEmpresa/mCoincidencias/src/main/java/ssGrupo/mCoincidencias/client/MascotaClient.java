@@ -16,7 +16,7 @@ public class MascotaClient {
     
     public List<MascotaDTO> obtenerMascotas() {
         
-        String url = "http://localhost:8081/mascota/v1/listar";      
+        String url = "http://localhost:8080/mascota/v1/listar";      
         ResponseEntity<MascotaDTO[]> res = 
             rt.getForEntity(url, MascotaDTO[].class);
         
@@ -25,7 +25,7 @@ public class MascotaClient {
     }
     
     public MascotaDTO obtenerMascotaID(Integer id){
-        String url = "http://localhost:8081/mascota/v1/obtener/{id}";
+        String url = "http://localhost:8080/mascota/v1/obtener/{id}";
         ResponseEntity<MascotaDTO> res = 
             rt.getForEntity(url, MascotaDTO.class, id);
         

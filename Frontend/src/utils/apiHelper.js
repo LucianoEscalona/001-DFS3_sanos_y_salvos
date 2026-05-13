@@ -91,7 +91,7 @@ export const searchMotor = async(id_m, id_r) => {
     try {
         const res = await fetch(`${API}/motor/v1/procesar/${id_m}/${id_r}`)
         if(!res.ok) throw new Error("ERROR al ejecutar: SearchMotor")
-        const data =  await res
+        const data =  await res.text()
         return data
     } catch(e) {
         console.error("Error al ejectar: SearchMotor, Mensaje de error: ", e)

@@ -104,7 +104,7 @@ public class MCoincidenciasServicio {
                     c_animal = true;
                     ptje_coincidencia += 3;
                 }
-                
+                Integer id_reporte_comparado = 0;
                 
                 System.out.println("-----------------------------");
                 System.out.println("ANTES DE POSIBLE COINCIDENCIA 2");
@@ -116,7 +116,7 @@ public class MCoincidenciasServicio {
                         LocalDateTime f_reporte_s = r.getTiempo_uvv();
                         posible_coincidencia = f_reporte_u.isBefore(f_reporte_s);
                         
-                        
+                        id_reporte_comparado = r.getId();
                     }
                 }
                 System.out.println("-----------------------------");
@@ -269,7 +269,8 @@ public class MCoincidenciasServicio {
                             c_ubicacion,
                             m_u.getId(),
                             r_u.getId(),
-                            m.getId()
+                            m.getId(),
+                            id_reporte_comparado
                     );
                     
                     List<ResultadoCoincidencia> ls_resultados = recuperarRes(r_u.getId());

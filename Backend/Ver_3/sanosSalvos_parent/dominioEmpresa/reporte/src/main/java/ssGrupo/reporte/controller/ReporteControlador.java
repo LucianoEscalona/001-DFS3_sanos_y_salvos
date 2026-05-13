@@ -24,7 +24,6 @@ import ssGrupo.reporte.entity.Reporte;
 import ssGrupo.reporte.repository.ReporteRepositorio;
 
 @RestController
-@CrossOrigin("http://localhost:5173")
 @RequestMapping("/reporte/v1")
 public class ReporteControlador {
     

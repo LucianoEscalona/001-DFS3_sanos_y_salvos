@@ -24,7 +24,6 @@ import ssGroup.mascota.entity.Mascota;
 import ssGroup.mascota.repository.MascotaRepositorio;
 
 @RestController
-@CrossOrigin("http://localhost:5173")
 @RequestMapping("/mascota/v1")
 public class MascotaControlador {
     

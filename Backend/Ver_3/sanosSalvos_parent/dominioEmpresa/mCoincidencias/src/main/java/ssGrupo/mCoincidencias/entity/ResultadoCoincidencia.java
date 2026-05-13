@@ -37,7 +37,8 @@ import lombok.Setter;
     "ubicacion_estadia_coincide",
     "idMascota",
     "idReporte",
-    "idMascota_revisada"
+    "idMascota_revisada",
+    "idReporte_revisado"
 })
 public class ResultadoCoincidencia {
     
@@ -71,6 +72,7 @@ public class ResultadoCoincidencia {
     private Integer idReporte;
 
     private Integer idMascota_revisada;
+    private Integer idReporte_revisado;
 
     public ResultadoCoincidencia(
             Integer ptje_res_coincidencia, 
@@ -95,7 +97,8 @@ public class ResultadoCoincidencia {
             Boolean ubicacion_estadia_coincide, 
             Integer idMascota, 
             Integer idReporte, 
-            Integer idMascota_revisada) {
+            Integer idMascota_revisada,
+            Integer idReporte_revisado) {
         this.ptje_res_coincidencia = ptje_res_coincidencia;
         this.nombre_coincide = nombre_coincide;
         this.animal_coincide = animal_coincide;
@@ -119,6 +122,7 @@ public class ResultadoCoincidencia {
         this.idMascota = idMascota;
         this.idReporte = idReporte;
         this.idMascota_revisada = idMascota_revisada;
+        this.idReporte_revisado = idReporte_revisado;
     }
     
 

@@ -16,7 +16,7 @@ public class ReporteClient {
     
     public List<Reporte_mDTO> obtenerReportes() {
         
-        String url = "http://localhost:8083/reporte/v1/listar";
+        String url = "http://localhost:8080/reporte/v1/listar";
         ResponseEntity<Reporte_mDTO[]> res = 
             rt.getForEntity(url, Reporte_mDTO[].class);
         
@@ -25,7 +25,7 @@ public class ReporteClient {
     }
     
     public Reporte_mDTO obtenerReporteID(Integer id){
-        String url = "http://localhost:8083/reporte/v1/obtener/{id}";
+        String url = "http://localhost:8080/reporte/v1/obtener/{id}";
         ResponseEntity<Reporte_mDTO> res = 
             rt.getForEntity(url, Reporte_mDTO.class, id);
         

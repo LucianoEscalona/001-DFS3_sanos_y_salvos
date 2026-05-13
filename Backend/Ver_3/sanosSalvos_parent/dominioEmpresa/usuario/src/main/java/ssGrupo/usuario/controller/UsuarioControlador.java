@@ -24,7 +24,6 @@ import ssGrupo.usuario.entity.Usuario;
 import ssGrupo.usuario.repository.UsuarioRepositorio;
 
 @RestController
-@CrossOrigin("http://localhost:5173")
 @RequestMapping("/usuario/v1")
 public class UsuarioControlador {
     

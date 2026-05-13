@@ -12,7 +12,6 @@ import ssGrupo.mCoincidencias.service.MCoincidenciasServicio;
 
 
 @RestController
-@CrossOrigin("http://localhost:5173")
 @RequestMapping("/motor/v1")
 public class MCoincidenciasControlador {
     
