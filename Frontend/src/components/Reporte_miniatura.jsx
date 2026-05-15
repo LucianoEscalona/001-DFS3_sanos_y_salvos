@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { getSMT_ID } from "../utils/apiHelper"
 import { useNavigate } from "react-router-dom"
 
-function Reporte_miniatura({id, naturaleza}) {
+function Reporte_miniatura({id, naturaleza, id_rep}) {
 
     const [reporte, setReporte] = useState({})
     const [animal,   setAnimal] = useState({})
@@ -13,6 +13,9 @@ function Reporte_miniatura({id, naturaleza}) {
     const ir_detalle = ()=>{
         navegar("/reporte_detalle")
         localStorage.setItem("id_rs", id)
+    }
+    const setId_buscar = ()=>{
+        id_rep(reporte.id)
     }
 
     useEffect(()=>{
@@ -31,7 +34,7 @@ function Reporte_miniatura({id, naturaleza}) {
                     setAnimal(res)
                 }
                 obtener_animal()
-                console.clear()
+  
             } catch (error) {
                 console.log(error)
             }
@@ -43,7 +46,7 @@ function Reporte_miniatura({id, naturaleza}) {
                     setUsuario(res)
                 }
                 obtener_usuario()
-                console.clear()
+    
             } catch (error) {
                 console.log(error)
             }
@@ -52,7 +55,7 @@ function Reporte_miniatura({id, naturaleza}) {
 
     return(
         <>
-        <div className="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+        <div className="col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12">
             <div className="b-gen p-4"> 
                 <h2>{animal.animal} PERDIDO</h2>
                 <div className="ps-4 pe-4 pt-3 pb-3">
@@ -66,7 +69,12 @@ function Reporte_miniatura({id, naturaleza}) {
                 <div className="b-gen p-2">
                     <h3>({usuario.telefono})</h3>
                 </div>
-                <button onClick={()=>ir_detalle()}>Ver detalles</button>
+                {naturaleza != "sel_motor" &&
+                    <button onClick={()=>ir_detalle()}>Ver detalles</button>
+                }
+                {naturaleza == "sel_motor" &&
+                    <button onClick={()=>setId_buscar()}>Seleccionar</button>
+                }
             </div>
         </div>
         </>

@@ -64,7 +64,7 @@ body::-webkit-scrollbar {
 }.mw-reglog::-webkit-scrollbar {
   display: none;
 }
-
+/*Para cuando esta en ingresar reporte*/
 .mw-car-animales{
   position: fixed;
   max-width: 90vw;
@@ -75,6 +75,20 @@ body::-webkit-scrollbar {
 .mw-car-animales-interno{
   max-height: 92%;
   overflow-y: auto;
+}
+/*para cuando esta revisando los resultados de las coincidencias*/
+.mw-car-reportes{
+  align-self: center;
+  justify-self: center;
+  max-width: 90vw;
+  max-height: 95vh;
+  width: 100%;
+  height: 100%;
+}
+.mw-car-reportes-interno{
+  display: flex;
+  max-height: 92%;
+  overflow-x: auto;
 }
 
 p{margin-bottom: 0;}

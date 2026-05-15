@@ -1,17 +1,21 @@
 import { useEffect, useState } from "react"
-import { resultMotor } from "../utils/apiHelper"
+import { getSMT_ID, resultMotor } from "../../utils/apiHelper"
+import { useNavigate } from "react-router-dom"
 
 function Resultado_dettalle(id_ru){
 
     const [res_u, setRes_u] = useState({})
 
-    const getResultad0 = async()=>{
-        const res = await resultMotor(id_ru)
+    const navigate = useNavigate()
+
+    const obtenerResultado = async()=>{
+        const res = await getSMT_ID("motor","obtener",id_ru)
         setRes_u(res)
     }
 
     useEffect(()=>{
-
+        id_ru = localStorage.getItem("id_rs")
+        obtenerResultado()
     },[])
 
     return(
@@ -229,8 +233,8 @@ function Resultado_dettalle(id_ru){
                     }
                 </div>
 
+                <button onClick={()=>navigate("/motor_test")}>Regresar</button>
             </div>
-                
                 
         </div>
         </>

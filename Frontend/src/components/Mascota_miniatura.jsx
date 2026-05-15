@@ -27,6 +27,9 @@ function Mascota_miniatura({id, naturaleza, cerrar, id_ani, origen}){
         id_ani(data.id)
         cerrar(false)
     }
+    const guardar_id_brc = ()=>{
+        id_ani(data.id)
+    }
 
     useEffect(()=>{
         const obtenerData = async() => {
@@ -110,6 +113,9 @@ function Mascota_miniatura({id, naturaleza, cerrar, id_ani, origen}){
                 }
                 {naturaleza=="sel_reporte" &&
                     <button onClick={()=>guardar_cerrar()} className="mt-3">Seleccionar</button>
+                }
+                {naturaleza=="sel_resCoincidencias" &&
+                    <button onClick={()=>guardar_id_brc()} className="mt-3">Seleccionar</button>
                 }
             </div>
         </div>

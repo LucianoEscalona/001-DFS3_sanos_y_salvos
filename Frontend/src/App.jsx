@@ -16,6 +16,7 @@ import Reporte_detalle from './pages/user/Reporte_detalle'
 import Reportes_sistema from './pages/user/Reportes_sistema'
 import Mascotas_sistema from './pages/user/Mascotas_sistema'
 import Motor_1 from './pages/user/Motor_1'
+import Resultado_dettalle from './pages/user/Resultado_detalle'
 
 function App() {
 
@@ -34,6 +35,7 @@ function App() {
           <Route path="/mascotas" element={<Mascotas />} />
           <Route path="/mascotas_sistema" element={<Mascotas_sistema />} />
           <Route path="/mascota_detalle" element={<Mascota_detalle />} />
+          <Route path="/detalle_coincidencias" element={<Resultado_dettalle/>}/>
 
           <Route path="/motor_test" element={<Motor_1 />} />
         </Routes>

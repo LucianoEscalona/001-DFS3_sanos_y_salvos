@@ -28,6 +28,10 @@ public class MCoincidenciasServicio {
     @Autowired
     private RestTemplate rt;
     
+    public ResultadoCoincidencia recResUnico(Integer id){
+        return rep.findById(id).orElse(null);
+    }
+    
     public List<ResultadoCoincidencia> recuperarRes(Integer id_reporte){
         
         List<ResultadoCoincidencia> ls_res = rep.findAll();

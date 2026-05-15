@@ -31,4 +31,9 @@ public class MCoincidenciasControlador {
             @PathVariable("id_r") Integer id_r) {
         return ser.recuperarRes(id_r);
     };
+    @GetMapping("/obtener/{id}")
+    public ResultadoCoincidencia obtener_resultado( 
+            @PathVariable("id") Integer id) {
+        return ser.recResUnico(id);
+    };
 }

@@ -35,7 +35,9 @@ public class UsuarioControlador {
     
     @PostMapping("/guardar")
     public ResponseEntity<?> post(@RequestBody Usuario u){
+        //entro a crear el usuario
         Usuario rU = rep.save(u);
+        //se guarda el usuario
         return ResponseEntity.status(HttpStatus.CREATED).body(rU);
     }
 //______________________________________________________________________________

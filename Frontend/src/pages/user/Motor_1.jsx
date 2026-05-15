@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react"
 import { motor_v1_test } from "../../utils/motor_v1.0"
-import { getSMT_ID, resultMotor, searchMotor } from "../../utils/apiHelper"
-import Resultado_dettalle from "../../components/Resultado_detalle"
+import { getSMT, getSMT_ID, resultMotor, searchMotor } from "../../utils/apiHelper"
+import Resultado_dettalle from "./Resultado_detalle"
+import Resultado_miniatura from "../../components/Resultado_miniatura"
+import Reporte_carousel from "../../components/Reporte_carousel"
 
 function Motor_1(){
     
@@ -27,8 +29,6 @@ function Motor_1(){
             setMas_2(res_2)
             const res_3 = await searchMotor(num_m, num_r)
             setResGuardado(res_3)
-            const res_4 = await resultMotor(num_r)
-            setResultados_c(res_4)
         } catch (error) {
             console.error(error)
         }
@@ -36,6 +36,13 @@ function Motor_1(){
     }
     const printRES = ()=>{
         console.log(resGuardado)
+    }
+    const mostrarResultados = async(nr)=>{
+        const res = await resultMotor(nr)
+        console.log("RESULTADO RES CON NUMERO DE REPORTE:",res)
+        const res_sap = res.filter(i=>i.idMascota !== i.idMascota_revisada) 
+        setResultados_c(res_sap)
+        console.log(res_sap)
     }
 
     useEffect(()=>{
@@ -56,11 +63,17 @@ function Motor_1(){
             <input type="number" value={num_b} onChange={(e)=>setNum_b(e.target.value)}/>
             <p>id reporte</p>
             <input type="number" value={num_r} onChange={(e)=>setNum_r(e.target.value)}/>
-            <button onClick={()=>searchTEST_01()}>Buscar concidencia</button>
+            <button onClick={()=>searchTEST_01()}>Generar concidencia</button>
+            <button onClick={()=>mostrarResultados(num_r)}>Buscar concidencia</button>
+            <button onClick={()=>console.log(num_r)}>p</button>
             
         </div>
         
-        <Resultado_dettalle id_ru={res_u.id}/>
+        <Reporte_carousel id_rb={setNum_r}/>
+
+        {resultados_c.map((r,i)=>(
+            <Resultado_miniatura res={r} key={i}/>
+        ))}
         
         <div className="row m-0 p-3">
             <div className="b-gen col-6 p-3">
