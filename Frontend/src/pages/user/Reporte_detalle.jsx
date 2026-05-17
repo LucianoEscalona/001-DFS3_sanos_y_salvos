@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { deleteSMT, getSMT_ID, resultMotor, searchMotor } from "../../utils/apiHelper"
+import { deleteSMT_auth, getSMT_ID, resultMotor, searchMotor } from "../../utils/apiHelper"
 import { capTxt, formato_apariencia, formato_collar, formato_raza } from "../../utils/FunFuns"
 import { useNavigate } from "react-router-dom"
 import Reporte_agregar from "../../components/Reporte_agregar"
@@ -35,7 +35,7 @@ function Reporte_detalle({id}) {
 
     const retirar = ()=>{
         if(confirm("Estas seguro de quitar el reporte del sistema?")){
-            deleteSMT("reporte","retirar_sis",reporte.id)
+            deleteSMT_auth("reporte","retirar_sis",reporte.id)
         }
     }
     const buscar_coincidencias = async(id_m, id_r)=>{

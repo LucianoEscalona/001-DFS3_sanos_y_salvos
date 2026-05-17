@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom"
-import { getSMT_ID } from "../../utils/apiHelper"
+import { postSMT_login } from "../../utils/apiHelper"
 import { useState } from "react"
 
 function Login() {
@@ -17,15 +17,26 @@ function Login() {
     }
 
     const iniciar_sesion = async(correo,passwd)=>{
-        const u = await getSMT_ID("usuario","login",correo) || {}
-        if(u.contrasenia == passwd){
-            localStorage.setItem("sesion",JSON.stringify(u))
+        const login_body = {
+            correo: correo,
+            passwd: passwd
+        }
+        const res = await postSMT_login("usuario","login",login_body) || {}
+        if(res.ok){
+            localStorage.setItem("sesion",JSON.stringify(res.data))
             alert("Inicio de sesion exitosa")
             navegar("/")
             window.location.reload()
         }else{
-            console.log(u.contrasenia,"|",passwd)
-            console.log(u.correo,"|",correo)
+            if(res.status === 401){
+                alert("Contraseña incorrecta")
+            }
+            else if(res.status === 404){
+                alert("Correo incorrecto")
+            }
+            else{
+                alert("Error inesperado")
+            }
         }
     }
 

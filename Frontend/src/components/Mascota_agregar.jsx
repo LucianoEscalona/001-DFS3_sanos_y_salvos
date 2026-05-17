@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { getSMT_ID, postSMT, putSMT } from "../utils/apiHelper"
+import { getSMT_ID, postSMT_auth, putSMT_auth } from "../utils/apiHelper"
 /* demasiadas razas y tipos de gatos =_=, asi que pondre algunas nomas, ya que es un proyecto ficticio */
 
 function Mascota_agregar({cerrar,naturaleza,id_mod, id_ani}) {
@@ -79,14 +79,14 @@ function Mascota_agregar({cerrar,naturaleza,id_mod, id_ani}) {
             rut_usuario: rut
         }
         if(nat=="add"){
-            postSMT("mascota","guardar",animal_g)
+            postSMT_auth("mascota","guardar",animal_g)
         }
         if(nat=="mod"){
-            putSMT("mascota","mod_info",animal_g,id_mod)
+            putSMT_auth("mascota","mod_info",animal_g,id_mod)
         }
         if(nat=="ag_reporte"){
             const postData_res = async() => {
-                const res = await postSMT("mascota","guardar",animal_g)
+                const res = await postSMT_auth("mascota","guardar",animal_g)
                 id_ani(res.id)
             }
             postData_res()

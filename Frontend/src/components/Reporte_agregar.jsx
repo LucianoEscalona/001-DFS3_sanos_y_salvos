@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import Mascotas_carousel from "./Mascotas_carousel"
-import { getSMT, getSMT_ID, postSMT, putSMT } from "../utils/apiHelper"
+import { getSMT, getSMT_ID, postSMT_auth, putSMT_auth } from "../utils/apiHelper"
 import Mascota_agregar from "./Mascota_agregar"
 
 function Reporte_agregar({cerrar, naturaleza, id_mod}) {
@@ -50,11 +50,11 @@ function Reporte_agregar({cerrar, naturaleza, id_mod}) {
             ubicacion_uvv: ubicacion_visto
         }
         if(naturaleza == "add"){
-            postSMT("reporte","guardar",reporte_g)
+            postSMT_auth("reporte","guardar",reporte_g)
             cerrar_agregar()
         }
         if(naturaleza == "mod"){
-            putSMT("reporte","mod_rep",reporte_g,id_mod)
+            putSMT_auth("reporte","mod_rep",reporte_g,id_mod)
             cerrar_agregar()
         }
         

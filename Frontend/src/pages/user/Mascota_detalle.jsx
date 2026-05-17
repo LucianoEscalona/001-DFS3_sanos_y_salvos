@@ -1,6 +1,6 @@
 import { use, useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { deleteSMT, getSMT_ID } from "../../utils/apiHelper"
+import { deleteSMT_auth, getSMT_ID } from "../../utils/apiHelper"
 import { capTxt, formato_apariencia, formato_collar, formato_raza } from "../../utils/FunFuns"
 import Mascota_agregar from "../../components/Mascota_agregar"
 
@@ -118,7 +118,7 @@ function Mascota_detalle(){
     }
     const retirar = ()=>{
         if(confirm("Estas seguro de retirar la mascota del sistema?")){
-            deleteSMT("mascota","retirar_sis",data.id)
+            deleteSMT_auth("mascota","retirar_sis",data.id)
         }
     }
 
