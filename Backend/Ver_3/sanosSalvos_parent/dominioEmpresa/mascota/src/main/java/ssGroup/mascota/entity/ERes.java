@@ -1,4 +1,4 @@
-package ssGrupo.usuario.entity;
+package ssGroup.mascota.entity;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Entity;

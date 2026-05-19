@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ssGrupo.mCoincidencias.entity.ResultadoCoincidencia;
+import ssGrupo.mCoincidencias.exception.ErrorNoConcretado;
 import ssGrupo.mCoincidencias.service.MCoincidenciasServicio;
 
 
@@ -22,18 +23,36 @@ public class MCoincidenciasControlador {
     public String procesar_coincidencias(
             @PathVariable("id_m") Integer id_m, 
             @PathVariable("id_r") Integer id_r) {
+        try {
+            ser.procesar(id_m, id_r);
+            return "Proceso ejecutado correctamente";
+        } catch (Exception e) {
+            throw new ErrorNoConcretado("/motor/v1/procesar"+"-"+
+                "No se pudo realizar la busqueda de coincidencias (id mascota: "+id_m+", id reporte: "+id_r+")"+"-"+
+                "Procesar (busqueda de resultados)");
+        }
         
-        ser.procesar(id_m, id_r);
-        return "Proceso ejecutado correctamente";
     }
     @GetMapping("/resultado/{id_r}")
     public List<ResultadoCoincidencia> recuperar_resultado( 
             @PathVariable("id_r") Integer id_r) {
-        return ser.recuperarRes(id_r);
+        try {
+            return ser.recuperarRes(id_r);
+        } catch (Exception e) {
+            throw new ErrorNoConcretado("/motor/v1/resultado"+"-"+
+                "No se pudo recuperar los resultados de las coincidencias del reporte (id reporte:"+id_r+")"+"-"+
+                "Obtener mascota con ID");
+        }
     };
     @GetMapping("/obtener/{id}")
     public ResultadoCoincidencia obtener_resultado( 
             @PathVariable("id") Integer id) {
-        return ser.recResUnico(id);
+        try {
+            return ser.recResUnico(id);
+        } catch (Exception e) {
+            throw new ErrorNoConcretado("/motor/v1/obtener"+"-"+
+                "No se pudo recuperar el resultado de las coincidencias del reporte unico (id:"+id+")"+"-"+
+                "Obtener mascota con ID");
+        }
     };
 }

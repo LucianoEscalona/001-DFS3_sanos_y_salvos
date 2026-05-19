@@ -1,4 +1,4 @@
-package ssGrupo.usuario.exception;
+package ssGrupo.mCoincidencias.exception;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -7,13 +7,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import ssGrupo.usuario.entity.ERes;
+import ssGrupo.mCoincidencias.entity.ERes;
 
 @RestControllerAdvice
 public class HandlerErrores {
     
-    @ExceptionHandler(ErrorCorreoRegistrado.class)
-    public ResponseEntity<?> hCorreoRegistrado(ErrorCorreoRegistrado e){
+    @ExceptionHandler(ErrorMotor.class)
+    public ResponseEntity<?> hMotorError(IllegalArgumentException e){
         
         LocalDateTime f_hoy = LocalDateTime.now();
         DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
@@ -24,20 +24,20 @@ public class HandlerErrores {
         String mensj = lsm[1];
         
         ERes res = new ERes(
-            "1201",
-            "Correo ya registrado",
-            "Logico",
+            "1401",
+            "Error en el motor de busqueda",
+            "Logica",
             lugar,
             mensj,
             f_format,
-            "" + HttpStatus.CONFLICT
+            "" + HttpStatus.NOT_ACCEPTABLE
         );
         return ResponseEntity
-            .status(HttpStatus.CONFLICT)
+            .status(HttpStatus.NOT_ACCEPTABLE)
             .body(res);
     }
-    @ExceptionHandler(ErrorRutRegistrado.class)
-    public ResponseEntity<?> hRutRegistrado(ErrorRutRegistrado e){
+    @ExceptionHandler(ErrorMascotaNoExiste.class)
+    public ResponseEntity<?> hMascotaNoE(IllegalArgumentException e){
         
         LocalDateTime f_hoy = LocalDateTime.now();
         DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
@@ -48,20 +48,20 @@ public class HandlerErrores {
         String mensj = lsm[1];
         
         ERes res = new ERes(
-            "1202",
-            "RUT ya registrado",
-            "Logico",
+            "1402",
+            "Mascota a buscar no existe",
+            "Not found",
             lugar,
             mensj,
             f_format,
-            "" + HttpStatus.CONFLICT
+            "" + HttpStatus.NOT_FOUND
         );
         return ResponseEntity
-            .status(HttpStatus.CONFLICT)
+            .status(HttpStatus.NOT_FOUND)
             .body(res);
     }
-    @ExceptionHandler(ErrorLogin.class)
-    public ResponseEntity<?> hLoginIncorrecto(ErrorLogin e){
+    @ExceptionHandler(ErrorReporteNoExiste.class)
+    public ResponseEntity<?> hReporteNoE(IllegalArgumentException e){
         
         LocalDateTime f_hoy = LocalDateTime.now();
         DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
@@ -72,18 +72,19 @@ public class HandlerErrores {
         String mensj = lsm[1];
         
         ERes res = new ERes(
-            "1203",
-            "Login incorrecto",
-            "Credenciales",
+            "1403",
+            "Reporte a buscar no existe",
+            "Not found",
             lugar,
             mensj,
             f_format,
-            "" + HttpStatus.UNAUTHORIZED
+            "" + HttpStatus.NOT_FOUND
         );
         return ResponseEntity
-            .status(HttpStatus.UNAUTHORIZED)
+            .status(HttpStatus.NOT_FOUND)
             .body(res);
     }
+    
 //______________________________________________________________________________
     
     @ExceptionHandler(IllegalArgumentException.class)
@@ -98,9 +99,9 @@ public class HandlerErrores {
         String mensj = lsm[1];
         
         ERes res = new ERes(
-            "1204",
+            "1404",
             "Dato(s) no valido(s)",
-            "Credenciales",
+            "Logica",
             lugar,
             mensj,
             f_format,
@@ -123,7 +124,7 @@ public class HandlerErrores {
         String mensj = lsm[1];
         
         ERes res = new ERes(
-            "1205",
+            "1405",
             "Not found",
             "Not found",
             lugar,
@@ -148,7 +149,7 @@ public class HandlerErrores {
         String mensj = lsm[1];
         
         ERes res = new ERes(
-            "1206",
+            "1406",
             "No se pudo eliminar",
             "Tecnico",
             lugar,
@@ -173,7 +174,7 @@ public class HandlerErrores {
         String accion = lsm[2];
         
         ERes res = new ERes(
-            "1207",
+            "1407",
             "No se pudo completar: "+accion,
             "Tecnico",
             lugar,

@@ -1,15 +1,25 @@
-package ssGroup.mascota.common;
+package ssGrupo.mCoincidencias.entity;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 @Schema(description = "Este modelo, permite manejar las excepciones que ocurran en el sistema")
-public class RespuestaExcepciones {
+@Entity
+@Table(name = "errores")
+public class ERes {
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
     
     @Schema(
     name        = "Codigo",
@@ -49,14 +59,7 @@ public class RespuestaExcepciones {
     example     = "Error: Al intentar guardar el OBJETO_X, se cancelo la accion ya que ya existe en la BDD",
     requiredMode = Schema.RequiredMode.REQUIRED)
     private String detalle;
-//______________________________________________________________________________
-    
-    @Schema(
-    name        = "Mensaje de error",
-    description = "Es el mensaje que genera el error",
-    example     = "Error: Unable to find XXX",
-    requiredMode = Schema.RequiredMode.REQUIRED)
-    private String mensaje_e;
+
 //______________________________________________________________________________
     
     @Schema(
@@ -73,4 +76,20 @@ public class RespuestaExcepciones {
     example     = "404",
     requiredMode = Schema.RequiredMode.REQUIRED)
     private String status;
+
+    public ERes(String codigo, 
+            String titulo, 
+            String tipo, 
+            String instancia, 
+            String detalle, 
+            String fecha, 
+            String status) {
+        this.codigo = codigo;
+        this.titulo = titulo;
+        this.tipo = tipo;
+        this.instancia = instancia;
+        this.detalle = detalle;
+        this.fecha = fecha;
+        this.status = status;
+    }
 }
