@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom"
 import { postSMT_login } from "../../utils/apiHelper"
 import { useState } from "react"
+import '../../otrocsspqyamucho.css'
 
 function Login() {
 
@@ -42,7 +43,13 @@ function Login() {
 
     return(
         <>
-        <div className="centrado_tarjetas z-pos-bottom">
+        <div className="black_filter">
+            </div>
+            <img 
+                src="../../../public/img/fondo_login.jpg" 
+                alt="Is anybody there...?" 
+                className="img-home_page"/>
+        <div className="fade-in t-1 centrado_tarjetas z-pos-bottom">
             <div className="p-4 b-gen mw-reglog">
                 <div className="row m-0 p-2">
                     <div className="d-flex justify-content-center">

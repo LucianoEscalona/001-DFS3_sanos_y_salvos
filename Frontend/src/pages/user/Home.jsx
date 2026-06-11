@@ -3,71 +3,35 @@ import '../../App.css'
 import Reporte_miniatura from '../../components/Reporte_miniatura'
 import { insert_ls, motor_demo } from '../../utils/test'
 import { getSMT } from '../../utils/apiHelper'
+import '../../otrocsspqyamucho.css'
+import { useNavigate } from 'react-router-dom'
 
 function Home() {
 
-    const [reportes, setReportes] = useState([])
-    
-    useEffect(()=>{
-        const obtenerData = async() => {
-            const res = await getSMT("reporte","listar")
-            setReportes(res)
-        }
-        obtenerData()
-    },[])
+    const navegar = useNavigate()
 
     return(
         <div className='container-fluid p-0'>
-
-
-        <div>
-            <div className='img-sim'></div>
-        </div>
-
-        <div className='row g-0'>
-            <div className='col-lg-8 col-md-6 col-sm-12 p-4'>
-                <h3>Bienvenido!</h3>
-                <p>Bienvenido a la pagina web de sanos y salvos!</p>
-                <p>Aqui puedes encotrar herramientas que te ayudaran a recuperar a tu querida mascota, o a informar sobre algun animal que pueda estar perdido!</p>
-                <p>Consulta los reportes mas recientes aqui, o mira todos los reportes activos hasta la fecha aqui:</p>
-                <button>Todos los reportes</button>
+            <div className="black_filter">
             </div>
-            <div className='col-lg-4 col-md-6 col-sm-12 p-4'>
-                <div className='img-sim'></div>
+            <img 
+                src="../../../public/img/home_page.jpg" 
+                alt="Is anybody there...?" 
+                className="img-home_page"/>
+            <div className='txt_fade_top'>
+                <h3 className='fade-in t-1 txt_c margin_top_cs'>~Sanos y Salvos</h3>
+                <p className='fade-in t-2 txt_c'>Ayudando a los animales de Chile a volver con sus deuños.</p>
+                <p className='fade-in t-3 txt_c mt-4 mb-3'>En nuestra pagina web, puedes encontrar reportes de mascotas extraviadas, o crear uno tu mismo. Tambien puedes consultar la informacion de las Mascotas registradas, y si quieres, puedes ingresar una a nuestro sistema.</p>
+                <button 
+                    onClick={()=>navegar("/reportes")}
+                    className="fade-in t-3 btn_hps">Reportes</button>
+                <button 
+                    onClick={()=>navegar("/mascotas")}
+                    className="fade-in t-3 btn_hps ms-3 me-3">Mascotas</button>
+                <button 
+                    onClick={()=>navegar("/login")}
+                    className="fade-in t-3 btn_hps">Iniciar sesion</button>
             </div>
-        </div>
-
-        <div>
-            <p className='p-3'></p>
-            <div className='p-4'>
-                <h4>Reportes de mascotas recientes:</h4>
-            </div>
-            <div className='row m-0'>
-                {reportes.map((r,i)=>(
-                    <Reporte_miniatura id={r.id} key={i} naturaleza={"home"}/>
-                ))
-                }
-            </div>
-        </div>
-        
-        <div>
-            <div className='row g-0'>
-            <p className='p-4'></p>
-            <div className='col-lg-8 col-md-6 col-sm-12 p-4'>
-                <h3>Has perdido o encontrado algun animal recientemente?</h3>
-                <p>Ingresa un reporte en nuestro sistema para mostrarle a todos informacion sobre tu mascota desaparecida.</p>
-                <p>O puedes reportar sobre un animal que parece perdido tambien</p>
-                <button>Ingresar reporte</button>
-                <button onClick={insert_ls}>TEST ls</button>
-                <button onClick={motor_demo}>TEST motor</button>
-            </div>
-            <div className='col-lg-4 col-md-6 col-sm-12 p-4'>
-                <div className='img-sim'></div>
-            </div>
-        </div>
-        </div>
-        
-
         </div>
     )
 }
