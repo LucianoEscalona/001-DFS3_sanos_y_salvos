@@ -202,13 +202,15 @@ public class UsuarioControlador {
     @DeleteMapping("/eliminar/{id}")
     public ResponseEntity<?> delete(@PathVariable("id") Integer id){
         try {
-            rep.deleteById(id);
-            if(rep.findById(id).isEmpty()){
-                throw new RuntimeException(
-                    "/usuario/v1/eliminar"+"-"+
-                    "No se encontro a ningun usuario con el id: "+id);
+            
+            if(rep.existsById(id)){
+                rep.deleteById(id);
+                return ResponseEntity.ok(HttpStatus.OK);
             }
-            return ResponseEntity.ok(HttpStatus.OK);
+            throw new RuntimeException(
+                "/usuario/v1/eliminar"+"-"+
+                "No se encontro a ningun usuario con el id: "+id);
+            
         } catch (Exception e) {
             throw new ErrorNoConcretado(
                 "/usuario/v1/eliminar"+"-"+

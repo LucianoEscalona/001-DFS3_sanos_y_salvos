@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -196,13 +195,15 @@ public class MascotaControlador {
     @DeleteMapping("/retirar_sis/{id}")
     public ResponseEntity<?> delete(@PathVariable("id") Integer id){
         try {
-            rep.deleteById(id);
-            if(rep.findById(id).isEmpty()){
-                throw new RuntimeException(
-                    "/mascota/v1/retirar_sis"+"-"+
-                    "No se encontro ninguna mascota con el id: "+id);
+            
+            if(rep.existsById(id)){
+                rep.deleteById(id);
+                return ResponseEntity.ok(HttpStatus.OK);
             }
-            return ResponseEntity.ok(HttpStatus.OK);
+            throw new RuntimeException(
+                "/mascota/v1/retirar_sis"+"-"+
+                "La mascota sigue existiendo: "+id);
+            
         } catch (Exception e) {
             throw new ErrorNoConcretado(
                 "/mascota/v1/retirar_sis"+"-"+
