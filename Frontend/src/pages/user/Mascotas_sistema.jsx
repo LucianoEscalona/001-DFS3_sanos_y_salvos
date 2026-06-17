@@ -4,8 +4,11 @@ import { useEffect, useState } from "react"
 import '../../styles/mascota.css'
 import Mascota_agregar from "../../components/Mascota_agregar"
 import Mascota_miniatura from "../../components/Mascota_miniatura"
+import { useNavigate } from "react-router-dom"
 
 function Mascotas_sistema(){
+
+    const navegar = useNavigate()
 
     const [mascotas, setMascotas] = useState([])
         const [mascotas_r, setMascotas_r] = useState([])
@@ -36,22 +39,18 @@ function Mascotas_sistema(){
     return(
         <>
         <div>
-            <div className="color-testing mascota-banner">
-                <div className="img-sim"></div>
-            </div>
-            <div className="row m-0 p-3">
-                <div className="col-xl-9 col-lg-8 col-md-6 col-sm-12">
-                    <div className="p-4">
-                        <h1>Bienvenido a la seccion de mascotas!</h1>
-                        <p>Aqui puedes las mascotas que has registrado en el sistema, y si no tienen ninguna mascota registrada, puedes registrar una de tus mascotas!</p>
-                        <p>Tambien puedes ingresar animales que hayas visto en algun lado (por ejemplo: animales que parezcan perdidos)</p>
-                    </div>
-                </div>
-                <div className="col-xl-3 col-lg-4 col-md-6 col-sm-12">
-                    <div className="p-4">
-                        <div className="img-sim"></div>
-                    </div>
-                </div>
+            <div className="banner overflow-hidden position-relative">
+                <img 
+                    src="../../../public/img/mascota_banner_2.png" 
+                    alt="Where is everyone..."
+                    className="w-100 h-100"/>   
+                <div className="txt_fade_end_conf">
+                    <h3 className="fade-in t-1">~Mascotas</h3>
+                    <p className="fade-in t-2 mb-3">Consulta todas las mascotas y animales encontrados que se han registrado en el sistema.</p>        
+                    <p className="fade-in t-2 mb-3">Si es necesario, puedes ingresar una Mascota o Animal en nuestro sistema.</p>                    
+                    <button className="fade-in t-2 btn_hps me-3" onClick={()=>setMostrar_agregar(true)}>Ingresar Mascota</button>
+                    <button className="fade-in t-2 btn_hps" onClick={()=>navegar("/mascotas")}>Ver mis Mascotas</button>
+                </div>            
             </div>
 
             <div className="color-testing mascota-opciones p-4">

@@ -21,7 +21,7 @@ function Home() {
             <div className='txt_fade_top'>
                 <h3 className='fade-in t-1 txt_c margin_top_cs'>~Sanos y Salvos</h3>
                 <p className='fade-in t-2 txt_c'>Ayudando a los animales de Chile a volver con sus deuños.</p>
-                <p className='fade-in t-3 txt_c mt-4 mb-3'>En nuestra pagina web, puedes encontrar reportes de mascotas extraviadas, o crear uno tu mismo. Tambien puedes consultar la informacion de las Mascotas registradas, y si quieres, puedes ingresar una a nuestro sistema.</p>
+                <p className='fade-in t-3 txt_c mt-4 mb-3'>En nuestra pagina web, puedes encontrar reportes de mascotas extraviadas, o crear uno tu mismo. Tambien puedes consultar la informacion de las Mascotas registradas, y si quieres, puedes ingresar una a nuestro sistema. (Necesitas tener una cuenta para poder ingresar informacion en la pagina)</p>
                 <button 
                     onClick={()=>navegar("/reportes")}
                     className="fade-in t-3 btn_hps">Reportes</button>

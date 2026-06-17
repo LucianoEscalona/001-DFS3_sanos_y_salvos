@@ -2,9 +2,13 @@ import { useEffect, useState } from "react"
 import { getSMT } from "../../utils/apiHelper"
 import Reporte_agregar from "../../components/Reporte_agregar"
 import Reporte_miniatura from "../../components/Reporte_miniatura"
+import { useNavigate } from "react-router-dom"
 
 function Reportes_sistema({}){
 
+    const navegar = useNavigate()
+
+    const [mos_agregar, setMos_agregar] = useState(false)
     const [reportes, setReportes] = useState([])
     const [sesion, setSesion] = useState({})
 
@@ -18,9 +22,21 @@ function Reportes_sistema({}){
     },[])
     return(
         <>
-            <p className="cuadrao">Reportes</p>
-            <h3>Reportes en el sistema</h3>
-
+            <div className="banner overflow-hidden position-relative">
+                <img 
+                    src="../../../public/img/banner_perdidos.png" 
+                    alt="Where is everyone..."
+                    className="w-100 h-100"/>  
+                <div className="txt_fade_end_conf">
+                    <h3 className="fade-in t-1">~Mascotas desaparecidas</h3>
+                    <p className="fade-in t-2 mb-3">Consulta aqui todos los reportes de animales perdidos que se han subido a la pagina, y si lo necesitas, puedes subir tu propio reporte sobre alguna mascota perdida o animal encontrado.</p>
+                    <button className="fade-in t-2 btn_hps me-3" onClick={()=>setMos_agregar(true)}>Crear reporte</button>
+                    <button className="fade-in t-2 btn_hps" onClick={()=>navegar("/reportes")}>Ver mis reportes</button>
+                </div>            
+            </div>
+            {mos_agregar &&
+                <Reporte_agregar cerrar={()=>setMos_agregar(false)} naturaleza={"add"}/>
+            }
             <div className="row m-0">
                 {reportes.map((r,i)=>(
                     <Reporte_miniatura id={r.id} key={i} naturaleza={"s_reportes"}/>
