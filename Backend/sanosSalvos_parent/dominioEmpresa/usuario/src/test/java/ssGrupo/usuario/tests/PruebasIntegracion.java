@@ -23,12 +23,12 @@ public class PruebasIntegracion {
     @Autowired
     private UsuarioControlador ctrl;
     
-    @DisplayName("")
+    @DisplayName("TEST 01: El usuario se crea en la BDD")
     @Test
     public void usuarioSeCreaYSeRecupera(){
         Usuario u = new Usuario(
             null, "Pedro","Pica","Piedra",
-            "correo@gmail.com","12346",
+            "test_email_01@gmail.com","12346",
             "+56950005000","50500500-5",
             "normal"
         );
@@ -42,12 +42,12 @@ public class PruebasIntegracion {
         Assertions.assertEquals(u.getApellido_p(),u_res.getApellido_p());
         Assertions.assertEquals(u.getRut(),u_res.getRut());
     }
-    @DisplayName("")
+    @DisplayName("TEST 02: Se crea un usuario y despues se modifican sus datos")
     @Test
     public void usuarioEsModificado(){
         Usuario u = new Usuario(
             null, "Pedro","Pica","Piedra",
-            "correo@gmail.com","12346",
+            "test_email_02@gmail.com","12346",
             "+56950005000","50500500-5",
             "normal"
         );
@@ -71,12 +71,12 @@ public class PruebasIntegracion {
         Assertions.assertEquals("Grifin", u_res.getApellido_p());
         Assertions.assertEquals("Dor", u_res.getApellido_m());
     }
-    @DisplayName("")
+    @DisplayName("TEST 03: Se crea un usuario y despues se elimina")
     @Test
     public void usuarioEsEliminado(){
         Usuario u = new Usuario(
             null, "Pedro","Pica","Piedra",
-            "correo@gmail.com","12346",
+            "test_email_03@gmail.com","12346",
             "+56950005000","50500500-5",
             "normal"
         );

@@ -125,13 +125,13 @@ public class ReporteControlador {
     @DeleteMapping("/retirar_sis/{id}")
     public ResponseEntity<?> delete(@PathVariable("id") Integer id){
         try {
-            rep.deleteById(id);
-            if(rep.findById(id).isEmpty()){
-                throw new RuntimeException(
-                    "/reporte/v1/retirar_sis"+"-"+
-                    "No se encontro ningun reporte con el id: "+id);
+            if(rep.existsById(id)){
+                rep.deleteById(id);
+                return ResponseEntity.ok(HttpStatus.OK);
             }
-            return ResponseEntity.ok(HttpStatus.OK);
+            throw new RuntimeException(
+                "/reporte/v1/retirar_sis"+"-"+
+                "El reporte sigue existiendo: "+id);
         } catch (Exception e) {
             throw new ErrorNoConcretado(
                 "/reporte/v1/retirar_sis"+"-"+

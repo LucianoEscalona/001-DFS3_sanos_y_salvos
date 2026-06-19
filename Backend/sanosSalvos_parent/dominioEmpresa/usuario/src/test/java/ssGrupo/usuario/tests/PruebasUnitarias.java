@@ -25,7 +25,7 @@ public class PruebasUnitarias {
     @InjectMocks
     private UsuarioControlador ctrl;
     
-    @DisplayName("")
+    @DisplayName("Probando que se guarde el usuario en el repo")
     @Test
     public void ProbarGetUsuario(){
         
@@ -40,7 +40,7 @@ public class PruebasUnitarias {
         Assertions.assertEquals("Hermenegildo", res_u.getNombre());
     }
     
-    @DisplayName("")
+    @DisplayName("Probando la modificacion de usuarios")
     @Test
     public void ProbarPutUsuario(){
         
@@ -60,7 +60,7 @@ public class PruebasUnitarias {
         Assertions.assertEquals("Juan.", res_u.getNombre());
     }
     
-    @DisplayName("")
+    @DisplayName("Probamos que se pueda llamar al metodo delete")
     @Test
     public void ProbarDeleteUsuario(){
         
