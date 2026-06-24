@@ -182,7 +182,7 @@ function Mascota_agregar({cerrar,naturaleza,id_mod, id_ani}) {
                         {naturaleza == "add" &&
                             <div className="d-flex gap-3 mt-4">    
                                 <p>Tipo de animal:</p>
-                                <select name="tipo" id="tipo" 
+                                <select name="tipo" id="dv_sel_tipo" 
                                     value={tipo} 
                                     onChange={(e)=>setTipo(e.target.value)}>
                                     <option value="mascota">Mascota</option>
@@ -193,7 +193,7 @@ function Mascota_agregar({cerrar,naturaleza,id_mod, id_ani}) {
                         {naturaleza == "ag_reporte" &&
                             <div className="d-flex gap-3 mt-4">    
                                 <p>Es su mascota o lo vio por ahi?:</p>
-                                <select name="tipo" id="tipo" 
+                                <select name="tipo" id="dv_sel_tipo" 
                                     value={tipo} 
                                     onChange={(e)=>setTipo(e.target.value)}>
                                     <option value="mascota">Mascota</option>
@@ -207,7 +207,7 @@ function Mascota_agregar({cerrar,naturaleza,id_mod, id_ani}) {
                             <>
                                 <div className="d-flex gap-3 mt-3">
                                     <p>Estado:</p>
-                                    <select name="estado" id="estado"
+                                    <select name="estado" id="dv_sel_estado"
                                         value={estado} 
                                         onChange={(e)=>setEstado(e.target.value)}>
                                         <option value="con_duenio">Con su dueño</option>
@@ -218,13 +218,13 @@ function Mascota_agregar({cerrar,naturaleza,id_mod, id_ani}) {
                         }
                         
                         <p className="mt-3">Nombre animal:</p>
-                        <input type="text" id="nombre" name="nombre"
+                        <input type="text" id="dv_nombre" name="nombre"
                             value={nombre}
                             onChange={(e)=>setNombre(e.target.value)}/>
 
                         <div className="d-flex gap-3 mt-4">
                             <p>Especie:</p>
-                            <select name="animal" id="animal" 
+                            <select name="animal" id="dv_sel_animal" 
                                 value={especie} 
                                 onChange={(e) => setEspecie(e.target.value)}>
                                 <option value="perro">Perro</option>
@@ -236,7 +236,7 @@ function Mascota_agregar({cerrar,naturaleza,id_mod, id_ani}) {
                             <>
                                 <div className="pt-3 mt-3 b-sep-t">
                                     <p>Raza:</p>
-                                    <select name="raza_1" id="raza_1"
+                                    <select name="raza_1" id="dv_sel_raza_1"
                                         value={raza_p}
                                         onChange={(e)=>setRaza_p(e.target.value)}>
                                         <option value="" disabled defaultValue={""} hidden>Raza de perro</option>
@@ -259,7 +259,7 @@ function Mascota_agregar({cerrar,naturaleza,id_mod, id_ani}) {
                                     {mezcla &&
                                         <>
                                             <p className="mt-2">Segunda raza:</p>
-                                            <select name="raza_2" id="raza_2"
+                                            <select name="raza_2" id="dv_sel_raza_2"
                                                 value={raza_s} 
                                                 onChange={(e) => setRaza_s(e.target.value)}>
                                                 <option value="" disabled defaultValue={""} hidden>mezcla con</option>
@@ -285,7 +285,7 @@ function Mascota_agregar({cerrar,naturaleza,id_mod, id_ani}) {
                                 <div className="d-flex gap-3 mt-2">
                                     <p>Es mezcla?</p>
                                     <label>
-                                        <input type="checkbox" checked={mezcla} onChange={(e) => setMezcla(e.target.checked)} />
+                                        <input id="dv_cb_razaseg" type="checkbox" checked={mezcla} onChange={(e) => setMezcla(e.target.checked)} />
                                     </label>
                                 </div>
                             </>
@@ -295,7 +295,7 @@ function Mascota_agregar({cerrar,naturaleza,id_mod, id_ani}) {
 
                                 <div className="pt-3 mt-3 b-sep-t">
                                     <p>Tipo de gato:</p>
-                                    <select name="raza_1" id="raza_1"
+                                    <select name="raza_1" id="dv_sel_raza_1"
                                         value={raza_p}
                                         onChange={(e)=>setRaza_p(e.target.value)}>
                                         <option value="" disabled defaultValue={""} hidden>Tipo de gato</option>
@@ -313,7 +313,7 @@ function Mascota_agregar({cerrar,naturaleza,id_mod, id_ani}) {
                                     {mezcla &&
                                         <>
                                             <p className="mt-2">Segundo tipo:</p>
-                                            <select name="raza_2" id="raza_2"
+                                            <select name="raza_2" id="dv_sel_raza_2"
                                                 value={raza_s} 
                                                 onChange={(e) => setRaza_s(e.target.value)}>
                                                 <option value="" disabled defaultValue={""} hidden>mezcla con</option>
@@ -334,7 +334,7 @@ function Mascota_agregar({cerrar,naturaleza,id_mod, id_ani}) {
                                 <div className="d-flex gap-3 mt-2">
                                     <p>Es mezcla?</p>
                                     <label>
-                                        <input type="checkbox" checked={mezcla} onChange={(e) => setMezcla(e.target.checked)} />
+                                        <input id="dv_cb_razaseg" type="checkbox" checked={mezcla} onChange={(e) => setMezcla(e.target.checked)} />
                                     </label>
                                 </div>
                             </>
@@ -342,7 +342,7 @@ function Mascota_agregar({cerrar,naturaleza,id_mod, id_ani}) {
 
                         <div className="d-flex gap-3 pt-3 mt-3 b-sep-t">
                             <p>Genero:</p>
-                            <select name="genero" id="genero"
+                            <select name="genero" id="dv_sel_genero"
                             value={genero} 
                             onChange={(e) => setGenero(e.target.value)}>
                                 <option value="macho">Macho</option>
@@ -352,33 +352,33 @@ function Mascota_agregar({cerrar,naturaleza,id_mod, id_ani}) {
                         <div className="d-flex gap-3 mt-2">
                             <p>Estas seguro del genero?</p>
                             <label>
-                                <input type="checkbox" checked={genero_seguro} onChange={(e) => setGenero_seguro(e.target.checked)} />
+                                <input id="dv_cb_genseg" type="checkbox" checked={genero_seguro} onChange={(e) => setGenero_seguro(e.target.checked)} />
                             </label>
                         </div>
 
                         <div className="d-flex gap-3 pt-3 mt-3 b-sep-t">
                             <p>Edad:</p>
-                            <input type="text" id="edad" name="edad" 
+                            <input type="text" id="dv_edad" name="edad" 
                             value={edad} 
                             onChange={(e) => setEdad(e.target.value)}/>
                         </div>
                         <div className="d-flex gap-3 mt-2">
                             <p>Estas seguro de la edad?</p>
                             <label>
-                                <input type="checkbox" checked={edad_segura} onChange={(e) => setEdad_segura(e.target.checked)} />
+                                <input id="dv_cb_edseg" type="checkbox" checked={edad_segura} onChange={(e) => setEdad_segura(e.target.checked)} />
                             </label>
                         </div>
                         <p className="mt-4 mb-3 pt-3 b-sep-t fw-bold">Collar y Chip:</p>
                         <div className="d-flex gap-3">    
                             <p>Tiene collar?</p>
                             <label>
-                                <input type="checkbox" checked={con_collar} onChange={(e) => setCon_collar(e.target.checked)} />
+                                <input id="dv_cb_collar" type="checkbox" checked={con_collar} onChange={(e) => setCon_collar(e.target.checked)} />
                             </label>
                         </div>
                         {con_collar &&
                             <>
                             <div>
-                                <select name="c_collar_1" id="c_collar_1" className="w-e mt-3"
+                                <select name="c_collar_1" id="dv_sel_c_collar_1" className="w-e mt-3"
                                     value={cll_c1}
                                     onChange={(e)=>setCll_c1(e.target.value)}>
                                     <option value="" disabled defaultValue={""} hidden>Color principal</option>
@@ -388,7 +388,7 @@ function Mascota_agregar({cerrar,naturaleza,id_mod, id_ani}) {
                                     <option value="UNKNOWN">No sabria decir</option>
                                 </select>
                                 {!cll_c1 == "" &&
-                                    <select name="c_collar_2" id="c_collar_2" className="w-e mt-2"
+                                    <select name="c_collar_2" id="dv_sel_c_collar_2" className="w-e mt-2"
                                         value={cll_c2}
                                         onChange={(e)=>setCll_c2(e.target.value)}>
                                         <option value="" disabled defaultValue={""} hidden>Color secundario</option>
@@ -399,7 +399,7 @@ function Mascota_agregar({cerrar,naturaleza,id_mod, id_ani}) {
                                         <option value="UNKNOWN">No sabria decir</option>
                                     </select>
                                 }
-                                <select name="m_collar" id="m_collar" className="w-e mt-2"
+                                <select name="m_collar" id="dv_sel_m_collar" className="w-e mt-2"
                                     value={cll_mt}
                                     onChange={(e)=>setCll_mt(e.target.value)}>
                                     <option value="" disabled defaultValue={""} hidden>Material</option>
@@ -409,7 +409,7 @@ function Mascota_agregar({cerrar,naturaleza,id_mod, id_ani}) {
                                     <option value="UNKNOWN">No sabria decir</option>
                                 </select>
                                 <p className="mt-3">Descripcion:</p>
-                                <input type="text" id="c_desc" name="c_desc" className="w-e"
+                                <input type="text" id="dv_c_desc" name="c_desc" className="w-e"
                                     value={cll_ds}
                                     onChange={(e)=>setCll_ds(e.target.value)}/>
                             </div>
@@ -419,7 +419,7 @@ function Mascota_agregar({cerrar,naturaleza,id_mod, id_ani}) {
                         <div className="d-flex gap-3 pt-3 mt-3 b-sep-t">    
                             <p>Tiene chip?</p>
                             <label>
-                                <input type="checkbox" checked={con_chip} onChange={(e) => setCon_chip(e.target.checked)} />
+                                <input id="dv_cb_chip" type="checkbox" checked={con_chip} onChange={(e) => setCon_chip(e.target.checked)} />
                             </label>
                         </div>
                         
@@ -427,7 +427,7 @@ function Mascota_agregar({cerrar,naturaleza,id_mod, id_ani}) {
                             <>
                             <div className="d-flex gap-3 mt-2">
                                 <p>Ubicacion del chip:</p>
-                                <select name="u_chip" id="u_chip"
+                                <select name="u_chip" id="dv_sel_u_chip"
                                     value={ubi_chip}
                                     onChange={(e)=>setUbi_chip(e.target.value)}>
                                     <option value="" disabled defaultValue={""} hidden>Seleccione ubicacion del chip</option>
@@ -446,7 +446,7 @@ function Mascota_agregar({cerrar,naturaleza,id_mod, id_ani}) {
                         <p className="mt-4 mb-4 pt-3 b-sep-t fw-bold">Descripion especifica:</p>
                         <div className="d-flex gap-3 mt-2">
                             <p>Color de ojos</p>
-                            <select name="ojo_i" id="ojo_i"
+                            <select name="ojo_i" id="dv_sel_ojo_i"
                                 value={da_coi}
                                 onChange={(e)=>setDa_coi(e.target.value)}>
                                 <option value="" disabled defaultValue={""} hidden>Izquierdo</option>
@@ -457,7 +457,7 @@ function Mascota_agregar({cerrar,naturaleza,id_mod, id_ani}) {
                                 <option value="cafe">Cafe</option>
                                 <option value="UNKNOWN">No se</option>
                             </select>
-                            <select name="ojo_d" id="ojo_d"
+                            <select name="ojo_d" id="dv_sel_ojo_d"
                                 value={da_cod}
                                 onChange={(e)=>setDa_cod(e.target.value)}>
                                 <option value="" disabled defaultValue={""} hidden>Derecho</option>
@@ -471,7 +471,7 @@ function Mascota_agregar({cerrar,naturaleza,id_mod, id_ani}) {
                         </div>
                         <div className="d-flex gap-3 mt-4">
                             <p>Largo del pelaje:</p>
-                            <select name="l_pelaje" id="l_pelaje"
+                            <select name="l_pelaje" id="dv_sel_l_pelaje"
                                 value={da_lpj}
                                 onChange={(e)=>setDa_lpj(e.target.value)}>
                                 <option value="corto">Corto</option>
@@ -483,12 +483,12 @@ function Mascota_agregar({cerrar,naturaleza,id_mod, id_ani}) {
                         </div>
 
                         <p className="mt-4">Detalles sobre la apariencia:</p>
-                        <textarea id="ap_des" name="ap_des" className="w-e"
+                        <textarea id="dv_ap_des" name="ap_des" className="w-e"
                             value={da_dsa}
                             onChange={(e)=>setDa_dsa(e.target.value)}/>
 
                         <p className="mt-2">Posee una condicion especial?:</p>
-                        <textarea id="co_esp" name="co_esp" className="w-e"
+                        <textarea id="dv_co_esp" name="co_esp" className="w-e"
                             value={con_animal}
                             onChange={(e)=>setCon_animal(e.target.value)}/>
                         {tipo == "mascota" &&
@@ -497,7 +497,7 @@ function Mascota_agregar({cerrar,naturaleza,id_mod, id_ani}) {
                         {tipo == "lo_vi" &&
                             <p className="mt-2">Donde vio al animal?:</p>
                         }
-                        <input type="text" id="residencia" name="residencia" className="w-e"
+                        <input type="text" id="dv_residencia" name="residencia" className="w-e"
                             value={ubi_residencia}
                             onChange={(e)=>setUbi_residencia(e.target.value)}/>
                         
@@ -505,13 +505,13 @@ function Mascota_agregar({cerrar,naturaleza,id_mod, id_ani}) {
                             <div className="d-flex gap-3 mt-2">
                                 <p>Mostrar ubicacion?</p>    
                                 <label>
-                                    <input type="checkbox" checked={mos_residencia} onChange={(e) => setMos_residencia(e.target.checked)} />
+                                    <input id="dv_cb_mosubi" type="checkbox" checked={mos_residencia} onChange={(e) => setMos_residencia(e.target.checked)} />
                                 </label>
                             </div>
                         }
                         <p className="mt-4"></p>
                         {naturaleza == "add" &&
-                            <button className="me-4" onClick={()=>manejo_boton()}>Registrar mascota</button>
+                            <button id="dv_btn_reg" className="me-4" onClick={()=>manejo_boton()}>Registrar mascota</button>
                         }
                         {naturaleza == "ag_reporte" &&
                             <button className="me-4" onClick={()=>manejo_boton()}>Registrar y asociar a reporte</button>

@@ -56,14 +56,16 @@ function Login() {
                         <h4 className="p-0 ">- Iniciar sesion -</h4>
                     </div>
                     <p className="p-0 mt-2">Correo:</p>
-                    <input type="text" 
+                    <input id="dv_l_correo" 
+                        type="text" 
                         value={cor}
                         onChange={(e)=>setCor(e.target.value)}/>
                     <p className="p-0 mt-2">Constraseña:</p>
-                    <input type="text" 
+                    <input id="dv_l_contrasenia" 
+                        type="text" 
                         value={pas}
                         onChange={(e)=>setPas(e.target.value)}/>
-                    <button className="mt-4" onClick={()=>iniciar_sesion(cor,pas)}>Iniciar sesion</button>
+                    <button id="dv_btn_is" className="mt-4" onClick={()=>iniciar_sesion(cor,pas)}>Iniciar sesion</button>
                     <div className="d-flex justify-content-center mt-2 p-0">
                         <p className="p-0 me-2"> No tienes una cuenta?,</p>
                         <a className="link-gen" onClick={()=>registrar()}>crea una aqui</a>

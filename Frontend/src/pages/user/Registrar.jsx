@@ -78,7 +78,7 @@ function Registrar() {
                         value={u_rut}
                         onChange={(e)=>u_setRut(e.target.value)}/>
                     <p className="p-0 mt-2">Telefono:</p>
-                    <input id="dv_rut"
+                    <input id="dv_telefono"
                         type="text"  
                         value={u_telefono}
                         onChange={(e)=>u_setTelefono(e.target.value)}/>

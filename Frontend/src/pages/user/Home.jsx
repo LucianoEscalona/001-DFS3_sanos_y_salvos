@@ -23,9 +23,11 @@ function Home() {
                 <p className='fade-in t-2 txt_c'>Ayudando a los animales de Chile a volver con sus deuños.</p>
                 <p className='fade-in t-3 txt_c mt-4 mb-3'>En nuestra pagina web, puedes encontrar reportes de mascotas extraviadas, o crear uno tu mismo. Tambien puedes consultar la informacion de las Mascotas registradas, y si quieres, puedes ingresar una a nuestro sistema. (Necesitas tener una cuenta para poder ingresar informacion en la pagina)</p>
                 <button 
+                    id="dv_btn_h_reportes"
                     onClick={()=>navegar("/reportes")}
                     className="fade-in t-3 btn_hps">Reportes</button>
                 <button 
+                    id="dv_btn_h_mascotas"
                     onClick={()=>navegar("/mascotas")}
                     className="fade-in t-3 btn_hps ms-3 me-3">Mascotas</button>
                 <button 

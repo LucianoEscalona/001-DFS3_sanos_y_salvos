@@ -89,7 +89,7 @@ function Navbar() {
                 }
                 {!sesionActiva &&
                     <li className="nav-item">
-                        <Link className="nav-link active" aria-current="page" to="/login">Iniciar sesion</Link>
+                        <Link className="nav-link active" aria-current="page" to="/login">Ir al login</Link>
                     </li>
                 }
             </ul>

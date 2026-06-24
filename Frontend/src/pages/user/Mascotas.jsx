@@ -50,7 +50,7 @@ function Mascotas() {
                     <h3 className="fade-in t-1">~Mis Mascotas</h3>
                     <p className="fade-in t-2 mb-3">Consulta las mascotas que has TU registrado en el sistema, y si no tienes ninguna registrada, puedes ingresar una de tus mascotas.</p>
                     <p className="fade-in t-2 mb-3">Tambien puedes ingresar animales que hayas visto en algun lado (por ejemplo: animales que parezcan perdidos)</p>
-                    <button className="fade-in t-2 btn_hps me-3" onClick={()=>setMostrar_agregar(true)}>Ingresar Mascota</button>
+                    <button id="dv_btn_mm_imascota" className="fade-in t-2 btn_hps me-3" onClick={()=>setMostrar_agregar(true)}>Ingresar Mascota</button>
                     <button className="fade-in t-2 btn_hps" onClick={()=>navegar("/mascotas_sistema")}>Ver todas las Mascotas</button>
                 </div>            
             </div>
