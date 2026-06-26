@@ -17,10 +17,11 @@ function Login() {
         navegar("/")
     }
 
-    const iniciar_sesion = async(correo,passwd)=>{
+    const iniciar_sesion = async(e)=>{
+        e.preventDefault()
         const login_body = {
-            correo: correo,
-            passwd: passwd
+            correo: cor,
+            passwd: pas
         }
         const res = await postSMT_login("usuario","login",login_body) || {}
         if(res.ok){
@@ -29,10 +30,10 @@ function Login() {
             navegar("/")
             window.location.reload()
         }else{
-            if(res.status === 401){
+            if(res.status == 401){
                 alert("Contraseña incorrecta")
             }
-            else if(res.status === 404){
+            else if(res.status == 404){
                 alert("Correo incorrecto")
             }
             else{
@@ -51,21 +52,29 @@ function Login() {
                 className="img-home_page"/>
         <div className="fade-in t-1 centrado_tarjetas z-pos-bottom">
             <div className="p-4 b-gen mw-reglog">
-                <div className="row m-0 p-2">
+                <form className="row m-0 p-2" onSubmit={iniciar_sesion}>
                     <div className="d-flex justify-content-center">
                         <h4 className="p-0 ">- Iniciar sesion -</h4>
                     </div>
                     <p className="p-0 mt-2">Correo:</p>
                     <input id="dv_l_correo" 
+                        required
+                        placeholder="Su correo"
+                        minLength={9}
+                        maxLength={30}
                         type="text" 
                         value={cor}
                         onChange={(e)=>setCor(e.target.value)}/>
                     <p className="p-0 mt-2">Constraseña:</p>
                     <input id="dv_l_contrasenia" 
-                        type="text" 
+                        required
+                        placeholder="Su contraseña"
+                        minLength={10}
+                        maxLength={20}
+                        type="password" 
                         value={pas}
                         onChange={(e)=>setPas(e.target.value)}/>
-                    <button id="dv_btn_is" className="mt-4" onClick={()=>iniciar_sesion(cor,pas)}>Iniciar sesion</button>
+                    <button type="submit" id="dv_btn_is" className="mt-4">Iniciar sesion</button>
                     <div className="d-flex justify-content-center mt-2 p-0">
                         <p className="p-0 me-2"> No tienes una cuenta?,</p>
                         <a className="link-gen" onClick={()=>registrar()}>crea una aqui</a>
@@ -73,7 +82,7 @@ function Login() {
                     <div className="d-flex justify-content-center mt-2 p-0">
                         <a className="link-gen" onClick={()=>home()}>volver al inicio</a>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
         </>

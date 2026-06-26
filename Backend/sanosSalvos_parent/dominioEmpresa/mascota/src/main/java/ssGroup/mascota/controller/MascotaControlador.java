@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import ssGroup.mascota.entity.Mascota;
-import ssGroup.mascota.exception.ErrorNoConcretado;
 import ssGroup.mascota.repository.MascotaRepositorio;
 
 @RestController
@@ -36,181 +35,131 @@ public class MascotaControlador {
     
     @GetMapping("/listar")
     public ResponseEntity<List<Mascota>> list(){
-        try {
-            List<Mascota> allM = rep.findAll();
-        
-            if (allM.isEmpty()){
-                return ResponseEntity.noContent().build();
-            } else {
-                return ResponseEntity.ok(allM);
-            }
-        } catch (Exception e) {
-            throw new ErrorNoConcretado(
-                "/mascota/v1/listar"+"-"+
-                "No se pudo listar las mascotas"+"-"+
-                "Listar mascotas");
+
+        List<Mascota> allM = rep.findAll();
+
+        if (allM.isEmpty()){
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.ok(allM);
         }
-        
     }
 //______________________________________________________________________________
     
     @GetMapping("/obtener/{id}")
     public ResponseEntity<?> get(@PathVariable("id") Integer id) {
-        try {
-            Optional<Mascota> optM = rep.findById(id);
 
-            if(optM.isPresent()){
-                Mascota rM = optM.get();
-                return new ResponseEntity<>(rM, HttpStatus.OK);
-            } else {
-                throw new NoSuchElementException(
-                    "/mascota/v1/obtener"+"-"+
-                    "No se pudo encontrar la mascota con id:"+id);
-            }
-        } catch (Exception e) {
-            throw new ErrorNoConcretado(
+        Optional<Mascota> optM = rep.findById(id);
+
+        if(optM.isPresent()){
+            Mascota rM = optM.get();
+            return new ResponseEntity<>(rM, HttpStatus.OK);
+        } else {
+            throw new NoSuchElementException(
                 "/mascota/v1/obtener"+"-"+
-                "No se pudo recuperar la mascota (id:"+id+")"+"-"+
-                "Obtener mascota con ID");
+                "No se pudo encontrar la mascota con id:"+id);
         }
     }
 //______________________________________________________________________________
     
     @PutMapping("/mod_info/{id}")
     public ResponseEntity<?> put(@PathVariable("id") Integer id, @RequestBody Mascota m){
-        try {
-            Optional<Mascota> optM = rep.findById(id);
 
-            if(optM.isPresent()){
-                Mascota modM = optM.get();
-                modM.setAnimal(m.getAnimal());
-                modM.setNombre(m.getNombre());
-                modM.setRaza_1(m.getRaza_1());
-                modM.setRaza_2(m.getRaza_2());
-                modM.setRaza_sg(m.getRaza_sg());
+        Optional<Mascota> optM = rep.findById(id);
 
-                modM.setGenero(m.getGenero());
-                modM.setGenero_seg(m.getGenero_seg());
+        if(optM.isPresent()){
+            Mascota modM = optM.get();
+            modM.setAnimal(m.getAnimal());
+            modM.setNombre(m.getNombre());
+            modM.setRaza_1(m.getRaza_1());
+            modM.setRaza_2(m.getRaza_2());
+            modM.setRaza_sg(m.getRaza_sg());
 
-                modM.setEdad(m.getEdad());
-                modM.setEdad_seg(m.getEdad_seg());
+            modM.setGenero(m.getGenero());
+            modM.setGenero_seg(m.getGenero_seg());
 
-                modM.setApariencia(m.getApariencia());
-                modM.setCondicion(m.getCondicion());
+            modM.setEdad(m.getEdad());
+            modM.setEdad_seg(m.getEdad_seg());
 
-                modM.setCollar(m.getCollar());
-                modM.setCollar_des(m.getCollar_des());
-                modM.setChip(m.getChip());
-                modM.setChip_ubi(m.getChip_ubi());
+            modM.setApariencia(m.getApariencia());
+            modM.setCondicion(m.getCondicion());
 
-                modM.setUbicacion_res(m.getUbicacion_res());
-                modM.setUbicacion_mos(m.getUbicacion_mos());
+            modM.setCollar(m.getCollar());
+            modM.setCollar_des(m.getCollar_des());
+            modM.setChip(m.getChip());
+            modM.setChip_ubi(m.getChip_ubi());
 
-                modM.setEstado(m.getEstado());
-                modM.setTipo(m.getTipo());
+            modM.setUbicacion_res(m.getUbicacion_res());
+            modM.setUbicacion_mos(m.getUbicacion_mos());
 
-                modM.setRut_usuario(m.getRut_usuario());
-                Mascota rM = rep.save(modM);
-                return new ResponseEntity<>(rM, HttpStatus.OK);
-            } else {
-                throw new NoSuchElementException(
-                    "/mascota/v1/modificar"+"-"+
-                    "No se encontro ninguna mascota con la id: "+id);
-            }
-        } catch (Exception e) {
-            throw new ErrorNoConcretado(
-                "/mascota/v1/mod_info"+"-"+
-                "No se pudo modificar la mascota (id:"+id+")"+"-"+
-                "Modificar informacion mascota");
+            modM.setEstado(m.getEstado());
+            modM.setTipo(m.getTipo());
+
+            modM.setRut_usuario(m.getRut_usuario());
+            Mascota rM = rep.save(modM);
+            return new ResponseEntity<>(rM, HttpStatus.OK);
+        } else {
+            throw new NoSuchElementException(
+                "/mascota/v1/modificar"+"-"+
+                "No se encontro ninguna mascota con la id: "+id);
         }
-        
     }
 //______________________________________________________________________________
     
     @PutMapping("/mod_tipo/{id}")
     public ResponseEntity<?> put_tipo(@PathVariable("id") Integer id, @RequestBody Mascota m){
-        try {
-            Optional<Mascota> optM = rep.findById(id);
-        
-            if(optM.isPresent()){
-                Mascota modM = optM.get();
-                modM.setTipo(m.getTipo());
-                Mascota rM = rep.save(modM);
-                return new ResponseEntity<>(rM, HttpStatus.OK);
-            } else {
-                throw new NoSuchElementException(
-                    "/mascota/v1/modificar"+"-"+
-                    "No se encontro ninguna mascota con la id: "+id);
-            }
-        } catch (Exception e) {
-            throw new ErrorNoConcretado(
-                "/mascota/v1/mod_tipo"+"-"+
-                "No se pudo modificar la mascota (id:"+id+")"+"-"+
-                "Modificar tipo mascota");
+
+        Optional<Mascota> optM = rep.findById(id);
+
+        if(optM.isPresent()){
+            Mascota modM = optM.get();
+            modM.setTipo(m.getTipo());
+            Mascota rM = rep.save(modM);
+            return new ResponseEntity<>(rM, HttpStatus.OK);
+        } else {
+            throw new NoSuchElementException(
+                "/mascota/v1/modificar"+"-"+
+                "No se encontro ninguna mascota con la id: "+id);
         }
-        
     }
 //______________________________________________________________________________
     
     @PutMapping("/mod_estado/{id}")
     public ResponseEntity<?> put_estado(@PathVariable("id") Integer id, @RequestBody Mascota m){
-        try {
-            Optional<Mascota> optM = rep.findById(id);
-        
-            if(optM.isPresent()){
-                Mascota modM = optM.get();
-                modM.setEstado(m.getEstado());
-                Mascota rM = rep.save(modM);
-                return new ResponseEntity<>(rM, HttpStatus.OK);
-            } else {
-                throw new NoSuchElementException(
-                    "/mascota/v1/modificar"+"-"+
-                    "No se encontro ninguna mascota con la id: "+id);
-            }
-        } catch (Exception e) {
-            throw new ErrorNoConcretado(
-                "/mascota/v1/mod_estado"+"-"+
-                "No se pudo modificar la mascota (id:"+id+")"+"-"+
-                "Modificar estado mascota");
+
+        Optional<Mascota> optM = rep.findById(id);
+
+        if(optM.isPresent()){
+            Mascota modM = optM.get();
+            modM.setEstado(m.getEstado());
+            Mascota rM = rep.save(modM);
+            return new ResponseEntity<>(rM, HttpStatus.OK);
+        } else {
+            throw new NoSuchElementException(
+                "/mascota/v1/modificar"+"-"+
+                "No se encontro ninguna mascota con la id: "+id);
         }
-        
     }
 //______________________________________________________________________________
     
     @PostMapping("/guardar")
     public ResponseEntity<?> post(@RequestBody Mascota m){
-        try {
+
             Mascota rM = rep.save(m);
             return ResponseEntity.status(HttpStatus.CREATED).body(rM);
-        } catch (Exception e) {
-            throw new ErrorNoConcretado(
-                "/mascota/v1/guardar"+"-"+
-                "No se pudo guardar la mascota en el sistema"+"-"+
-                "Guardar");
-        }
-        
     }
 //______________________________________________________________________________
 
     @DeleteMapping("/retirar_sis/{id}")
     public ResponseEntity<?> delete(@PathVariable("id") Integer id){
-        try {
-            
-            if(rep.existsById(id)){
-                rep.deleteById(id);
-                return ResponseEntity.ok(HttpStatus.OK);
-            }
-            throw new RuntimeException(
-                "/mascota/v1/retirar_sis"+"-"+
-                "La mascota sigue existiendo: "+id);
-            
-        } catch (Exception e) {
-            throw new ErrorNoConcretado(
-                "/mascota/v1/retirar_sis"+"-"+
-                "No se pudo retirar a la mascota (id:"+id+") del sistema"+"-"+
-                "Retirar sistema");
+
+        if(rep.existsById(id)){
+            rep.deleteById(id);
+            return ResponseEntity.ok(HttpStatus.OK);
         }
-        
+        throw new RuntimeException(
+            "/mascota/v1/retirar_sis"+"-"+
+            "La mascota sigue existiendo: "+id);
     }
 }
 

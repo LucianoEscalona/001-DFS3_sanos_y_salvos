@@ -39,25 +39,29 @@ function Reporte_agregar({cerrar, naturaleza, id_mod}) {
         setId_seleccion_rep(0)
         cerrar(false)
     }
-    const print_info_r = ()=>{
-        const reporte_g = {
-            id_mascota: id_seleccion_rep,
-            id_usuario: sesion.id,
-            titulo: titulo,
-            descripcion: descripcion,
-            consideracion_e: consideracion,
-            tiempo_uvv: tiempo_visto,
-            ubicacion_uvv: ubicacion_visto
+    const print_info_r = (e)=>{
+        e.preventDefault()
+        if(id_seleccion_rep<=0){
+            alert("Debes seleccionar o agregar un animal al reporte")
+        }else{
+            const reporte_g = {
+                id_mascota: id_seleccion_rep,
+                id_usuario: sesion.id,
+                titulo: titulo,
+                descripcion: descripcion,
+                consideracion_e: consideracion,
+                tiempo_uvv: tiempo_visto,
+                ubicacion_uvv: ubicacion_visto
+            }
+            if(naturaleza == "add"){
+                postSMT_auth("reporte","guardar",reporte_g)
+                cerrar_agregar()
+            }
+            if(naturaleza == "mod"){
+                putSMT_auth("reporte","mod_rep",reporte_g,id_mod)
+                cerrar_agregar()
+            }
         }
-        if(naturaleza == "add"){
-            postSMT_auth("reporte","guardar",reporte_g)
-            cerrar_agregar()
-        }
-        if(naturaleza == "mod"){
-            putSMT_auth("reporte","mod_rep",reporte_g,id_mod)
-            cerrar_agregar()
-        }
-        
     }
 
     useEffect(()=>{
@@ -103,7 +107,7 @@ function Reporte_agregar({cerrar, naturaleza, id_mod}) {
     return(
         <>
             <div className="fondo_opaco_tarjetas">
-                <div className="mw-fra b-gen p-5">
+                <form className="mw-fra b-gen p-5" onSubmit={print_info_r}>
                     <h4>Animal asociado al reporte</h4>
                     <button onClick={()=>setSeleccionar(true)}>Seleccionar</button>
                     <button onClick={()=>setIngresar(true)}>Ingresar</button>
@@ -112,24 +116,57 @@ function Reporte_agregar({cerrar, naturaleza, id_mod}) {
                     }
                     <h4>Ingresar datos del reporte</h4>
                     <p>Titulo del reporte:</p>
-                    <input value={titulo} onChange={(e)=>setTitulo(e.target.value)} className="w-e mb-2" type="text" />
+                    <input 
+                        id="dv_r_titulo"
+                        required
+                        minLength={5}
+                        maxLength={50}
+                        value={titulo} 
+                        onChange={(e)=>setTitulo(e.target.value)} 
+                        className="w-e mb-2" type="text" />
                     <p>Descripcion del reporte:</p>
-                    <textarea value={descripcion} onChange={(e)=>setDescripcion(e.target.value)} className="w-e mb-2" name="" id=""></textarea>
+                    <textarea 
+                        id="dv_r_desc"
+                        required
+                        minLength={5}
+                        maxLength={300}
+                        value={descripcion} 
+                        onChange={(e)=>setDescripcion(e.target.value)} 
+                        className="w-e mb-2" name=""></textarea>
                     <p>Consideracion especial:</p>
-                    <textarea value={consideracion} onChange={(e)=>setConsideracion(e.target.value)} className="w-e mb-2" name="" id=""></textarea>
+                    <textarea 
+                        id="dv_r_cons"
+                        required
+                        minLength={5}
+                        maxLength={200}
+                        value={consideracion} 
+                        onChange={(e)=>setConsideracion(e.target.value)} 
+                        className="w-e mb-2" name=""></textarea>
                     <p>Cuando vio al animal?</p>
-                    <input value={tiempo_visto} onChange={(e)=>setTiempo_visto(e.target.value)} className="w-e mb-2" type="datetime-local" />
+                    <input 
+                        id="dv_r_tvisto"
+                        required
+                        value={tiempo_visto} 
+                        onChange={(e)=>setTiempo_visto(e.target.value)} 
+                        className="w-e mb-2" type="datetime-local" />
                     <p>Donde vio al animal?</p>
-                    <input value={ubicacion_visto} onChange={(e)=>setUbicacion_visto(e.target.value)} className="w-e mb-2" type="text" />
+                    <input 
+                        id="dv_r_uvisto"
+                        required
+                        minLength={5}
+                        maxLength={100}
+                        value={ubicacion_visto} 
+                        onChange={(e)=>setUbicacion_visto(e.target.value)} 
+                        className="w-e mb-2" type="text" />
                     {naturaleza == "add" &&
-                        <button onClick={()=>print_info_r()}>Subir reporte</button>
+                        <button type="submit">Subir reporte</button>
                     }
                     {naturaleza == "mod" &&
-                        <button onClick={()=>print_info_r()}>Guardar cambios</button>
+                        <button type="submit">Guardar cambios</button>
                     }
                     
                     <button onClick={()=>cerrar_agregar()}>Cerrar</button>
-                </div>
+                </form>
                 {seleccionar &&
                     <Mascotas_carousel cerrar={()=>setSeleccionar(false)} id_ani={setId_seleccion_rep}/>
                 }

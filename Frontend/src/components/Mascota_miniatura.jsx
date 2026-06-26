@@ -112,10 +112,10 @@ function Mascota_miniatura({id, naturaleza, cerrar, id_ani, origen}){
                     <button onClick={()=>detalle(id)} className="mt-3">Ver detalles</button>
                 }
                 {naturaleza=="sel_reporte" &&
-                    <button onClick={()=>guardar_cerrar()} className="mt-3">Seleccionar</button>
+                    <button onClick={()=>guardar_cerrar()} className="mt-3">Seleccionar mascota</button>
                 }
                 {naturaleza=="sel_resCoincidencias" &&
-                    <button onClick={()=>guardar_id_brc()} className="mt-3">Seleccionar</button>
+                    <button onClick={()=>guardar_id_brc()} className="mt-3">Buscar coincidencias</button>
                 }
             </div>
         </div>
