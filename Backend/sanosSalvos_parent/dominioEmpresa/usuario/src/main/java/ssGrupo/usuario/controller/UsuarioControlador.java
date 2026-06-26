@@ -53,11 +53,11 @@ public class UsuarioControlador {
     public ResponseEntity<?> post(@RequestBody Usuario u){
         
         u.setContrasenia(encoder.encode(u.getContrasenia()));
-        Usuario rU = rep.save(u);
 
         List<Usuario> ls_u = rep.findAll();
         for(Usuario usr : ls_u){
             if(ls_u.isEmpty()){
+                Usuario rU = rep.save(u);
                 return ResponseEntity.status(HttpStatus.CREATED).body(rU);
             }else{
                 if(usr.getCorreo().equalsIgnoreCase(u.getCorreo())){
@@ -70,9 +70,11 @@ public class UsuarioControlador {
                         "/usuario/v1/guardar" + "-" +
                         "El RUT ya ha sido registrado en la BDD, no es posible crear el usuario");
                 }
+                Usuario rU = rep.save(u);
                 return ResponseEntity.status(HttpStatus.CREATED).body(rU);
             }
         }
+        Usuario rU = rep.save(u);
         return ResponseEntity.status(HttpStatus.CREATED).body(rU);
 
     }

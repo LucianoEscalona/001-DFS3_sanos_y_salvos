@@ -30,27 +30,34 @@ function Registrar() {
 
                 if(num>=3 && may>=3){
 
-                    const usuario_g = {
-                        nombre: u_nombre,
-                        apellido_p: u_apellido_p,
-                        apellido_m: u_apellido_m,
-                        correo: u_correo,
-                        contrasenia: u_passwd,
-                        telefono: u_telefono,
-                        rut: u_rut,
-                        tipo_usuario: "usuario_ddm"
-                    }
-                    console.log(usuario_g)
-                    try {
-                        postSMT("usuario","guardar",usuario_g)
-                        alert("Cuenta creada correctamente!")
-                        navegar("/login")
-                    } catch (error) {
-                        alert("No se pudo crear la cuenta!")
+                    if(u_nombre.length >= 3 &&
+                        u_apellido_p.length >= 3 &&
+                        u_apellido_m.length >= 3 &&
+                        u_telefono.length >= 5
+                    ){
+                        const usuario_g = {
+                            nombre: u_nombre,
+                            apellido_p: u_apellido_p,
+                            apellido_m: u_apellido_m,
+                            correo: u_correo,
+                            contrasenia: u_passwd,
+                            telefono: u_telefono,
+                            rut: u_rut,
+                            tipo_usuario: "usuario_ddm"
+                        }
+                        console.log(usuario_g)
+                        try {
+                            postSMT("usuario","guardar",usuario_g)
+                            navegar("/login")
+                        } catch (error) {
+                            alert("No se pudo crear la cuenta!")
+                        }
+                    }else{
+                        alert("Algunos datos no cumplen el largo minimo!")
                     }
 
                 }else{
-                    alert("Contraseña invalida")
+                    alert("Contraseña invalida, minimo 3 mayusculas, 3 numeros y un largo minimo de 10")
                 }
             }else{
                 alert("Correo invalido")
