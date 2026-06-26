@@ -136,7 +136,6 @@ function Reporte_agregar({cerrar, naturaleza, id_mod}) {
                     <p>Consideracion especial:</p>
                     <textarea 
                         id="dv_r_cons"
-                        required
                         minLength={5}
                         maxLength={200}
                         value={consideracion} 

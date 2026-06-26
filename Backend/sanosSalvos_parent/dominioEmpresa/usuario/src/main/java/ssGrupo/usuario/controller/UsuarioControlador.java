@@ -58,6 +58,8 @@ public class UsuarioControlador {
         List<Usuario> ls_u = rep.findAll();
         for(Usuario usr : ls_u){
             if(ls_u.isEmpty()){
+                return ResponseEntity.status(HttpStatus.CREATED).body(rU);
+            }else{
                 if(usr.getCorreo().equalsIgnoreCase(u.getCorreo())){
                 throw new ErrorCorreoRegistrado(
                     "/usuario/v1/guardar" + "-" +
@@ -68,8 +70,6 @@ public class UsuarioControlador {
                         "/usuario/v1/guardar" + "-" +
                         "El RUT ya ha sido registrado en la BDD, no es posible crear el usuario");
                 }
-                return ResponseEntity.status(HttpStatus.CREATED).body(rU);
-            }else{
                 return ResponseEntity.status(HttpStatus.CREATED).body(rU);
             }
         }

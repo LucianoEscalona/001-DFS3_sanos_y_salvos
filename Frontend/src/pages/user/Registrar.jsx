@@ -78,7 +78,7 @@ function Registrar() {
                         required
                         placeholder="Debe contener '@gmail.com'"
                         minLength={9}
-                        maxLength={30}
+                        maxLength={35}
                         type="text" 
                         value={u_correo}
                         onChange={(e)=>u_setCorreo(e.target.value)}/>
@@ -119,7 +119,7 @@ function Registrar() {
                     <input id="dv_rut"
                         required
                         placeholder="Su RUT (50500500-5)"
-                        minLength={3}
+                        minLength={10}
                         maxLength={12}
                         type="text"  
                         value={u_rut}
@@ -129,7 +129,7 @@ function Registrar() {
                         required
                         placeholder="Su numero de telefono"
                         minLength={5}
-                        maxLength={12}
+                        maxLength={14}
                         type="text"  
                         value={u_telefono}
                         onChange={(e)=>u_setTelefono(e.target.value)}/>

@@ -41,59 +41,70 @@ function Mascota_agregar({cerrar,naturaleza,id_mod, id_ani}) {
     const [estado, setEstado] = useState("con_duenio")
 
     const print_info = (nat)=>{
-        let pDes_collar = `${cll_c1}-${cll_c2}-${cll_mt}-${cll_ds}`
-        let pDes_animal = `${da_coi}-${da_cod}-${da_lpj}-${da_dsa}`
-        let con = con_animal
-
-        let pRaza_s = raza_s
-        let pUbi_chip = ubi_chip
-        let pMos_residencia = mos_residencia
-        let pEstado = estado
-        if(!mezcla){pRaza_s = "NONE"}
-        if(!con_collar){pDes_collar = "NONE"}
-        if(!con_chip){pUbi_chip = "NONE"}
-        if(con==""){con="NONE"}
-        if(tipo=="lo_vi"){pMos_residencia = true; pEstado = "perdido"}
         const u = JSON.parse(localStorage.getItem("sesion"))
-        var rut = u.rut
-        const animal_g = {
-            nombre: nombre,
-            animal: especie,
-            raza_1: raza_p,
-            raza_2: pRaza_s,
-            raza_sg: mezcla,
-            genero: genero,
-            genero_seg: genero_seguro,
-            edad: edad,
-            edad_seg: edad_segura,
-            collar: con_collar,
-            collar_des: pDes_collar,
-            chip: con_chip,
-            chip_ubi: pUbi_chip,
-            apariencia: pDes_animal,
-            condicion: con,
-            ubicacion_res: ubi_residencia,
-            ubicacion_mos: pMos_residencia,
-            tipo: tipo,
-            estado: pEstado,
-            rut_usuario: rut
-        }
-        if(nat=="add"){
-            postSMT_auth("mascota","guardar",animal_g)
-        }
-        if(nat=="mod"){
-            putSMT_auth("mascota","mod_info",animal_g,id_mod)
-        }
-        if(nat=="ag_reporte"){
-            const postData_res = async() => {
-                const res = await postSMT_auth("mascota","guardar",animal_g)
-                id_ani(res.id)
+
+        if(u != undefined && u != null ){
+            if(u.token){
+                let pDes_collar = `${cll_c1}-${cll_c2}-${cll_mt}-${cll_ds}`
+                let pDes_animal = `${da_coi}-${da_cod}-${da_lpj}-${da_dsa}`
+                let con = con_animal
+        
+                let pRaza_s = raza_s
+                let pUbi_chip = ubi_chip
+                let pMos_residencia = mos_residencia
+                let pEstado = estado
+                if(!mezcla){pRaza_s = "NONE"}
+                if(!con_collar){pDes_collar = "NONE"}
+                if(!con_chip){pUbi_chip = "NONE"}
+                if(con==""){con="NONE"}
+                if(tipo=="lo_vi"){pMos_residencia = true; pEstado = "perdido"}
+                
+                var rut = u.rut
+                const animal_g = {
+                    nombre: nombre,
+                    animal: especie,
+                    raza_1: raza_p,
+                    raza_2: pRaza_s,
+                    raza_sg: mezcla,
+                    genero: genero,
+                    genero_seg: genero_seguro,
+                    edad: edad,
+                    edad_seg: edad_segura,
+                    collar: con_collar,
+                    collar_des: pDes_collar,
+                    chip: con_chip,
+                    chip_ubi: pUbi_chip,
+                    apariencia: pDes_animal,
+                    condicion: con,
+                    ubicacion_res: ubi_residencia,
+                    ubicacion_mos: pMos_residencia,
+                    tipo: tipo,
+                    estado: pEstado,
+                    rut_usuario: rut
+                }
+                if(nat=="add"){
+                    postSMT_auth("mascota","guardar",animal_g)
+                }
+                if(nat=="mod"){
+                    putSMT_auth("mascota","mod_info",animal_g,id_mod)
+                }
+                if(nat=="ag_reporte"){
+                    const postData_res = async() => {
+                        const res = await postSMT_auth("mascota","guardar",animal_g)
+                        id_ani(res.id)
+                    }
+                    postData_res()
+                }
+            }else{
+                alert("No tienes un token de sesion!")
             }
-            postData_res()
+        }else{
+            alert("No puedes registrar mascotas sin una cuenta!, como podriamos saber de quien es si no tienes una?")
         }
     }
 
-    const manejo_boton = ()=>{
+    const manejo_boton = (e)=>{
+        e.preventDefault()
         print_info(naturaleza)
         cerrar()
     }
@@ -110,7 +121,6 @@ function Mascota_agregar({cerrar,naturaleza,id_mod, id_ani}) {
         if(naturaleza == "ag_reporte"){
             setEstado("perdido")
         }
-        alert("-"+naturaleza+"-")
     },[])
     useEffect(()=>{
         if(naturaleza=="mod"){
@@ -174,7 +184,7 @@ function Mascota_agregar({cerrar,naturaleza,id_mod, id_ani}) {
         <>
             <div className="fondo_opaco_tarjetas">
             <div className="p-4 b-gen mw-fra">
-                <div className="row m-0">
+                <form className="row m-0" onSubmit={manejo_boton}>
                     <div className="col-md-6 col-sm-12">
                         <div className="img-sim shadow"></div>
                         <p className="mt-4 mb-3 pt-3 fw-bold">Descripcion General:</p>
@@ -207,7 +217,7 @@ function Mascota_agregar({cerrar,naturaleza,id_mod, id_ani}) {
                             <>
                                 <div className="d-flex gap-3 mt-3">
                                     <p>Estado:</p>
-                                    <select name="estado" id="dv_sel_estado"
+                                    <select name="estado" id="dv_sel_estado" required
                                         value={estado} 
                                         onChange={(e)=>setEstado(e.target.value)}>
                                         <option value="con_duenio">Con su dueño</option>
@@ -218,7 +228,9 @@ function Mascota_agregar({cerrar,naturaleza,id_mod, id_ani}) {
                         }
                         
                         <p className="mt-3">Nombre animal:</p>
-                        <input type="text" id="dv_nombre" name="nombre"
+                        <input type="text" id="dv_nombre" name="nombre" placeholder="Ingrese nombre del animal"
+                            minLength={1}
+                            maxLength={50}
                             value={nombre}
                             onChange={(e)=>setNombre(e.target.value)}/>
 
@@ -236,7 +248,7 @@ function Mascota_agregar({cerrar,naturaleza,id_mod, id_ani}) {
                             <>
                                 <div className="pt-3 mt-3 b-sep-t">
                                     <p>Raza:</p>
-                                    <select name="raza_1" id="dv_sel_raza_1"
+                                    <select name="raza_1" id="dv_sel_raza_1" required
                                         value={raza_p}
                                         onChange={(e)=>setRaza_p(e.target.value)}>
                                         <option value="" disabled defaultValue={""} hidden>Raza de perro</option>
@@ -295,7 +307,7 @@ function Mascota_agregar({cerrar,naturaleza,id_mod, id_ani}) {
 
                                 <div className="pt-3 mt-3 b-sep-t">
                                     <p>Tipo de gato:</p>
-                                    <select name="raza_1" id="dv_sel_raza_1"
+                                    <select name="raza_1" id="dv_sel_raza_1" required
                                         value={raza_p}
                                         onChange={(e)=>setRaza_p(e.target.value)}>
                                         <option value="" disabled defaultValue={""} hidden>Tipo de gato</option>
@@ -342,7 +354,7 @@ function Mascota_agregar({cerrar,naturaleza,id_mod, id_ani}) {
 
                         <div className="d-flex gap-3 pt-3 mt-3 b-sep-t">
                             <p>Genero:</p>
-                            <select name="genero" id="dv_sel_genero"
+                            <select name="genero" id="dv_sel_genero" required
                             value={genero} 
                             onChange={(e) => setGenero(e.target.value)}>
                                 <option value="macho">Macho</option>
@@ -358,7 +370,9 @@ function Mascota_agregar({cerrar,naturaleza,id_mod, id_ani}) {
 
                         <div className="d-flex gap-3 pt-3 mt-3 b-sep-t">
                             <p>Edad:</p>
-                            <input type="text" id="dv_edad" name="edad" 
+                            <input type="text" id="dv_edad" name="edad" placeholder="ingrese la edad o un aproximado"
+                            minLength={1}
+                            maxLength={30}
                             value={edad} 
                             onChange={(e) => setEdad(e.target.value)}/>
                         </div>
@@ -409,7 +423,9 @@ function Mascota_agregar({cerrar,naturaleza,id_mod, id_ani}) {
                                     <option value="UNKNOWN">No sabria decir</option>
                                 </select>
                                 <p className="mt-3">Descripcion:</p>
-                                <input type="text" id="dv_c_desc" name="c_desc" className="w-e"
+                                <input type="text" id="dv_c_desc" name="c_desc" className="w-e" placeholder="Proporcione una descripcion extra sobre el collar si es necesario"
+                                    minLength={1}
+                                    maxLength={100}
                                     value={cll_ds}
                                     onChange={(e)=>setCll_ds(e.target.value)}/>
                             </div>
@@ -483,12 +499,16 @@ function Mascota_agregar({cerrar,naturaleza,id_mod, id_ani}) {
                         </div>
 
                         <p className="mt-4">Detalles sobre la apariencia:</p>
-                        <textarea id="dv_ap_des" name="ap_des" className="w-e"
+                        <textarea id="dv_ap_des" name="ap_des" className="w-e" placeholder="Ingrese una descripcion especifica del animal"
+                            minLength={1}
+                            maxLength={150}
                             value={da_dsa}
                             onChange={(e)=>setDa_dsa(e.target.value)}/>
 
                         <p className="mt-2">Posee una condicion especial?:</p>
-                        <textarea id="dv_co_esp" name="co_esp" className="w-e"
+                        <textarea id="dv_co_esp" name="co_esp" className="w-e" placeholder="El animal posee alguna condicion medica o alguna caracteristica que se debe tener en consideracion?"
+                            minLength={1}
+                            maxLength={150}
                             value={con_animal}
                             onChange={(e)=>setCon_animal(e.target.value)}/>
                         {tipo == "mascota" &&
@@ -497,7 +517,9 @@ function Mascota_agregar({cerrar,naturaleza,id_mod, id_ani}) {
                         {tipo == "lo_vi" &&
                             <p className="mt-2">Donde vio al animal?:</p>
                         }
-                        <input type="text" id="dv_residencia" name="residencia" className="w-e"
+                        <input type="text" id="dv_residencia" name="residencia" className="w-e" placeholder="Ubicacion donde vive el animal"
+                            minLength={1}
+                            maxLength={50}
                             value={ubi_residencia}
                             onChange={(e)=>setUbi_residencia(e.target.value)}/>
                         
@@ -511,17 +533,17 @@ function Mascota_agregar({cerrar,naturaleza,id_mod, id_ani}) {
                         }
                         <p className="mt-4"></p>
                         {naturaleza == "add" &&
-                            <button id="dv_btn_reg" className="me-4" onClick={()=>manejo_boton()}>Registrar mascota</button>
+                            <button type="submit" id="dv_btn_reg" className="me-4">Registrar mascota</button>
                         }
                         {naturaleza == "ag_reporte" &&
-                            <button className="me-4" onClick={()=>manejo_boton()}>Registrar y asociar a reporte</button>
+                            <button type="submit" className="me-4">Registrar y asociar a reporte</button>
                         }
                         {naturaleza == "mod" &&
-                            <button className="me-4" onClick={()=>manejo_boton()}>Guardar cambios</button>
+                            <button type="submit" className="me-4">Guardar cambios</button>
                         }
                         <button onClick={cerrar}>Cerrar</button>
                     </div>
-                </div>
+                </form>
             </div>
             </div>
         </>
