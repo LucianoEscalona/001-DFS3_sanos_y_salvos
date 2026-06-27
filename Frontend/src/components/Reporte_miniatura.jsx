@@ -61,12 +61,14 @@ function Reporte_miniatura({id, naturaleza, id_rep}) {
                 <div className="ps-4 pe-4 pt-3 pb-3">
                     <div className="img-sim"></div>
                 </div>
-                <p>{animal.nombre}</p>
-                <p>{animal.animal} {animal.genero} {animal.raza_1}, de {animal.edad}.</p>
-                <p>{reporte.descripcion}</p>
-                <p>Desaparecio el {reporte.tiempo_uvv}, en {reporte.ubicacion_uvv}</p>
-                <p>si lo ve porfavor, llame al:</p>
-                <div className="b-gen p-2">
+                <div className="ps-4 pe-4 pt-1 pb-3">
+                    <p>{animal.nombre}</p>
+                    <p>{animal.animal} {animal.genero} {animal.raza_1}, de {animal.edad}.</p>
+                    <p>{reporte.descripcion}</p>
+                    <p>Desaparecio el {reporte.tiempo_uvv}, en {reporte.ubicacion_uvv}</p>
+                    <p>si lo ve porfavor, llame al:</p>
+                </div>
+                <div className="b-gen p-2 mb-3 nphone_color">
                     <h3>({usuario.telefono})</h3>
                 </div>
                 {naturaleza != "sel_motor" &&

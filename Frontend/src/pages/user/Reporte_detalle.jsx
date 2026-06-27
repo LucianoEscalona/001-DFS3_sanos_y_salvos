@@ -159,58 +159,60 @@ function Reporte_detalle({id}) {
 
     return(
         <>
-        <div className="p-4 b-gen"> 
-            <h2>TIPO REPORTE</h2>
-            <div className="img-sim min-h"></div>
-            <div className="p-3">
-                <p className="mt-2">{tipo}</p>
-                <p className="mt-2">{nombre}</p>
-                <p className="mt-2">{especie}{razas}</p>
-                <p className="mt-2">{genero}</p>
-                <p className="mt-2">{edad}</p>
-                <p className="mt-2">{apariencia}</p>
-                <p className="mt-2">{condicion}</p>
-                <p className="mt-2">{collar_des}</p>
-                <p className="mt-2">{chip}</p>
-                <p className="mt-2">{ubicacion}</p>
-                <p className="mt-2"><em>{estado}</em></p>
-                <p>--------------------------</p>
-                <p className="mt-2">{reporte.titulo}</p>
-                <p className="mt-2">{reporte.descripcion}</p>
-                <p className="mt-2">{reporte.consideracion_e}</p>
-                <p className="mt-2">{reporte.tiempo_uvv}</p>
-                <p className="mt-2">{reporte.ubicacion_uvv}</p>
-                <p>--------------------------</p>
-                {animal.tipo == "mascota" &&
-                    <>
-                        <p className="mt-2">Si lo ve, contactese con {usuario.nombre} {usuario.appelido_p}</p>
-                        <h3 className="mt-2 b-gen p-3">{usuario.telefono}</h3>
-                    </>
-                }
-                {animal.tipo == "lo_vi" &&
-                    <>
-                        <p className="mt-2">Si es suyo, contacte con {usuario.nombre} {usuario.appelido_p}</p>
-                        <h3 className="mt-2 b-gen p-3">{usuario.telefono}</h3>
-                    </>
-                }
-                {origen_red == "m_reportes" &&
-                    <button onClick={()=>navegar("/reportes")}>Regresar</button>
-                }
-                {origen_red == "s_reportes" &&
-                    <button onClick={()=>navegar("/reportes_sistema")}>Regresar</button>
-                }
-                {origen_red == "home" &&
-                    <button onClick={()=>navegar("/")}>Regresar</button>
-                }
-                {sesion != undefined && sesion.id == reporte.id_usuario &&
-                    <>
-                        <button onClick={()=>setModificando(true)}>Modificar</button>
-                        <button onClick={()=>retirar()}>Quitar reporte</button>
-                    </>
-                }
-                <p>-Probando el motor-</p>
-                <button onClick={()=>buscar_coincidencias(reporte.id_mascota, reporte.id)}>Buscar coincidencias</button>
-                <button onClick={()=>printResultados()}>PRINT</button>
+        <div className="centrado_tarjetas pt-5">
+            <div className="p-5 b-gen mw-fra"> 
+                <h2>TIPO REPORTE</h2>
+                <div className="img-sim min-h"></div>
+                <div className="p-3"> 
+                    <p className="mt-2">{tipo}</p>
+                    <p className="mt-2">{nombre}</p>
+                    <p className="mt-2">{especie}{razas}</p>
+                    <p className="mt-2">{genero}</p>
+                    <p className="mt-2">{edad}</p>
+                    <p className="mt-2">{apariencia}</p>
+                    <p className="mt-2">{condicion}</p>
+                    <p className="mt-2">{collar_des}</p>
+                    <p className="mt-2">{chip}</p>
+                    <p className="mt-2">{ubicacion}</p>
+                    <p className="mt-2"><em>{estado}</em></p>
+                    <p>--------------------------</p>
+                    <p className="mt-2">{reporte.titulo}</p>
+                    <p className="mt-2">{reporte.descripcion}</p>
+                    <p className="mt-2">{reporte.consideracion_e}</p>
+                    <p className="mt-2">{reporte.tiempo_uvv}</p>
+                    <p className="mt-2">{reporte.ubicacion_uvv}</p>
+                    <p>--------------------------</p>
+                    {animal.tipo == "mascota" &&
+                        <>
+                            <p className="mt-2">Si lo ve, contactese con {usuario.nombre} {usuario.appelido_p}</p>
+                            <h3 className="mt-2 b-gen p-3 nphone_color">{usuario.telefono}</h3>
+                        </>
+                    }
+                    {animal.tipo == "lo_vi" &&
+                        <>
+                            <p className="mt-2">Si es suyo, contacte con {usuario.nombre} {usuario.appelido_p}</p>
+                            <h3 className="mt-2 b-gen p-3">{usuario.telefono}</h3>
+                        </>
+                    }
+                    {origen_red == "m_reportes" &&
+                        <button onClick={()=>navegar("/reportes")}>Regresar</button>
+                    }
+                    {origen_red == "s_reportes" &&
+                        <button onClick={()=>navegar("/reportes_sistema")}>Regresar</button>
+                    }
+                    {origen_red == "home" &&
+                        <button onClick={()=>navegar("/")}>Regresar</button>
+                    }
+                    {sesion != undefined && sesion.id == reporte.id_usuario &&
+                        <>
+                            <button className="ms-2" onClick={()=>setModificando(true)}>Modificar</button>
+                            <button className="ms-2" onClick={()=>retirar()}>Quitar reporte</button>
+                        </>
+                    }
+                    <p className="mt-3 mb-3">-Probando el motor-</p>
+                    <button onClick={()=>buscar_coincidencias(reporte.id_mascota, reporte.id)}>Buscar coincidencias</button>
+                    <button className="ms-2" onClick={()=>printResultados()}>PRINT</button>
+                </div>
             </div>
         </div>
         {modificando &&

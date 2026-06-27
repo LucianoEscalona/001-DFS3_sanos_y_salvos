@@ -10,6 +10,19 @@ function Home() {
 
     const navegar = useNavigate()
 
+    const [sesionActiva, setSesionActiva] = useState(false)
+    useEffect(()=>{
+        try {
+            if(JSON.parse(localStorage.getItem("sesion"))){
+                setSesionActiva(true)
+            }else{
+                setSesionActiva(false)
+            }
+        } catch (error) {
+            setSesionActiva(false)
+        }
+    },[])
+
     return(
         <div className='container-fluid p-0'>
             <div className="black_filter">
@@ -30,9 +43,13 @@ function Home() {
                     id="dv_btn_h_mascotas"
                     onClick={()=>navegar("/mascotas")}
                     className="fade-in t-3 btn_hps ms-3 me-3">Mascotas</button>
-                <button 
-                    onClick={()=>navegar("/login")}
-                    className="fade-in t-3 btn_hps">Iniciar sesion</button>
+                {!sesionActiva &&
+                <>
+                    <button 
+                        onClick={()=>navegar("/login")}
+                        className="fade-in t-3 btn_hps">Iniciar sesion</button>
+                </>
+                }
             </div>
         </div>
     )

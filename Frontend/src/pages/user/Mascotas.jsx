@@ -55,23 +55,18 @@ function Mascotas() {
                 </div>            
             </div>
 
-            <div className="color-testing mascota-opciones p-4">
-                <p>Check for coincidences</p>
-            </div>
-            <button onClick={()=>setMostrar_agregar(true)}>Registrar mascota</button>
-            <p className="cuadrao">Mascotas</p>
             <div className="">
                 {mostrar_agregar &&
                     <Mascota_agregar cerrar={()=>setMostrar_agregar(false)} naturaleza={"add"}/>
                 }                
-                <h2 className="p-4 m-0 m_t_style">Mascotas registradas</h2>
-                <div className="row m-0 w-bg pt-3 pb-3">
+                <h3 className="ps-5 pt-4 pb-4 pe-5 m-0 m_t_style c-black">~ Mi mascotas registradas</h3>
+                <div className="row m-0 w-bg pt-3 pb-3 b-gen brad-0">
                     {mascotas_r.map((m, i)=>(
                         <Mascota_miniatura key={i} id={m.id} naturaleza={"ver_detalle"} origen={"/mascotas"}/>
                     ))}
                 </div>
-                <h2 className="p-4 m-0 m_t_style">Animales vistos</h2>
-                <div className="row m-0 w-bg pt-3 pb-3">
+                <h3 className="ps-5 pt-4 pb-4 pe-5 m-0 m_t_style c-black">~ Mis animales vistos</h3>
+                <div className="row m-0 w-bg pt-3 pb-3 b-gen brad-0">
                     {animales_v.map((a, i)=>(
                         <Mascota_miniatura key={i} id={a.id} naturaleza={"ver_detalle"} origen={"/mascotas"}/>
                     ))}

@@ -13,15 +13,15 @@
 }
 body{
   overflow-x: hidden;
-  background-color: rgb(243, 240, 232);
+  background-color: rgb(255, 255, 255);
 }
 body::-webkit-scrollbar {
   display: none;
 }
 .b-gen{
-  border: 1px solid rgb(128, 57, 0);
-  border-radius: 5px;
-  background-color: rgb(238, 230, 210);
+  border: 1px solid rgb(24, 22, 32);
+  border-radius: 3px;
+  background-color: rgb(255, 255, 255);
 }
 .fondo_opaco_tarjetas{
   position: fixed;
@@ -48,8 +48,9 @@ body::-webkit-scrollbar {
   justify-content: center;
   align-items: center;
 }
+.mwidthrep{max-width: 2000px;}
 .mw-fra{
-  max-width: 1000px;
+  max-width: 1200px !important;
   max-height: 95vh;
   width: 95vw;
   overflow-y: auto;
@@ -113,32 +114,35 @@ p{margin-bottom: 0;}
 
 button{
   padding: 6px 10px 6px 10px;
-  color: rgb(211, 84, 0);
+  color: rgb(35, 33, 50);
   background-color: transparent;
-  border: 1px solid rgb(211, 84, 0);
+  border: 1px solid rgb(35, 33, 50);
   border-radius: 3px;
   transition: all 0.2s ease-in-out;
 }
 button:hover{
-  color: rgb(241, 235, 221);
-  background-color: rgb(211, 84, 0);
-  border: 1px solid rgb(211, 84, 0);
+  color: rgb(255, 255, 255);
+  background-color: rgb(35, 33, 50);
+  border: 1px solid rgb(35, 33, 50);
   border-radius: 3px;
 }
+.nphone_color{background-color: rgb(35, 33, 50);}
 p,h1,h2,h3,h4, strong{
-  color: rgb(75, 34, 0);
+  color: rgb(0, 0, 0) ;
 }
+.c-black{color: rgb(0,0,0);}
+.brad-0{border-radius: 0px;}
 .link-gen{
-  color: rgb(211, 84, 0);
+  color: rgb(0, 90, 207);
 }
 .link-gen:hover{
-  color: rgb(134, 54, 0);
+  color: rgb(0, 29, 57);
 }
 
 .m_t_style{
   border-top: 8px solid rgb(255, 255, 255);
-  background-color: rgb(238, 230, 210);
-  border-bottom: 8px solid rgb(223, 206, 164);
+  background-color: rgb(255, 255, 255);
+  border-bottom: 8px solid rgb(255, 255, 255);
 }
 .btn-red{
   color: rgb(179, 0, 0);

@@ -25,8 +25,6 @@ function Motor_1(){
         try {
             const res_1 = await getSMT_ID("mascota","obtener",num_m)
             setMas_1(res_1)
-            const res_2 = await getSMT_ID("mascota","obtener",num_b)
-            setMas_2(res_2)
             const res_3 = await searchMotor(num_m, num_r)
             setResGuardado(res_3)
         } catch (error) {
@@ -63,9 +61,9 @@ function Motor_1(){
             <input type="number" value={num_b} onChange={(e)=>setNum_b(e.target.value)}/>
             <p>id reporte</p>
             <input type="number" value={num_r} onChange={(e)=>setNum_r(e.target.value)}/>
-            <button onClick={()=>searchTEST_01()}>Generar concidencia</button>
-            <button onClick={()=>mostrarResultados(num_r)}>Buscar concidencia</button>
-            <button onClick={()=>console.log(num_r)}>p</button>
+            <button onClick={()=>searchTEST_01()}>Search test 1</button>
+            <button onClick={()=>mostrarResultados(num_r)}>Mostrar resutlados</button>
+            <button onClick={()=>console.log(num_r)}>log num_r</button>
             
         </div>
         
@@ -77,7 +75,7 @@ function Motor_1(){
         
         <div className="row m-0 p-3">
             <div className="b-gen col-6 p-3">
-                    <button onClick={()=>printRES()}>PRINT</button>
+                    <button onClick={()=>printRES()}>printRES</button>
             </div>
             <div className="b-gen col-6 p-3">
                 

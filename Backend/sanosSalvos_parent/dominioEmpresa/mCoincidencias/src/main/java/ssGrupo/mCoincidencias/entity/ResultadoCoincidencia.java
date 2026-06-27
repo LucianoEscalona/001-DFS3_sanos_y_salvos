@@ -8,15 +8,17 @@ import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Table(name = "res_coincidencias")
 @Getter
 @Setter
+@NoArgsConstructor
 @EqualsAndHashCode(of = {
     "ptje_res_coincidencia", 
-    "nombre_coincide",
+    "nombre_coincide", 
     "animal_coincide",
     "raza_primaria_coincide",
     "raza_secundaria_coincide",
@@ -124,10 +126,4 @@ public class ResultadoCoincidencia {
         this.idMascota_revisada = idMascota_revisada;
         this.idReporte_revisado = idReporte_revisado;
     }
-    
-
-    public ResultadoCoincidencia() {
-    }
-    
-    
 }

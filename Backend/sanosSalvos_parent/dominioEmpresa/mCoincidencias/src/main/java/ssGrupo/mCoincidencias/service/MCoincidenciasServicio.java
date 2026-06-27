@@ -12,7 +12,7 @@ import org.springframework.web.client.RestTemplate;
 import ssGrupo.mCoincidencias.client.MascotaClient;
 import ssGrupo.mCoincidencias.client.ReporteClient;
 import ssGrupo.mCoincidencias.dto.MascotaDTO;
-import ssGrupo.mCoincidencias.dto.Reporte_mDTO;
+import ssGrupo.mCoincidencias.dto.ReporteDTO;
 import ssGrupo.mCoincidencias.entity.ResultadoCoincidencia;
 import ssGrupo.mCoincidencias.exception.ErrorMotor;
 import ssGrupo.mCoincidencias.repository.ResultadoCoincidenciaRepositorio;
@@ -51,261 +51,210 @@ public class MCoincidenciasServicio {
                 "Hubo un error inesperado al intentar recuperar los resultados de las coincidencias");
         }
     }
-    
+
     public void procesar(Integer id_m, Integer id_r){
-        
-        try {
-            System.out.println("-----------------------------");
-            System.out.println("LOGRO LLAMAR AL METODO");
-            System.out.println("-----------------------------");
 
-            List<MascotaDTO> ls_m = mc.obtenerMascotas();
-            MascotaDTO m_u = mc.obtenerMascotaID(id_m);
+        ResultadoCoincidencia resCon = new ResultadoCoincidencia();
 
-            List<Reporte_mDTO> ls_r = rc.obtenerReportes();
-            Reporte_mDTO r_u = rc.obtenerReporteID(id_r);
+        List<MascotaDTO> ls_mascota = mc.obtenerMascotas();
+        List<ReporteDTO> ls_reporte = rc.obtenerReportes();
 
-            for(MascotaDTO m : ls_m){
-                if(m_u != null){
+        MascotaDTO m = mc.obtenerMascotaID(id_m);
+        ReporteDTO r = rc.obtenerReporteID(id_r);
 
-                    System.out.println("-----------------------------");
-                    System.out.println("ENTRO A EL PRIMER IF");
-                    System.out.println("-----------------------------");
+        Integer p_coin = 0;     /*Puntaje coincidencia*/
+        Boolean e_coin = false; /*Existe coincidencia*/
+        System.out.println("Entrando al for");
+        for(MascotaDTO mDto : ls_mascota){
+            System.out.println("Dentro del for");
+            
+            resCon.setIdMascota(id_m);
+            resCon.setIdMascota_revisada(mDto.getId());
+            resCon.setIdReporte(id_r);
 
-                    Integer ptje_coincidencia = 0;
-                    Boolean posible_coincidencia = false;
-
-                    Boolean c_nombre = false;
-                    Boolean c_animal = false;
-                    Boolean c_raza_1 = false;
-                    Boolean c_raza_2 = false;
-                    Boolean c_raza_seg = false;
-
-                    Boolean c_genero = false;
-                    Boolean c_genero_seg = false;
-
-                    Boolean c_edad = false;
-                    Boolean c_edad_seg = false;
-
-                    Boolean c_apariencia_oi = false;
-                    Boolean c_apariencia_od = false;
-                    Boolean c_apariencia_lp = false;
-
-                    Boolean c_collar = false;
-                    Boolean c_collar_c1 = false;
-                    Boolean c_collar_c2 = false;
-                    Boolean c_collar_material = false;
-
-                    Boolean c_chip = false;
-                    Boolean c_chip_ubi = false;
-
-                    Boolean c_ubicacion = false;
-
-                    List<String> origen_collar = new ArrayList<>(Arrays.asList(m_u.getCollar_des().split("-")));
-                    List<String> origen_apariencia = new ArrayList<>(Arrays.asList(m_u.getApariencia().split("-")));
-
-                    List<String> comparado_collar = new ArrayList<>(Arrays.asList(m.getCollar_des().split("-")));
-                    List<String> comparado_apariencia = new ArrayList<>(Arrays.asList(m.getApariencia().split("-")));
-
-                    System.out.println("-----------------------------");
-                    System.out.println("ANTES DE POSIBLE COINCIDENCIA 1");
-                    System.out.println("-----------------------------");
-
-                    if(m_u.getAnimal().equalsIgnoreCase(m.getAnimal())){
-                        posible_coincidencia = true;
-                        c_animal = true;
-                        ptje_coincidencia += 3;
-                    }
-                    Integer id_reporte_comparado = 0;
-
-                    System.out.println("-----------------------------");
-                    System.out.println("ANTES DE POSIBLE COINCIDENCIA 2");
-                    System.out.println("-----------------------------");
-
-                    for(Reporte_mDTO r : ls_r){
-                        if(r_u != null){
-                            LocalDateTime f_reporte_u = r_u.getTiempo_uvv();
-                            LocalDateTime f_reporte_s = r.getTiempo_uvv();
-                            posible_coincidencia = f_reporte_u.isBefore(f_reporte_s);
-
-                            id_reporte_comparado = r.getId();
-                        }
-                    }
-                    System.out.println("-----------------------------");
-                    System.out.println("ANTES DE LOS IF");
-                    System.out.println("-----------------------------");
-
-                    if(posible_coincidencia){
-                        //----------------------------------------COMPARACION-NOMBRE
-                        if(m_u.getNombre().equalsIgnoreCase(m.getNombre())){
-                            c_nombre = true;
-                            ptje_coincidencia += 3;
-                        }
-                        //-----------------------------------------COMPARACION-RAZAS
-                        if(m_u.getRaza_1().equalsIgnoreCase(m.getRaza_1())){
-                            c_raza_1 = true;
-                            if(m_u.getRaza_sg() == true){
-                                if(Objects.equals(m_u.getRaza_sg(), m.getRaza_sg())){
-                                    ptje_coincidencia += 3;
-                                    c_raza_seg = true;
-                                }else{
-                                    ptje_coincidencia += 1;
-                                }
-                            }else{
-                                ptje_coincidencia += 2;
-                            }
-                        }
-
-                        if(m_u.getRaza_2().equalsIgnoreCase(m.getRaza_2())){
-                            c_raza_2 = true;
-                            if(m_u.getRaza_sg() == true){
-                                if(Objects.equals(m_u.getRaza_sg(), m.getRaza_sg())){
-                                    ptje_coincidencia += 3;
-                                    c_raza_seg = true;
-                                }else{
-                                    ptje_coincidencia += 1;
-                                }
-                            }else{
-                                ptje_coincidencia += 2;
-                            }
-                        }
-                        //----------------------------------------COMPARACION-GENERO
-                        if(m_u.getGenero().equalsIgnoreCase(m.getGenero())){
-                            c_genero = true;
-                            if(m_u.getGenero_seg() == true){
-                                if(Objects.equals(m_u.getGenero_seg(), m.getGenero_seg())){
-                                    ptje_coincidencia += 3;
-                                    c_genero_seg = true;
-                                }else{
-                                    ptje_coincidencia += 1;
-                                }
-                            }else{
-                                ptje_coincidencia += 2;
-                            }
-                        }
-                        //------------------------------------------COMPARACION-EDAD
-                        if(m_u.getEdad().equalsIgnoreCase(m.getEdad())){
-                            c_edad = true;
-                            if(m_u.getEdad_seg()== true){
-                                if(Objects.equals(m_u.getEdad_seg(), m.getEdad_seg())){
-                                    ptje_coincidencia += 3;
-                                    c_edad_seg = true;
-                                }else{
-                                    ptje_coincidencia += 1;
-                                }
-                            }else{
-                                ptje_coincidencia += 2;
-                            }
-                        }
-                        //------------------------------------COMPARACION-APARIENCIA
-                        if(origen_apariencia.get(0).equalsIgnoreCase(comparado_apariencia.get(0))){
-                            ptje_coincidencia += 1;
-                            c_apariencia_oi = true;
-                        }
-                        if(origen_apariencia.get(1).equalsIgnoreCase(comparado_apariencia.get(1))){
-                            ptje_coincidencia += 1;
-                            c_apariencia_od = true;
-                        }
-                        if(origen_apariencia.get(2).equalsIgnoreCase(comparado_apariencia.get(2))){
-                            ptje_coincidencia += 1;
-                            c_apariencia_lp = true;
-                        }
-                        //----------------------------------------COMPARACION-COLLAR
-                        if(m_u.getCollar() == true){
-                            if(Objects.equals(m_u.getCollar(), m.getCollar())){
-                                c_collar = true;
-                                if(origen_collar.get(0).equalsIgnoreCase(comparado_collar.get(0))){
-                                    ptje_coincidencia += 1;
-                                    c_collar_c1 = true;
-                                }
-                                if(origen_collar.get(1).equalsIgnoreCase(comparado_collar.get(1))){
-                                    ptje_coincidencia += 1;
-                                    c_collar_c2 = true;
-                                }
-                                if(origen_collar.get(2).equalsIgnoreCase(comparado_collar.get(2))){
-                                    ptje_coincidencia += 1;
-                                    c_collar_material = true;
-                                }
-                            }
-                        }else{
-                            if(Objects.equals(m_u.getCollar(), m.getCollar())){
-                                ptje_coincidencia += 2;
-                                c_collar = true;
-                            }
-                        }
-                        //----------------------------------------------------------
-                        if(m_u.getChip() == true){
-                            if(Objects.equals(m_u.getChip(), m.getChip())){
-                                ptje_coincidencia += 2;
-                                c_chip = true;
-                                if(m_u.getChip_ubi().equalsIgnoreCase(m.getChip_ubi())){
-                                    ptje_coincidencia += 2;
-                                    c_chip_ubi = true;
-                                }
-                            }
-                        }else if(m_u.getChip() == false){
-                            if(Objects.equals(m_u.getChip(), m.getChip())){
-                                ptje_coincidencia += 4;
-                                c_chip = true;
-                                c_chip_ubi = true;
-                            }
-                        }
-                        //----------------------------------------------------------
-                        if(m_u.getUbicacion_res().equalsIgnoreCase(m.getUbicacion_res())){
-                            ptje_coincidencia += 3;
-                            c_ubicacion = true;
-                        }
-                        System.out.println("-----------------------------");
-                        System.out.println("ANTES DE CREAR EL RESULTADO  ");
-                        System.out.println("-----------------------------");
-                        ResultadoCoincidencia rc_motor = new ResultadoCoincidencia(
-                                ptje_coincidencia,
-                                c_nombre,
-                                c_animal,
-                                c_raza_1,
-                                c_raza_2,
-                                c_raza_seg,
-                                c_genero,
-                                c_genero_seg,
-                                c_edad,
-                                c_edad_seg,
-                                c_apariencia_oi,
-                                c_apariencia_od,
-                                c_apariencia_lp,
-                                c_collar,
-                                c_collar_c1,
-                                c_collar_c2,
-                                c_collar_material,
-                                c_chip,
-                                c_chip_ubi,
-                                c_ubicacion,
-                                m_u.getId(),
-                                r_u.getId(),
-                                m.getId(),
-                                id_reporte_comparado
-                        );
-
-                        List<ResultadoCoincidencia> ls_resultados = recuperarRes(r_u.getId());
-
-                        System.out.println("-----------------------------");
-                        System.out.println(ls_resultados);
-                        System.out.println("-----------------------------");
-
-                        if(ls_resultados.isEmpty()){
-                            rep.save(rc_motor);
-                        }else{
-                            if(!ls_resultados.contains(rc_motor)){
-                                rep.save(rc_motor);
-                            }
-                        }
-
-                    }
+            for(ReporteDTO rDto : ls_reporte){
+                if(rDto.getId_mascota() == m.getId()){
+                    resCon.setIdReporte_revisado(rDto.getId());
                 }
             }
-        } catch (Exception e) {
-            throw new ErrorMotor(
-                "Servicio motor, procesar"+"-"+
-                "Hubo un error inesperado al procesar las mascotas, no se pudo concretar la busqueda de coincidencias");
+
+            List<String> o_lsc = new ArrayList<>(Arrays.asList(m.getCollar_des().split("-")));
+            List<String> o_lsa = new ArrayList<>(Arrays.asList(m.getApariencia().split("-")));
+
+            List<String> c_lsc = new ArrayList<>(Arrays.asList(mDto.getCollar_des().split("-")));
+            List<String> c_lsa = new ArrayList<>(Arrays.asList(mDto.getApariencia().split("-")));
+
+            if(m.getAnimal().equalsIgnoreCase(mDto.getAnimal())){
+                resCon.setAnimal_coincide(true);
+                e_coin = true;
+                p_coin += 3;
+            }else{
+                resCon.setAnimal_coincide(false);
+            }
+
+            if(m.getNombre().equalsIgnoreCase(mDto.getNombre())){
+                resCon.setNombre_coincide(true);
+                p_coin += 3;
+            }else{
+                resCon.setNombre_coincide(false);
+            }
+
+            if(m.getRaza_1().equalsIgnoreCase(mDto.getRaza_1())){
+                resCon.setRaza_primaria_coincide(true);
+                if(m.getRaza_sg() == true){
+                    if(Objects.equals(m.getRaza_sg(), mDto.getRaza_sg())){
+                        p_coin += 3;
+                        resCon.setRaza_es_segura(true);
+                    }else{
+                        p_coin += 1;
+                        resCon.setRaza_es_segura(false);
+                    }
+                }else{
+                    p_coin += 2;
+                }
+            }else{
+                resCon.setRaza_primaria_coincide(false);
+            }
+
+            if(m.getRaza_2().equalsIgnoreCase(mDto.getRaza_2())){
+                resCon.setRaza_secundaria_coincide(true);
+                if(m.getRaza_sg() == true){
+                    if(Objects.equals(m.getRaza_sg(), mDto.getRaza_sg())){
+                        p_coin += 3;
+                        resCon.setRaza_es_segura(true);
+                    }else{
+                        p_coin += 1;
+                        resCon.setRaza_es_segura(false);
+                    }
+                }else{
+                    p_coin += 2;
+                    resCon.setRaza_es_segura(false);
+                }
+            }else{
+                resCon.setRaza_secundaria_coincide(false);
+            }
+
+            if(m.getGenero().equalsIgnoreCase(mDto.getGenero())){
+                resCon.setGenero_coincide(true);
+                if(m.getGenero_seg() == true){
+                    if(Objects.equals(m.getGenero_seg(), mDto.getGenero_seg())){
+                        p_coin += 3;
+                        resCon.setGenero_es_seguro(true);
+                    }else{
+                        p_coin += 1;
+                        resCon.setGenero_es_seguro(false);
+                    }
+                }else{
+                    p_coin += 2;
+                    resCon.setGenero_es_seguro(false);
+                }
+            }else{
+                resCon.setGenero_coincide(false);
+            }
+
+            if(m.getEdad().equalsIgnoreCase(mDto.getEdad())){
+                resCon.setEdad_coincide(true);
+                if(m.getEdad_seg()== true){
+                    if(Objects.equals(m.getEdad_seg(), mDto.getEdad_seg())){
+                        p_coin += 3;
+                        resCon.setEdad_es_segura(true);
+                    }else{
+                        p_coin += 1;
+                        resCon.setEdad_es_segura(false);
+                    }
+                }else{
+                    p_coin += 2;
+                    resCon.setEdad_es_segura(false);
+                }
+            }else{
+                resCon.setEdad_coincide(false);
+            }
+
+            if(o_lsa.get(0).equalsIgnoreCase(c_lsa.get(0))){
+                p_coin += 1;
+                resCon.setColor_ojo_i_coincide(true);
+            }else{
+                resCon.setColor_ojo_i_coincide(false);
+            }
+            if(o_lsa.get(1).equalsIgnoreCase(c_lsa.get(1))){
+                p_coin += 1;
+                resCon.setColor_ojo_d_coincide(true);
+            }else{
+                resCon.setColor_ojo_d_coincide(false);
+            }
+            if(o_lsa.get(2).equalsIgnoreCase(c_lsa.get(2))){
+                p_coin += 1;
+                resCon.setLargo_pelaje_coincide(true);
+            }else{
+                resCon.setLargo_pelaje_coincide(false);
+            }
+
+            if(m.getCollar() == true){
+                if(Objects.equals(m.getCollar(), mDto.getCollar())){
+                    resCon.setTiene_collar(true);
+                    if(o_lsc.get(0).equalsIgnoreCase(c_lsc.get(0))){
+                        p_coin += 1;
+                        resCon.setColor_collar_p_coincide(true);
+                    }else{
+                        resCon.setColor_collar_p_coincide(false);
+                    }
+                    if(o_lsc.get(1).equalsIgnoreCase(c_lsc.get(1))){
+                        p_coin += 1;
+                        resCon.setColor_collar_s_coincide(true);
+                    }else{
+                        resCon.setColor_collar_s_coincide(false);
+                    }
+                    if(o_lsc.get(2).equalsIgnoreCase(c_lsc.get(2))){
+                        p_coin += 1;
+                        resCon.setMaterial_collar_coincide(true);
+                    }else{
+                        resCon.setMaterial_collar_coincide(false);
+                    }
+                }else{
+                    resCon.setTiene_collar(false);
+                }
+            }else{
+                if(Objects.equals(m.getCollar(), mDto.getCollar())){
+                    p_coin += 2;
+                    resCon.setTiene_collar(true);
+                }else{
+                    resCon.setTiene_collar(false);
+                }
+            }
+
+            if(m.getChip() == true){
+                if(Objects.equals(m.getChip(), mDto.getChip())){
+                    p_coin += 2;
+                    resCon.setTiene_chip(true);
+                    if(m.getChip_ubi().equalsIgnoreCase(mDto.getChip_ubi())){
+                        p_coin += 2;
+                        resCon.setUbicacion_chip_coincide(true);
+                    }else{
+                        resCon.setUbicacion_chip_coincide(false);
+                    }
+                }else{
+                    resCon.setTiene_chip(false);
+                }
+            }else if(m.getChip() == false){
+                if(Objects.equals(m.getChip(), mDto.getChip())){
+                    p_coin += 4;
+                    resCon.setUbicacion_chip_coincide(true);
+                    resCon.setTiene_chip(true);
+                }else{
+                    resCon.setUbicacion_chip_coincide(false);
+                    resCon.setTiene_chip(false);
+                }
+            }
+
+            if(m.getUbicacion_res().equalsIgnoreCase(mDto.getUbicacion_res())){
+                p_coin += 3;
+                resCon.setUbicacion_estadia_coincide(true);
+            }else{
+                resCon.setUbicacion_estadia_coincide(false);
+            }
+            
+            resCon.setPtje_res_coincidencia(p_coin);
+            rep.save(resCon);
         }
     }
 }

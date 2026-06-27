@@ -47,10 +47,11 @@ function Reportes() {
                     <button className="fade-in t-2 btn_hps" onClick={()=>navegar("/reportes_sistema")}>Ver todos reportes</button>
                 </div>            
             </div>
+            <h3 className="ps-5 pt-4 pb-4 pe-5 m-0 m_t_style c-black">~ Mis reportes</h3>
             {mos_agregar &&
                 <Reporte_agregar cerrar={()=>setMos_agregar(false)} naturaleza={"add"}/>
             }
-            <div className="row m-0">
+            <div className="row m-0 w-bg pt-3 pb-3 b-gen brad-0">
                 {reportes.map((r,i)=>(
                     <Reporte_miniatura id={r.id} key={i} naturaleza={"m_reportes"}/>
                 ))

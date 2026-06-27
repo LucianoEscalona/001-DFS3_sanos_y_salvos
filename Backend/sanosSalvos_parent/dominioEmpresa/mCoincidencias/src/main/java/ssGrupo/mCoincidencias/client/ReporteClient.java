@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-import ssGrupo.mCoincidencias.dto.Reporte_mDTO;
+import ssGrupo.mCoincidencias.dto.ReporteDTO;
 
 @Service
 public class ReporteClient {
@@ -14,20 +14,20 @@ public class ReporteClient {
     @Autowired
     private RestTemplate rt;
     
-    public List<Reporte_mDTO> obtenerReportes() {
+    public List<ReporteDTO> obtenerReportes() {
         
         String url = "http://localhost:8080/reporte/v1/listar";
-        ResponseEntity<Reporte_mDTO[]> res = 
-            rt.getForEntity(url, Reporte_mDTO[].class);
+        ResponseEntity<ReporteDTO[]> res = 
+            rt.getForEntity(url, ReporteDTO[].class);
         
         return res.getBody() != null
             ? Arrays.asList(res.getBody()) : List.of();
     }
     
-    public Reporte_mDTO obtenerReporteID(Integer id){
+    public ReporteDTO obtenerReporteID(Integer id){
         String url = "http://localhost:8080/reporte/v1/obtener/{id}";
-        ResponseEntity<Reporte_mDTO> res = 
-            rt.getForEntity(url, Reporte_mDTO.class, id);
+        ResponseEntity<ReporteDTO> res = 
+            rt.getForEntity(url, ReporteDTO.class, id);
         
         if(res.getBody() == null){
             throw new RuntimeException("Reporte no encontrado");

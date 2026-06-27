@@ -108,13 +108,13 @@ function Reporte_agregar({cerrar, naturaleza, id_mod}) {
         <>
             <div className="fondo_opaco_tarjetas">
                 <form className="mw-fra b-gen p-5" onSubmit={print_info_r}>
-                    <h4>Animal asociado al reporte</h4>
+                    <h4 className="mb-3">- Animal asociado al reporte:</h4>
                     <button onClick={()=>setSeleccionar(true)}>Seleccionar</button>
-                    <button onClick={()=>setIngresar(true)}>Ingresar</button>
+                    <button className="ms-2" onClick={()=>setIngresar(true)}>Ingresar</button>
                     {is_seleccionado && a_seleccionado != undefined &&
                         <p>{a_seleccionado.nombre}</p>
                     }
-                    <h4>Ingresar datos del reporte</h4>
+                    <h4 className="mt-3 mb3">- Ingresar datos del reporte:</h4>
                     <p>Titulo del reporte:</p>
                     <input 
                         id="dv_r_titulo"
@@ -156,7 +156,7 @@ function Reporte_agregar({cerrar, naturaleza, id_mod}) {
                         maxLength={100}
                         value={ubicacion_visto} 
                         onChange={(e)=>setUbicacion_visto(e.target.value)} 
-                        className="w-e mb-2" type="text" />
+                        className="w-e mb-3" type="text" />
                     {naturaleza == "add" &&
                         <button type="submit">Subir reporte</button>
                     }
@@ -164,7 +164,7 @@ function Reporte_agregar({cerrar, naturaleza, id_mod}) {
                         <button type="submit">Guardar cambios</button>
                     }
                     
-                    <button onClick={()=>cerrar_agregar()}>Cerrar</button>
+                    <button className="ms-2" onClick={()=>cerrar_agregar()}>Cerrar</button>
                 </form>
                 {seleccionar &&
                     <Mascotas_carousel cerrar={()=>setSeleccionar(false)} id_ani={setId_seleccion_rep}/>

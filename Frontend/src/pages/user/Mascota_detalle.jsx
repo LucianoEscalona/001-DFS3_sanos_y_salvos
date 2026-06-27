@@ -179,9 +179,6 @@ function Mascota_detalle(){
                             </div>
                         </div>
                     </div>
-                    {sesion != null && rut_temp == sesion.rut &&
-                        <button className="btn-red">Reportar como desaparecido</button>
-                    }
                 </div>
             </div>
             </div>

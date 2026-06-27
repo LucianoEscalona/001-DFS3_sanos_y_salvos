@@ -210,7 +210,6 @@ export const deleteSMT_auth = async(api, ruta, id) => {
 export const searchMotor = async(id_m, id_r) => {
     try {
         const token = getToken()
-        console.log("TOKEN: ",token)
         const res = await fetch(`${API}/motor/v1/procesar/${id_m}/${id_r}`,
         {
             method: "GET",

@@ -7,10 +7,12 @@ function Navbar() {
     const navegar = useNavigate()
 
     const cerrar_sesion = ()=>{
-        localStorage.removeItem("sesion")
-        setSesionActiva(false)
-        navegar("/")
-        window.location.reload()
+        if(confirm("Desea cerras sesion?")){
+            localStorage.removeItem("sesion")
+            setSesionActiva(false)
+            navegar("/")
+            window.location.reload()
+        }
     }
 
     useEffect(()=>{
@@ -39,9 +41,6 @@ function Navbar() {
                 </li>
                 <li className="nav-item">
                     <Link className="nav-link active" aria-current="page" to="/">Inicio</Link>
-                </li>
-                <li className="nav-item">
-                    <Link className="nav-link active" aria-current="page" to="/">Contacto</Link>
                 </li>
                 {sesionActiva &&
                     <>
@@ -77,6 +76,7 @@ function Navbar() {
                     </>
                 }
                 {sesionActiva &&
+                /*
                     <li className="nav-item dropdown">
                         <a className="nav-link dropdown-toggle" to="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Sesion
@@ -85,6 +85,9 @@ function Navbar() {
                                 <li><Link className="dropdown-item" to="/">Ver sesion</Link></li>
                                 <li><Link className="dropdown-item" to="/" onClick={()=>cerrar_sesion()}>Cerrar sesion</Link></li>
                             </ul>
+                    </li>*/
+                    <li className="nav-item">
+                        <Link className="nav-link active" aria-current="page" to="/" onClick={()=>cerrar_sesion()}>Cerrar sesion</Link>
                     </li>
                 }
                 {!sesionActiva &&

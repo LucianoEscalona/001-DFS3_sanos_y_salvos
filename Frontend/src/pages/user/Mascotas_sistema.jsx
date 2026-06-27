@@ -15,6 +15,19 @@ function Mascotas_sistema(){
         const [animales_v, setAnimales_v] = useState([])
     const [mostrar_agregar, setMostrar_agregar] = useState(false)
 
+    const [sesionActiva, setSesionActiva] = useState(false)
+    useEffect(()=>{
+        try {
+            if(JSON.parse(localStorage.getItem("sesion"))){
+                setSesionActiva(true)
+            }else{
+                setSesionActiva(false)
+            }
+        } catch (error) {
+            setSesionActiva(false)
+        }
+    },[])
+
     useEffect(()=>{
         const obtenerData = async() => {
             const res = await getSMT("mascota","listar")
@@ -47,29 +60,32 @@ function Mascotas_sistema(){
                 <div className="txt_fade_end_conf">
                     <h3 className="fade-in t-1">~Mascotas</h3>
                     <p className="fade-in t-2 mb-3">Consulta todas las mascotas y animales encontrados que se han registrado en el sistema.</p>        
-                    <p className="fade-in t-2 mb-3">Si es necesario, puedes ingresar una Mascota o Animal en nuestro sistema.</p>                    
-                    <button className="fade-in t-2 btn_hps me-3" onClick={()=>setMostrar_agregar(true)}>Ingresar Mascota</button>
-                    <button className="fade-in t-2 btn_hps" onClick={()=>navegar("/mascotas")}>Ver mis Mascotas</button>
+                    {!sesionActiva &&
+                    <>
+                        <p className="fade-in t-2 mb-3">Si necesitas ingresar una Mascota o Animal en nuestro sistema, debes tener una sesion activa.</p>   
+                    </>
+                    }
+                    {sesionActiva &&
+                    <>
+                        <p className="fade-in t-2 mb-3">Si es necesario, puedes ingresar una Mascota o Animal en nuestro sistema.</p>                    
+                        <button className="fade-in t-2 btn_hps me-3" onClick={()=>setMostrar_agregar(true)}>Ingresar Mascota</button>
+                        <button className="fade-in t-2 btn_hps" onClick={()=>navegar("/mascotas")}>Ver mis Mascotas</button>
+                    </>
+                    }
                 </div>            
             </div>
-
-            <div className="color-testing mascota-opciones p-4">
-                <p>Check for coincidences</p>
-            </div>
-            <button onClick={()=>setMostrar_agregar(true)}>Registrar mascota</button>
-            <p className="cuadrao">Mascotas</p>
             <div className="">
                 {mostrar_agregar &&
                     <Mascota_agregar cerrar={()=>setMostrar_agregar(false)} naturaleza={"add"}/>
                 }                
-                <h2 className="p-4 m-0 m_t_style">Mascotas registradas</h2>
-                <div className="row m-0 w-bg pt-3 pb-3">
+                <h3 className="ps-5 pt-4 pb-4 pe-5 m-0 m_t_style c-black">~ Mascotas registradas</h3>
+                <div className="row m-0 w-bg pt-3 pb-3 b-gen brad-0">
                     {mascotas_r.map((m, i)=>(
                         <Mascota_miniatura key={i} id={m.id} naturaleza={"ver_detalle"} origen={"/mascotas_sistema"}/>
                     ))}
                 </div>
-                <h2 className="p-4 m-0 m_t_style">Animales vistos</h2>
-                <div className="row m-0 w-bg pt-3 pb-3">
+                <h3 className="ps-5 pt-4 pb-4 pe-5 m-0 m_t_style c-black">~ Animales vistos</h3>
+                <div className="row m-0 w-bg pt-3 pb-3 b-gen brad-0">
                     {animales_v.map((a, i)=>(
                         <Mascota_miniatura key={i} id={a.id} naturaleza={"ver_detalle"} origen={"/mascotas_sistema"}/>
                     ))}
