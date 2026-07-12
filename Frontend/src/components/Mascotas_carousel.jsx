@@ -8,8 +8,10 @@ function Mascotas_carousel({cerrar, id_ani}){
 
     useEffect(()=>{
         const obtenerData = async() => {
+            const sesion = JSON.parse(localStorage.getItem("sesion"))
             const res = await getSMT("mascota","listar")
-            setAnimales(res)
+            const res_filter = res.filter(m=>m.rut_usuario == sesion.rut)
+            setAnimales(res_filter)
         }
         obtenerData()
     },[])

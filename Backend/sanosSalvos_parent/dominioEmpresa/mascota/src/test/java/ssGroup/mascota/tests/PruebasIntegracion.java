@@ -34,7 +34,7 @@ public class PruebasIntegracion {
             "apariencia TEST","condicion TEST",
             true,"TEST",true,"TEST",
             "Ubicacion TEST",true,
-            "Mascota","Con su duenio","50500500-5"
+            "Mascota","Con su duenio","50500500-5","/public/img/gato_01.jpg"
         );
         ctrl.post(m_input);
         
@@ -57,7 +57,7 @@ public class PruebasIntegracion {
             "apariencia TEST","condicion TEST",
             true,"TEST",true,"TEST",
             "Ubicacion TEST",true,
-            "Mascota","Con su duenio","50500500-5"
+            "Mascota","Con su duenio","50500500-5","/public/img/gato_01.jpg"
         );
         ResponseEntity<?> respuestaPost = ctrl.post(m_original);
         
@@ -90,7 +90,7 @@ public class PruebasIntegracion {
             "apariencia TEST","condicion TEST",
             true,"TEST",true,"TEST",
             "Ubicacion TEST",true,
-            "Mascota","Con su duenio","50500500-5"
+            "Mascota","Con su duenio","50500500-5","/public/img/gato_01.jpg"
         );
         
         ResponseEntity<?> res = ctrl.post(m_input);

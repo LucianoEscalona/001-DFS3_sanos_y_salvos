@@ -37,21 +37,21 @@ function Resultado_miniatura ({res}) {
 
     return(
         <>
-        <div className="b-gen">
+        <div className="b-gen p-5 mw-fra mb-3">
             <h4>Resultado de Busqueda N° {res.id}</h4>
             <strong>Puntaje de coincidencia: {res.ptje_res_coincidencia}</strong>
             <p>Se compararon los siguientes animales:</p>
             <div className="row m-0">
-                <div className="col-md-6 col-sm-12">
-                    <div className="img-sim"></div>
+                <div className="col-lg-6 col-md-6 col-sm-12">
+                    <img src={m1.temp_imagen} className="img-size" alt="img animal" />
                     <p>{m1.nombre} ({m1.tipo})</p>
                 </div>
-                <div className="col-md-6 col-sm-12">
-                    <div className="img-sim"></div>
+                <div className="col-lg-6 col-md-6 col-sm-12">
+                    <img src={m2.temp_imagen} className="img-size" alt="img animal" />
                     <p>{m2.nombre} ({m2.tipo})</p>
                 </div>
             </div>
-            <button onClick={()=>navigate("/detalle_coincidencias")}>Ver detalles</button>
+            <button onClick={()=>detalle_res()}>Ver detalles</button>
         </div>
         </>
     )

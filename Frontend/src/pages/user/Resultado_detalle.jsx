@@ -14,16 +14,21 @@ function Resultado_dettalle(id_ru){
     }
 
     useEffect(()=>{
-        id_ru = localStorage.getItem("id_rs")
+        id_ru = localStorage.getItem("id_detalle_res")
         obtenerResultado()
     },[])
 
     return(
         <>
-        <div className="b-gen card-mSize">
+        <img 
+            src="../../../public/img/temp_fondo.jpg" 
+            alt="Is anybody there...?" 
+            className="img-home_page"/>
+        <div className="centrado_tarjetas z-pos-bottom"></div>
+        <div className="b-gen card-mSize mt-5">
             <div className="row m-0">
 
-                <div className="col-md-6 col-sm-12 p-4">
+                <div className="col-md-6 col-sm-12 p-5">
                     <h4>Coincidencias en la informacion general:</h4>
                     {res_u.nombre_coincide &&
                         <div className="d-flex gap-2">
@@ -233,7 +238,9 @@ function Resultado_dettalle(id_ru){
                     }
                 </div>
 
-                <button onClick={()=>navigate("/motor_test")}>Regresar</button>
+                <div className="m-2" >
+                    <button className="m-2" onClick={()=>navigate("/motor_test")}>Regresar</button>
+                </div>
             </div>
                 
         </div>

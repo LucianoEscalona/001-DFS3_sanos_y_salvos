@@ -30,6 +30,9 @@ function Reporte_agregar({cerrar, naturaleza, id_mod}) {
     const animal_seleccionado = (id_seleccionado)=>{
         if(id_seleccionado!=0){
             const animal_reporte = animales.find(a=>a.id==id_seleccionado)
+            if(animal_reporte.nombre == ""){
+                animal_reporte.nombre = "Sin nombre"
+            }
             setA_seleccionado(animal_reporte)
             setIs_seleccionado(true)
         }
@@ -112,7 +115,7 @@ function Reporte_agregar({cerrar, naturaleza, id_mod}) {
                     <button onClick={()=>setSeleccionar(true)}>Seleccionar</button>
                     <button className="ms-2" onClick={()=>setIngresar(true)}>Ingresar</button>
                     {is_seleccionado && a_seleccionado != undefined &&
-                        <p>{a_seleccionado.nombre}</p>
+                        <p>ID: {a_seleccionado.id}, Nombre: {a_seleccionado.nombre}, Raza: {a_seleccionado.raza_1}</p>
                     }
                     <h4 className="mt-3 mb3">- Ingresar datos del reporte:</h4>
                     <p>Titulo del reporte:</p>

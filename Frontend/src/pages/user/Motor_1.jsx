@@ -13,6 +13,8 @@ function Motor_1(){
     const [num_m, setNum_m] = useState(0)
     const [num_b, setNum_b] = useState(0)
     const [num_r, setNum_r] = useState(0)
+    const [nombre_a, setNombre_a] = useState("")
+    const [titulo_r, setTitulo_r] = useState("")
 
     const [resultados_c, setResultados_c] = useState([])
     const [res_u, setRes_u] = useState({})
@@ -38,8 +40,7 @@ function Motor_1(){
     const mostrarResultados = async(nr)=>{
         const res = await resultMotor(nr)
         console.log("RESULTADO RES CON NUMERO DE REPORTE:",res)
-        const res_sap = res.filter(i=>i.idMascota !== i.idMascota_revisada) 
-        setResultados_c(res_sap)
+        setResultados_c(res)
         console.log(res_sap)
     }
 
@@ -53,34 +54,19 @@ function Motor_1(){
 
     return(
         <>
-        <div className="b-gen">
-            <p>temp</p>
-            <p>id mascota</p>
-            <input type="number" value={num_m} onChange={(e)=>setNum_m(e.target.value)}/>
-            <p>id a buscar</p>
-            <input type="number" value={num_b} onChange={(e)=>setNum_b(e.target.value)}/>
-            <p>id reporte</p>
-            <input type="number" value={num_r} onChange={(e)=>setNum_r(e.target.value)}/>
-            <button onClick={()=>searchTEST_01()}>Search test 1</button>
-            <button onClick={()=>mostrarResultados(num_r)}>Mostrar resutlados</button>
-            <button onClick={()=>console.log(num_r)}>log num_r</button>
+        <div className="b-gen p-4">
+            <h3 className="c-black">Reporte y animal seleccionado:</h3>
+            <p className="mb-3">{titulo_r}, {nombre_a}</p>
+            <button onClick={()=>searchTEST_01()}>Buscar coincidencias</button>
+            <button className="ms-2" onClick={()=>mostrarResultados(num_r)}>Mostrar resutlados</button>
             
         </div>
         
-        <Reporte_carousel id_rb={setNum_r}/>
+        <Reporte_carousel id_rb={setNum_r} id_mb={setNum_m} nombre_mb={setNombre_a} titulo_rb={setTitulo_r}/>
 
         {resultados_c.map((r,i)=>(
             <Resultado_miniatura res={r} key={i}/>
         ))}
-        
-        <div className="row m-0 p-3">
-            <div className="b-gen col-6 p-3">
-                    <button onClick={()=>printRES()}>printRES</button>
-            </div>
-            <div className="b-gen col-6 p-3">
-                
-            </div>
-        </div>
         </>
     )
 }

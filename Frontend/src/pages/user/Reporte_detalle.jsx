@@ -159,10 +159,15 @@ function Reporte_detalle({id}) {
 
     return(
         <>
+        <img 
+            src="../../../public/img/temp_fondo.jpg" 
+            alt="Is anybody there...?" 
+            className="img-home_page"/>
+        <div className="centrado_tarjetas z-pos-bottom"></div>
         <div className="centrado_tarjetas pt-5">
             <div className="p-5 b-gen mw-fra"> 
                 <h2>TIPO REPORTE</h2>
-                <div className="img-sim min-h"></div>
+                <img src={animal.temp_imagen} className="img-size" alt="img animal" />
                 <div className="p-3"> 
                     <p className="mt-2">{tipo}</p>
                     <p className="mt-2">{nombre}</p>

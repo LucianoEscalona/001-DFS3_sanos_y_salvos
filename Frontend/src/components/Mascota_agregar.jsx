@@ -39,6 +39,7 @@ function Mascota_agregar({cerrar,naturaleza,id_mod, id_ani}) {
 
     const [tipo, setTipo] = useState("mascota")
     const [estado, setEstado] = useState("con_duenio")
+    const [imagen, setImagen] = useState("")
 
     const print_info = (nat)=>{
         const u = JSON.parse(localStorage.getItem("sesion"))
@@ -58,7 +59,7 @@ function Mascota_agregar({cerrar,naturaleza,id_mod, id_ani}) {
                 if(!con_chip){pUbi_chip = "NONE"}
                 if(con==""){con="NONE"}
                 if(tipo=="lo_vi"){pMos_residencia = true; pEstado = "perdido"}
-                
+
                 var rut = u.rut
                 const animal_g = {
                     nombre: nombre,
@@ -80,7 +81,8 @@ function Mascota_agregar({cerrar,naturaleza,id_mod, id_ani}) {
                     ubicacion_mos: pMos_residencia,
                     tipo: tipo,
                     estado: pEstado,
-                    rut_usuario: rut
+                    rut_usuario: rut,
+                    temp_imagen: imagen
                 }
                 if(nat=="add"){
                     postSMT_auth("mascota","guardar",animal_g)
@@ -186,7 +188,35 @@ function Mascota_agregar({cerrar,naturaleza,id_mod, id_ani}) {
             <div className="p-4 b-gen mw-fra">
                 <form className="row m-0" onSubmit={manejo_boton}>
                     <div className="col-md-6 col-sm-12">
-                        <div className="img-sim shadow"></div>
+                        <img src={imagen} className="img-size" alt="Selecciona una imagen" />
+                        {especie == "perro" &&
+                        <>
+                            <select 
+                            value={imagen} 
+                            onChange={(e)=>setImagen(e.target.value)}
+                            id="dv_sel_img" className="mt-2">
+                                <option value="" disabled defaultValue={""} hidden>Img de perro TEMPORAL</option>
+                                <option value="/public/img/perro_01.jpg">Wenamecho</option>
+                                <option value="/public/img/perro_02.jpg">Pastor aleman</option>
+                                <option value="/public/img/perro_03.jpg">Pastor aleman perdido</option>
+                            </select>
+                        </>
+                        }
+                        {especie == "gato" &&
+                        <>
+                            <select 
+                            value={imagen} 
+                            onChange={(e)=>setImagen(e.target.value)}
+                            id="dv_sel_img" className="mt-2">
+                                <option value="" disabled defaultValue={""} hidden>Img de gato TEMPORAL</option>
+                                <option value="/public/img/gato_01.jpg">Gato blanco con gris</option>
+                                <option value="/public/img/gato_02.jpg">Gato naranja</option>
+                                <option value="/public/img/gato_03.jpg">Larry.</option>
+                            </select>
+                        </>
+                        }
+                        
+
                         <p className="mt-4 mb-3 pt-3 fw-bold">Descripcion General:</p>
 
                         {naturaleza == "add" &&

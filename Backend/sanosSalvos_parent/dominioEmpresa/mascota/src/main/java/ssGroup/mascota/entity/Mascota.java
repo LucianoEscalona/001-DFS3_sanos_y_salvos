@@ -47,4 +47,6 @@ public class Mascota {
     private String estado;
     
     private String rut_usuario;
+    
+    private String temp_imagen;
 }

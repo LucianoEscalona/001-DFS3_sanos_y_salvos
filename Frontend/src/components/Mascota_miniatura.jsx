@@ -25,6 +25,7 @@ function Mascota_miniatura({id, naturaleza, cerrar, id_ani, origen}){
 
     const guardar_cerrar = ()=>{
         id_ani(data.id)
+        console.log("mascota miniatura: " + data.id)
         cerrar(false)
     }
     const guardar_id_brc = ()=>{
@@ -95,7 +96,7 @@ function Mascota_miniatura({id, naturaleza, cerrar, id_ani, origen}){
                 <div className="d-flex justify-content-center align-items-center">
                     <img className="cc-st mb-2" src="../../public/img/Red-Pin.png" alt="NOT FOUND" />
                 </div>
-                <div className="img-sim shadow"></div>
+                <img src={data.temp_imagen} className="img-size" alt="img animal" />
                 {naturaleza=="ver_detalle" &&
                     <h4 className="mt-4">{nombre}</h4>
                 }

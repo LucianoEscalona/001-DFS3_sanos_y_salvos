@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { getSMT_ID } from "../utils/apiHelper"
 import { useNavigate } from "react-router-dom"
 
-function Reporte_miniatura({id, naturaleza, id_rep}) {
+function Reporte_miniatura({id, naturaleza, id_rep, id_mas, n_mas, t_rep}) {
 
     const [reporte, setReporte] = useState({})
     const [animal,   setAnimal] = useState({})
@@ -16,6 +16,9 @@ function Reporte_miniatura({id, naturaleza, id_rep}) {
     }
     const setId_buscar = ()=>{
         id_rep(reporte.id)
+        id_mas(reporte.id_mascota)
+        n_mas(animal.nombre)
+        t_rep(reporte.titulo)
     }
 
     useEffect(()=>{
@@ -59,14 +62,23 @@ function Reporte_miniatura({id, naturaleza, id_rep}) {
             <div className="b-gen p-4"> 
                 <h2>{animal.animal} PERDIDO</h2>
                 <div className="ps-4 pe-4 pt-3 pb-3">
-                    <div className="img-sim"></div>
+                    <img src={animal.temp_imagen} className="img-size" alt="img animal" />
                 </div>
                 <div className="ps-4 pe-4 pt-1 pb-3">
                     <p>{animal.nombre}</p>
                     <p>{animal.animal} {animal.genero} {animal.raza_1}, de {animal.edad}.</p>
                     <p>{reporte.descripcion}</p>
                     <p>Desaparecio el {reporte.tiempo_uvv}, en {reporte.ubicacion_uvv}</p>
-                    <p>si lo ve porfavor, llame al:</p>
+                    {animal.tipo == "lo_vi" &&
+                    <>
+                        <p>Si es suyo, llame al:</p>
+                    </>
+                    }
+                    {animal.tipo == "mascota" &&
+                    <>
+                        <p>si lo ve porfavor, llame al:</p>
+                    </>
+                    }
                 </div>
                 <div className="b-gen p-2 mb-3 nphone_color">
                     <h3>({usuario.telefono})</h3>

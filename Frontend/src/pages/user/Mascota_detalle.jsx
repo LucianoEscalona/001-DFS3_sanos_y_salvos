@@ -124,12 +124,18 @@ function Mascota_detalle(){
 
     return(
         <>
+            <div className="black_filter">
+            </div>
+            <img 
+                src="../../../public/img/temp_fondo.jpg" 
+                alt="Is anybody there...?" 
+                className="img-home_page"/>
             <div className="centrado_tarjetas z-pos-bottom">
             <div className="b-gen mw-fra p-4">
                 <div className="row m-0">
                     <div className="col-md-6 p-3">
                         <h5><strong>Informacion general:</strong></h5>
-                        <div className="img-sim mt-3 mb-2 shadow"></div>
+                        <img src={data.temp_imagen} className="img-size" alt="img animal" />
                         <p className="mt-3">
                             <strong>Tipo de animal: </strong>{tipo}
                         </p>
